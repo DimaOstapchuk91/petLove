@@ -1,0 +1,21 @@
+:root {
+  --background-page: #f9f9f9;
+  --color-brand: #f6b83d;
+  --color-brand-light: #fff4df;
+  --color-star: #ffc531;
+
+  /* Text */
+  --color-text-dark: #262626;
+  --color-text-light: #2b2b2a;
+  --color-text-white: #ffffff;
+  --color-text-gray: rgba(38, 38, 38, 0.5);
+  --color-text-gray-dark: rgba(38, 38, 38, 0.6);
+  --color-text-gray-light: rgba(43, 43, 42, 0.4);
+
+  /* Inputs */
+  --error-color: #ef2447;
+  --success-color: #08aa83;
+  --inputs-color: rgba(38, 38, 38, 0.15);
+
+  transition: background-color 500ms ease;
+}
