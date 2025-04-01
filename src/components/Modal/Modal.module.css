@@ -1,0 +1,49 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(11, 11, 11, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.noScroll {
+  overflow: hidden;
+  height: 100%;
+}
+
+.window {
+  position: relative;
+  background-color: var(--bg-component-white);
+  border-radius: 15px;
+  width: max-content;
+  overflow: hidden;
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 300ms ease;
+}
+
+.closeButton:hover {
+  opacity: 0.6;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  stroke: var(--text-color-black);
+}
+
+/* .icon:hover {
+  opacity: 0.8;
+} */
