@@ -1,7 +1,8 @@
 import cat from '../../assets/img/cat.png';
+import dog from '../../assets/img/corgi.png';
 import rectangle from '../../assets/img/rectangle.png';
 
-const AuthIllustration = () => {
+const AuthIllustration = ({ isPet }) => {
   return (
     <div className='rounded-[30px] bg-brand max-w-[335px] h-[280px] relative'>
       <img
@@ -9,7 +10,12 @@ const AuthIllustration = () => {
         src={rectangle}
         alt='rectangle'
       />
-      <img className='absolute' src={cat} alt='cat' />
+      {isPet === 'cat' && (
+        <img className='absolute bottom-0' src={cat} alt='cat' />
+      )}
+      {isPet === 'dog' && (
+        <img className='absolute bottom-0' src={dog} alt='cat' />
+      )}
     </div>
   );
 };

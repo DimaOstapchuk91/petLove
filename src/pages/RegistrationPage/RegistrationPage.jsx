@@ -4,8 +4,8 @@ import RegistrationForm from '../../components/RegistrationForm/RegistrationForm
 const RegistrationPage = () => {
   return (
     <section className='container'>
-      <div className='flex flex-col py-7 gap-2.5'>
-        <AuthIllustration />
+      <div className='flex flex-col py-5 gap-2.5'>
+        <AuthIllustration isPet={'cat'} />
         <RegistrationForm />
       </div>
     </section>

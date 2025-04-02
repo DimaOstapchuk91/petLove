@@ -28,13 +28,19 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <h2>Log in</h2>
-      <p>Welcome! Please enter your credentials to login to the platform:</p>
-      <ul>
+    <form
+      className='bg-text-white px-5 py-15 rounded-[30px]'
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <h2 className='text-[28px] font-bold mb-3'>Log in</h2>
+      <p className='text-[14px] font-medium mb-6'>
+        Welcome! Please enter your credentials to login to the platform:
+      </p>
+      <ul className='flex flex-col gap-2.5 mb-10'>
         <li>
           <label>
             <input
+              className='border border-inputs outline-none rounded-[30px] w-full p-3'
               type='email'
               name='email'
               placeholder='Email'
@@ -44,19 +50,33 @@ const LoginForm = () => {
           </label>
         </li>
         <li>
-          <label>
-            <input type='password' name='password' {...register('password')} />
+          <label className='relative'>
+            <input
+              className='border border-inputs outline-none rounded-[30px] w-full p-3'
+              type={passwordVisible ? 'text' : 'password'}
+              name='password'
+              placeholder='Password'
+              {...register('password')}
+            />
             <button
               type='button'
-              className=''
+              className='absolute bottom-0.5 right-3 cursor-pointer'
               onClick={togglePasswordVisibility}
             >
               {passwordVisible ? (
-                <svg width='15' height='15' className=''>
+                <svg
+                  width='18'
+                  height='18'
+                  className='fill-transparent stroke-brand'
+                >
                   <use href={`${sprite}#icon-eye-on`}></use>
                 </svg>
               ) : (
-                <svg width='15' height='15' className=''>
+                <svg
+                  width='18'
+                  height='18'
+                  className='fill-transparent stroke-brand'
+                >
                   <use href={`${sprite}#icon-eye-off`}></use>
                 </svg>
               )}
@@ -65,12 +85,21 @@ const LoginForm = () => {
           </label>
         </li>
       </ul>
-      <div className=''>
-        <button type='submit' className=''>
+      <div className='flex flex-col  w-full gap-3'>
+        <button
+          type='submit'
+          className='p-3 w-ful bg-brand rounded-[30px] text-text-white transition-all duration-300 hover:bg-hover cursor-pointer'
+        >
           Registration
         </button>
-        <p>
-          Don’t have an account? <NavLink to='/register'>Register</NavLink>
+        <p className='text-center text-xs text-text-gray font-medium'>
+          Don’t have an account?{' '}
+          <NavLink
+            className='text-brand transition-all duration-300 hover:text-hover cursor-pointer'
+            to='/register'
+          >
+            Register
+          </NavLink>
         </p>
       </div>
     </form>
