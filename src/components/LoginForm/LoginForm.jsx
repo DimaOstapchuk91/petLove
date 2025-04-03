@@ -29,18 +29,20 @@ const LoginForm = () => {
 
   return (
     <form
-      className='bg-text-white px-5 py-15 rounded-[30px]'
+      className='bg-text-white px-5 py-15 rounded-[30px] md:py-17.5 md:px-35'
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h2 className='text-[28px] font-bold mb-3'>Log in</h2>
-      <p className='text-[14px] font-medium mb-6'>
+      <h2 className='text-[28px] font-bold mb-3 md:text-[54px] md:mb-4'>
+        Log in
+      </h2>
+      <p className='text-[14px] font-medium mb-6 md:text-lg md:mb-8'>
         Welcome! Please enter your credentials to login to the platform:
       </p>
-      <ul className='flex flex-col gap-2.5 mb-10'>
+      <ul className='flex flex-col gap-2.5 mb-10 md:gap-4 md:mb-12.5'>
         <li>
           <label>
             <input
-              className='border border-inputs outline-none rounded-[30px] w-full p-3'
+              className='border border-inputs outline-none rounded-[30px] w-full p-3 md:p-4'
               type='email'
               name='email'
               placeholder='Email'
@@ -52,7 +54,7 @@ const LoginForm = () => {
         <li>
           <label className='relative'>
             <input
-              className='border border-inputs outline-none rounded-[30px] w-full p-3'
+              className='border border-inputs outline-none rounded-[30px] w-full p-3 md:p-4'
               type={passwordVisible ? 'text' : 'password'}
               name='password'
               placeholder='Password'
@@ -88,11 +90,11 @@ const LoginForm = () => {
       <div className='flex flex-col  w-full gap-3'>
         <button
           type='submit'
-          className='p-3 w-ful bg-brand rounded-[30px] text-text-white transition-all duration-300 hover:bg-hover cursor-pointer'
+          className='p-3 w-ful bg-brand rounded-[30px] text-text-white transition-all duration-300 hover:bg-hover cursor-pointer md:p-4.5'
         >
           Registration
         </button>
-        <p className='text-center text-xs text-text-gray font-medium'>
+        <p className='text-center text-xs text-text-gray font-medium md:text-sm'>
           Don’t have an account?{' '}
           <NavLink
             className='text-brand transition-all duration-300 hover:text-hover cursor-pointer'

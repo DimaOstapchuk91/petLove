@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../redux/user/operations.js';
 
-const LogOutBtn = () => {
+const LogOutBtn = ({ className }) => {
   const dispatch = useDispatch();
 
   const hendleLogout = () => {
@@ -9,7 +9,7 @@ const LogOutBtn = () => {
   };
 
   return (
-    <button type='button' onClick={hendleLogout}>
+    <button className={className} type='button' onClick={hendleLogout}>
       LOG OUT
     </button>
   );

@@ -5,26 +5,33 @@ import Logo from '../Logo/Logo.jsx';
 import sprite from '../../assets/sprite.svg';
 import { useState } from 'react';
 import MobileMenu from '../MobileMenu/MobileMenu.jsx';
+import UserBar from '../UserBar/UserBar.jsx';
+import useMediaQuery from '../../hooks/useMediaQuery.js';
 
 const Header = () => {
+  const isMobile = useMediaQuery('(max-width: 767px)');
+  const isDesktop = useMediaQuery('(min-width: 1280px)');
   const [isOpen, setIsOpen] = useState(false);
+
   const isLogin = true;
-  const mobile = true;
   return (
     <header className='container !mt-7'>
       <div className='flex justify-between items-center'>
         <Logo />
-        {!mobile ? (
+        {isDesktop ? (
           <div className='flex'>
             <Nav />
             {isLogin ? <UserNav /> : <AuthNav />}
           </div>
         ) : (
-          <button type='button' onClick={() => setIsOpen(!isOpen)}>
-            <svg width='32' height='32' className='stroke-text-dark'>
-              <use href={`${sprite}#icon-menu-burger`}></use>
-            </svg>
-          </button>
+          <div className='flex gap-3'>
+            {isMobile ? <UserBar /> : <UserNav />}
+            <button type='button' onClick={() => setIsOpen(!isOpen)}>
+              <svg width='32' height='32' className='stroke-text-dark'>
+                <use href={`${sprite}#icon-menu-burger`}></use>
+              </svg>
+            </button>
+          </div>
         )}
       </div>
       <MobileMenu

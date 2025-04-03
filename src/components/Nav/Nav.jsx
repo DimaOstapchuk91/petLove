@@ -1,14 +1,15 @@
 import { NavLink } from 'react-router-dom';
-import s from './Nav.module.css';
 
 const Nav = () => {
   return (
     <nav>
-      <ul className={s.navList}>
+      <ul className='flex flex-col gap-2.5 max-w-30'>
         <li>
           <NavLink
             className={({ isActive }) =>
-              isActive ? `${s.navLink} ${s.active}` : s.navLink
+              isActive
+                ? ``
+                : `py-3.5 px-5 block text-center border border-border rounded-[30px] w-full text-[14px] font-medium text-text-white`
             }
             to='/news'
           >
@@ -18,7 +19,9 @@ const Nav = () => {
         <li>
           <NavLink
             className={({ isActive }) =>
-              isActive ? `${s.navLink} ${s.active}` : s.navLink
+              isActive
+                ? ``
+                : `py-3.5 px-5 block text-center border border-border rounded-[30px] w-full text-[14px] font-medium text-text-white`
             }
             to='/notices'
           >
@@ -29,7 +32,9 @@ const Nav = () => {
         <li>
           <NavLink
             className={({ isActive }) =>
-              isActive ? `${s.navLink} ${s.active}` : s.navLink
+              isActive
+                ? ``
+                : `py-3.5 px-5 block text-center border border-border rounded-[30px] w-full text-[14px] font-medium text-text-white`
             }
             to='/friends'
           >

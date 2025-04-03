@@ -18,11 +18,7 @@
   --color-success: var(--success-color);
   --color-inputs: var(--inputs-color);
   --color-hover: var(--color-hover);
-}
-
-/* Reset styles */
-* {
-  box-sizing: border-box;
+  --color-border: var(--color-border);
 }
 
 html {

@@ -35,18 +35,20 @@ const RegistrationForm = () => {
 
   return (
     <form
-      className='bg-text-white px-5 py-7 rounded-[30px]'
+      className='bg-text-white px-5 py-5 rounded-[30px] md:py-6.5 md:px-35'
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h2 className='text-[28px] font-bold mb-3'>Registration</h2>
-      <p className='text-[14px] font-medium mb-5'>
+      <h2 className='text-[28px] font-bold mb-3 md:text-[54px] md:mb-4'>
+        Registration
+      </h2>
+      <p className='text-[14px] font-medium mb-5 md:text-lg md:mb-8'>
         Thank you for your interest in our platform.
       </p>
-      <ul className='flex flex-col gap-2.5 mb-6'>
+      <ul className='flex flex-col gap-2.5 mb-6 md:gap-4'>
         <li>
           <label>
             <input
-              className='border border-inputs outline-none rounded-[30px] w-full p-3'
+              className='border border-inputs outline-none rounded-[30px] w-full p-3 md:p-4'
               type='text'
               name='name'
               placeholder='Name'
@@ -58,7 +60,7 @@ const RegistrationForm = () => {
         <li>
           <label>
             <input
-              className='border border-inputs outline-none rounded-[30px] w-full p-3'
+              className='border border-inputs outline-none rounded-[30px] w-full p-3 md:p-4'
               type='email'
               name='email'
               placeholder='Email'
@@ -70,7 +72,7 @@ const RegistrationForm = () => {
         <li>
           <label className='relative'>
             <input
-              className='border border-inputs outline-none rounded-[30px] w-full p-3'
+              className='border border-inputs outline-none rounded-[30px] w-full p-3 md:p-4'
               type={passwordVisible ? 'text' : 'password'}
               name='password'
               placeholder='Password'
@@ -105,9 +107,10 @@ const RegistrationForm = () => {
         <li>
           <label className='relative'>
             <input
-              className='border border-inputs outline-none rounded-[30px] w-full p-3 '
+              className='border border-inputs outline-none rounded-[30px] w-full p-3 md:p-4'
               type={repeatPasswordVisible ? 'text' : 'password'}
               name='confirmPassword'
+              placeholder='Confirm password'
             />
             <button
               type='button'
@@ -141,11 +144,11 @@ const RegistrationForm = () => {
       <div className='flex flex-col  w-full gap-3'>
         <button
           type='submit'
-          className='p-3 w-ful bg-brand rounded-[30px] text-text-white transition-all duration-300 hover:bg-hover cursor-pointer'
+          className='p-3 w-ful bg-brand rounded-[30px] text-text-white transition-all duration-300 hover:bg-hover cursor-pointer md:p-4.5'
         >
           Registration
         </button>
-        <p className='text-center text-xs text-text-gray font-medium'>
+        <p className='text-center text-xs text-text-gray font-medium md:text-sm'>
           Already have an account?{' '}
           <NavLink
             className='text-brand transition-all duration-300 hover:text-hover cursor-pointer'

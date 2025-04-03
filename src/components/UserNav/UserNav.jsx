@@ -1,21 +1,15 @@
-import s from './UserNav.module.css';
-// import sprite from '../../assets/sprite.svg';
+import LogOutBtn from '../LogOutBtn/LogOutBtn.jsx';
+import UserBar from '../UserBar/UserBar.jsx';
 
 const UserNav = () => {
   return (
-    <div className={s.userInfo}>
-      <button type='button' className={s.logoutBtn}>
-        LOG OUT
-      </button>
-
-      <>
-        <span className={s.iconBox}>
-          {/* <svg className={s.userIcon} width='24' height='24'>
-            <use href={`${sprite}#icon-user`}></use>
-          </svg> */}
-        </span>
-        <p className={s.userName}>Anonimus</p>
-      </>
+    <div className='flex gap-2'>
+      <LogOutBtn
+        className={
+          'p-3 block text-center text-base rounded-[30px] bg-brand text-text-white  md:w-auto md:px-9'
+        }
+      />
+      <UserBar />
     </div>
   );
 };
