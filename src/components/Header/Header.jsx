@@ -16,16 +16,22 @@ const Header = () => {
   const isLogin = true;
   return (
     <header className='container !mt-7'>
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center xl:gap-[313px] xl:w-full xl:justify-start'>
         <Logo />
         {isDesktop ? (
-          <div className='flex'>
-            <Nav />
-            {isLogin ? <UserNav /> : <AuthNav />}
+          <div className='w-full flex items-center justify-between'>
+            <Nav header={'header'} />
+            {!isLogin ? <UserNav /> : <AuthNav header={'header'} />}
           </div>
         ) : (
           <div className='flex gap-3'>
-            {isMobile ? <UserBar /> : <UserNav />}
+            {isMobile ? (
+              <UserBar />
+            ) : !isLogin ? (
+              <UserNav />
+            ) : (
+              <AuthNav header={'header'} />
+            )}
             <button type='button' onClick={() => setIsOpen(!isOpen)}>
               <svg width='32' height='32' className='stroke-text-dark'>
                 <use href={`${sprite}#icon-menu-burger`}></use>
