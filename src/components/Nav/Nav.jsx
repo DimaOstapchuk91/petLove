@@ -1,8 +1,12 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
+import useMediaQuery from '../../hooks/useMediaQuery.js';
 
 const Nav = ({ header }) => {
+  const location = useLocation();
   const isHeader = header === 'header';
-  console.log(isHeader);
+  const isDesk = useMediaQuery('(min-width: 1280px)');
+
+  const isLocation = location.pathname === '/home';
 
   return (
     <nav>
@@ -12,11 +16,13 @@ const Nav = ({ header }) => {
         <li>
           <NavLink
             className={
-              isHeader
+              isHeader || isLocation
                 ? ({ isActive }) =>
                     isActive
-                      ? `px-5 py-4 block  border border-brand rounded-[30px]`
-                      : `px-5 py-4 block  border border-inputs rounded-[30px]`
+                      ? `px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42]  border border-brand rounded-[30px]`
+                      : isLocation && isDesk
+                      ? 'px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-border text-text-white hover:opacity-[0.8] rounded-[30px]'
+                      : `px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-inputs rounded-[30px]`
                 : ({ isActive }) =>
                     isActive
                       ? ``
@@ -30,11 +36,13 @@ const Nav = ({ header }) => {
         <li>
           <NavLink
             className={
-              isHeader
+              isHeader || isLocation
                 ? ({ isActive }) =>
                     isActive
-                      ? `px-5 py-4 block  border border-brand rounded-[30px]`
-                      : `px-5 py-4 block  border border-inputs rounded-[30px]`
+                      ? `px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42]  border border-brand rounded-[30px]`
+                      : isLocation && isDesk
+                      ? 'px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-border text-text-white hover:opacity-[0.8] rounded-[30px]'
+                      : `px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-inputs rounded-[30px]`
                 : ({ isActive }) =>
                     isActive
                       ? ``
@@ -49,11 +57,13 @@ const Nav = ({ header }) => {
         <li>
           <NavLink
             className={
-              isHeader
+              isHeader || isLocation
                 ? ({ isActive }) =>
                     isActive
-                      ? `px-5 py-4 block  border border-brand rounded-[30px]`
-                      : `px-5 py-4 block  border border-inputs rounded-[30px]`
+                      ? `px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42]  border border-brand rounded-[30px]`
+                      : isLocation && isDesk
+                      ? 'px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-border text-text-white hover:opacity-[0.8] rounded-[30px]'
+                      : `px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-inputs rounded-[30px]`
                 : ({ isActive }) =>
                     isActive
                       ? ``

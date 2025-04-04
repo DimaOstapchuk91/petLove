@@ -31,7 +31,7 @@ const Header = () => {
       <div
         className={
           isLocation
-            ? 'flex justify-between w-full px-10 items-center xl:gap-[313px] xl:w-full xl:justify-start absolute mt-7 right-0 left-0 md:px-16'
+            ? 'flex justify-between w-full px-10 items-center xl:gap-[313px] xl:w-full xl:justify-start absolute mt-7 right-0 left-0 md:px-16 xl:px-24'
             : 'flex justify-between items-center xl:gap-[313px] xl:w-full xl:justify-start'
         }
       >
@@ -43,12 +43,12 @@ const Header = () => {
           </div>
         ) : (
           <div className='flex gap-3'>
-            {isMobile ? (
+            {isMobile && !isLocation ? (
               <UserBar />
-            ) : !isLogin ? (
+            ) : !isLogin && !isLocation ? (
               <UserNav />
             ) : (
-              <AuthNav header={'header'} />
+              !isLocation && <AuthNav header={'header'} />
             )}
             <button type='button' onClick={() => setIsOpen(!isOpen)}>
               <svg
