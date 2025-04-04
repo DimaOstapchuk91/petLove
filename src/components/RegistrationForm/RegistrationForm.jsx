@@ -6,6 +6,7 @@ import sprite from '../../assets/sprite.svg';
 import { orderRegistrationSchema } from '../../utils/formValidation.js';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import Title from '../Title/Title.jsx';
 
 const RegistrationForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -38,9 +39,7 @@ const RegistrationForm = () => {
       className='bg-text-white px-5 py-5 rounded-[30px] md:py-6.5 md:px-35 xl:w-1/2 xl:py-17 xl:px-21'
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h2 className='text-[28px] font-bold mb-3 md:text-[54px] md:mb-4'>
-        Registration
-      </h2>
+      <Title titleText={'Registration'} />
       <p className='text-[14px] font-medium mb-5 md:text-lg md:mb-8'>
         Thank you for your interest in our platform.
       </p>

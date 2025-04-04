@@ -6,6 +6,7 @@ import { loginUser } from '../../redux/user/operations.js';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { orderLoginSchema } from '../../utils/formValidation.js';
+import Title from '../Title/Title.jsx';
 
 const LoginForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -32,9 +33,7 @@ const LoginForm = () => {
       className='bg-text-white px-5 py-15 rounded-[30px] md:py-17.5 md:px-35 xl:py-28.5 xl:px-21 xl:w-1/2 '
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h2 className='text-[28px] font-bold mb-3 md:text-[54px] md:mb-4'>
-        Log in
-      </h2>
+      <Title titleText={'Log in'} />
       <p className='text-[14px] font-medium mb-6 md:text-lg md:mb-8'>
         Welcome! Please enter your credentials to login to the platform:
       </p>
@@ -95,7 +94,7 @@ const LoginForm = () => {
           LOG IN
         </button>
         <p className='text-center text-xs text-text-gray font-medium md:text-sm'>
-          Don’t have an account?{' '}
+          Don&apos;t have an account?{' '}
           <NavLink
             className='text-brand transition-all duration-300 hover:text-hover cursor-pointer'
             to='/register'

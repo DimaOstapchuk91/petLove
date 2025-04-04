@@ -8,7 +8,7 @@ import rectangle from '../../assets/img/rectangle.png';
 import rectangleDesk from '../../assets/img/rectangle-desk.png';
 import useMediaQuery from '../../hooks/useMediaQuery.js';
 
-const AuthIllustration = ({ isPet }) => {
+const PetBlock = ({ isPet }) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
   const isDesk = useMediaQuery('(min-width: 1280px)');
 
@@ -62,7 +62,7 @@ const AuthIllustration = ({ isPet }) => {
               alt='Animal img'
             />
           </div>
-          <div className='max-w-[198px]'>
+          <div className='max-w-[201px]'>
             <div className='flex justify-between items-center mb-2'>
               <p className='font-bold text-brand'>{cats ? 'Jack' : 'Rich'}</p>
               <p className='text-xs font-medium text-text-gray'>
@@ -83,4 +83,4 @@ const AuthIllustration = ({ isPet }) => {
     </div>
   );
 };
-export default AuthIllustration;
+export default PetBlock;

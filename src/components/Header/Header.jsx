@@ -7,16 +7,34 @@ import { useState } from 'react';
 import MobileMenu from '../MobileMenu/MobileMenu.jsx';
 import UserBar from '../UserBar/UserBar.jsx';
 import useMediaQuery from '../../hooks/useMediaQuery.js';
+import { useLocation } from 'react-router-dom';
 
 const Header = () => {
   const isMobile = useMediaQuery('(max-width: 767px)');
   const isDesktop = useMediaQuery('(min-width: 1280px)');
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+
+  const isLocation = location.pathname === '/home';
+
+  console.log(isLocation);
 
   const isLogin = true;
   return (
-    <header className='container !mt-7'>
-      <div className='flex justify-between items-center xl:gap-[313px] xl:w-full xl:justify-start'>
+    <header
+      className={
+        isLocation
+          ? 'max-w-[375px] mx-auto px-[20px]  md:max-w-[768px] xl:max-w-[1280px] relative '
+          : 'max-w-[375px] mx-auto px-[20px] mt-7 md:px-[32px] md:max-w-[768px] xl:max-w-[1280px]'
+      }
+    >
+      <div
+        className={
+          isLocation
+            ? 'flex justify-between w-full px-10 items-center xl:gap-[313px] xl:w-full xl:justify-start absolute mt-7 right-0 left-0 md:px-16'
+            : 'flex justify-between items-center xl:gap-[313px] xl:w-full xl:justify-start'
+        }
+      >
         <Logo />
         {isDesktop ? (
           <div className='w-full flex items-center justify-between'>
@@ -33,7 +51,13 @@ const Header = () => {
               <AuthNav header={'header'} />
             )}
             <button type='button' onClick={() => setIsOpen(!isOpen)}>
-              <svg width='32' height='32' className='stroke-text-dark'>
+              <svg
+                width='32'
+                height='32'
+                className={
+                  isLocation ? 'stroke-text-white' : 'stroke-text-dark'
+                }
+              >
                 <use href={`${sprite}#icon-menu-burger`}></use>
               </svg>
             </button>
