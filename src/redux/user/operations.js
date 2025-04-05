@@ -6,8 +6,9 @@ export const registerUser = createAsyncThunk(
   async (credenrials, thunkAPI) => {
     try {
       const { data } = await petLoveApi.post('users/signup', credenrials);
-      setAuthHeader(data.data.token);
-      return data.data;
+      setAuthHeader(data.token);
+
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -18,10 +19,12 @@ export const loginUser = createAsyncThunk(
   'user/login',
   async (credentials, thunkAPI) => {
     try {
-      const { data } = await petLoveApi.post('user/signin', credentials);
-      setAuthHeader(data.data.token);
-      return data.data;
+      const { data } = await petLoveApi.post('users/signin', credentials);
+      setAuthHeader(data.token);
+      console.log(data);
+      return data;
     } catch (error) {
+      console.log(error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

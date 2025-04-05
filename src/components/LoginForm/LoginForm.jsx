@@ -4,13 +4,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { loginUser } from '../../redux/user/operations.js';
 import { useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { orderLoginSchema } from '../../utils/formValidation.js';
 import Title from '../Title/Title.jsx';
 
 const LoginForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -25,7 +26,13 @@ const LoginForm = () => {
   };
 
   const onSubmit = async data => {
-    dispatch(loginUser(data));
+    try {
+      await dispatch(loginUser(data)).unwrap();
+
+      navigate('/profile');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
