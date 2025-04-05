@@ -8,8 +8,11 @@ import MobileMenu from '../MobileMenu/MobileMenu.jsx';
 import UserBar from '../UserBar/UserBar.jsx';
 import useMediaQuery from '../../hooks/useMediaQuery.js';
 import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectIsLoggedIn } from '../../redux/user/selectors.js';
 
 const Header = () => {
+  const isLogin = useSelector(selectIsLoggedIn);
   const isMobile = useMediaQuery('(max-width: 767px)');
   const isDesktop = useMediaQuery('(min-width: 1280px)');
   const location = useLocation();
@@ -17,9 +20,8 @@ const Header = () => {
 
   const isLocation = location.pathname === '/home';
 
-  console.log(isLocation);
+  console.log('is login ?', isLogin);
 
-  const isLogin = true;
   return (
     <header
       className={
@@ -39,13 +41,13 @@ const Header = () => {
         {isDesktop ? (
           <div className='w-full flex items-center justify-between'>
             <Nav header={'header'} />
-            {!isLogin ? <UserNav /> : <AuthNav header={'header'} />}
+            {isLogin ? <UserNav /> : <AuthNav header={'header'} />}
           </div>
         ) : (
           <div className='flex gap-3'>
             {isMobile && !isLocation ? (
               <UserBar />
-            ) : !isLogin && !isLocation ? (
+            ) : isLogin && !isLocation ? (
               <UserNav />
             ) : (
               !isLocation && <AuthNav header={'header'} />

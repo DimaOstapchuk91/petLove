@@ -8,7 +8,7 @@ const UserBar = () => {
   return (
     <div className='md:flex md:items-center md:gap-2'>
       <NavLink
-        className='w-10 flex justify-center items-center h-10 bg-brand-light rounded-full cursor-pointer transition-all duration-300  hover:opacity-[0.8]'
+        className='w-10 flex justify-center items-center h-10 bg-brand-light rounded-full cursor-pointer transition-all duration-300  hover:opacity-[0.8] xl:w-12.5 xl:h-12.5'
         to='/profile'
       >
         <svg className='fill-brand stroke-brand' width='20' height='20'>

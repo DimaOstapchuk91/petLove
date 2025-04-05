@@ -8,8 +8,10 @@ import RegistrationPage from './pages/RegistrationPage/RegistrationPage.jsx';
 import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import ProfilePage from './pages/ProfilePage/ProfilePage.jsx';
 import AddPetPage from './pages/AddPetPage/AddPetPage.jsx';
+import useAuthToken from './redux/service/configApi.js';
 
 function App() {
+  useAuthToken();
   return (
     <>
       <Layout>

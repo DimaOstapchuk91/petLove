@@ -41,7 +41,7 @@ const MobileMenu = ({ isOpen, onClose, isLogin }) => {
         </button>
 
         <Nav />
-        {!isLogin ? (
+        {isLogin ? (
           <LogOutBtn
             className={
               isLocation

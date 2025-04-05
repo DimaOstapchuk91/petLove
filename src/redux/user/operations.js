@@ -103,7 +103,7 @@ export const logoutUser = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = petLoveApi.post('users/signout');
-      return response.message;
+      return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
