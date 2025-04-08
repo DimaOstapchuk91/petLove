@@ -11,6 +11,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import { newsReducer } from './news/slice.js';
 
 const persistUserConfig = {
   key: 'accessToken',
@@ -23,6 +24,7 @@ const persistedUserReducer = persistReducer(persistUserConfig, userReducer);
 export const store = configureStore({
   reducer: {
     user: persistedUserReducer,
+    news: newsReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

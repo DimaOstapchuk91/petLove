@@ -31,4 +31,4 @@ const newsSlice = createSlice({
   },
 });
 
-export const userReducer = newsSlice.reducer;
+export const newsReducer = newsSlice.reducer;
