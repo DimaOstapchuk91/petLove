@@ -1,111 +1,85 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { petLoveApi, setAuthHeader } from '../service/configApi.js';
+import { handleRequest } from '../service/handleRequest.js';
 
 export const registerUser = createAsyncThunk(
   'user/register',
-  async (credenrials, thunkAPI) => {
-    try {
-      const { data } = await petLoveApi.post('users/signup', credenrials);
-      setAuthHeader(data.token);
+  async (credentials, thunkAPI) => {
+    const requestFunction = async data => {
+      return petLoveApi.post('users/signup', data);
+    };
+    const result = await handleRequest(requestFunction, thunkAPI, credentials);
 
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
+    if (result?.token) setAuthHeader(result.token);
+
+    return result;
   }
 );
 
 export const loginUser = createAsyncThunk(
   'user/login',
   async (credentials, thunkAPI) => {
-    try {
-      const { data } = await petLoveApi.post('users/signin', credentials);
-      setAuthHeader(data.token);
-      console.log(data);
-      return data;
-    } catch (error) {
-      console.log(error);
-      return thunkAPI.rejectWithValue(error.message);
-    }
+    const requestFunction = async data => {
+      return petLoveApi.post('users/signin', data);
+    };
+
+    const result = await handleRequest(requestFunction, thunkAPI, credentials);
+
+    if (result?.token) setAuthHeader(result.token);
+
+    return result;
   }
 );
 
 export const getUserCurrentData = createAsyncThunk(
   'user/current',
   async (_, thunkAPI) => {
-    try {
-      const { data } = await petLoveApi.get('users/current');
-      return data.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
+    return handleRequest(() => petLoveApi.get('users/current'), thunkAPI);
   }
 );
 
 export const getUserFullCurrentData = createAsyncThunk(
   'user/full-current',
   async (_, thunkAPI) => {
-    try {
-      const { data } = await petLoveApi.get('users/current/full');
-
-      return data.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
+    return handleRequest(() => petLoveApi.get('users/current/full'), thunkAPI);
   }
 );
 
 export const editUserCurrent = createAsyncThunk(
   'user/current-edit',
-  async (credenrials, thunkAPI) => {
-    try {
-      const { data } = await petLoveApi.patch(
-        'users/current/edit',
-        credenrials
-      );
+  async (credentials, thunkAPI) => {
+    const requestFunction = async data => {
+      return petLoveApi.patch('users/current/edit', data);
+    };
 
-      return data.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
+    return handleRequest(requestFunction, thunkAPI, credentials);
   }
 );
 
 export const addPets = createAsyncThunk(
   'user/pets-add',
   async (credentials, thunkAPI) => {
-    try {
-      const { data } = await petLoveApi.post(
-        'users/current/pets/add',
-        credentials
-      );
-      return data.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
+    const requestFunction = async data => {
+      return petLoveApi.post('users/current/pets/add', data);
+    };
+
+    return handleRequest(requestFunction, thunkAPI, credentials);
   }
 );
 
 export const removePets = createAsyncThunk(
-  'user/perts-remuve',
+  'user/pets-remove',
   async (id, thunkAPI) => {
-    try {
-      const { data } = petLoveApi.delete(`users/current/pets/remove/${id}`);
-      return data.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
+    return handleRequest(
+      () => petLoveApi.delete(`users/current/pets/remove/${id}`),
+      thunkAPI
+    );
   }
 );
 
 export const logoutUser = createAsyncThunk(
   'user/logout',
   async (_, thunkAPI) => {
-    try {
-      const response = petLoveApi.post('users/signout');
-      return response;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
+    return handleRequest(() => petLoveApi.post('users/signout'), thunkAPI);
   }
 );

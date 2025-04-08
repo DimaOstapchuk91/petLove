@@ -13,12 +13,17 @@ const initialState = {
   userCurrentFull: null,
   token: null,
   isLoading: false,
-  error: false,
+  error: null,
 };
 
-const slice = createSlice({
+const authSlice = createSlice({
   name: 'user',
   initialState,
+  reducers: {
+    unauthorized() {
+      return initialState;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(registerUser.fulfilled, (state, action) => {
@@ -70,12 +75,14 @@ const slice = createSlice({
           getUserFullCurrentData.rejected,
           logoutUser.rejected
         ),
-        state => {
+        (state, action) => {
           state.isLoading = false;
-          state.error = true;
+          state.error = action.payload;
         }
       );
   },
 });
 
-export const userReducer = slice.reducer;
+export const { unauthorized } = authSlice.actions;
+
+export const userReducer = authSlice.reducer;

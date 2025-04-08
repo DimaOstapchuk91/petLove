@@ -27,6 +27,7 @@ const LoginForm = () => {
 
   const onSubmit = async data => {
     try {
+      console.log(data);
       await dispatch(loginUser(data)).unwrap();
 
       navigate('/profile');
