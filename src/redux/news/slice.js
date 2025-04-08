@@ -13,6 +13,14 @@ const initialState = {
 const newsSlice = createSlice({
   name: 'news',
   initialState,
+  reducers: {
+    setNewsPage: (state, action) => {
+      const newPage = action.payload;
+      if (newPage >= 1 && newPage <= state.totalPages) {
+        state.page = newPage;
+      }
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(getNews.pending, state => {
@@ -30,5 +38,7 @@ const newsSlice = createSlice({
       });
   },
 });
+
+export const { setNewsPage } = newsSlice.actions;
 
 export const newsReducer = newsSlice.reducer;
