@@ -19,6 +19,7 @@
   --color-inputs: var(--inputs-color);
   --color-hover: var(--color-hover);
   --color-border: var(--color-border);
+  --color-disabled: var(--color-disabled);
 }
 
 html {

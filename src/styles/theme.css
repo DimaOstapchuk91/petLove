@@ -12,7 +12,10 @@
   --color-text-gray: rgba(38, 38, 38, 0.5);
   --color-text-gray-dark: rgba(38, 38, 38, 0.6);
   --color-text-gray-light: rgba(43, 43, 42, 0.4);
+
+  /* btn */
   --color-border: rgba(255, 255, 255, 0.5);
+  --color-disabled: rgba(38, 38, 38, 0.05);
 
   /* Inputs */
   --error-color: #ef2447;
