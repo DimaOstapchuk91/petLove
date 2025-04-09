@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNews } from '../../redux/news/operations.js';
 import Title from '../../components/Title/Title.jsx';
@@ -13,20 +13,22 @@ import { setNewsPage } from '../../redux/news/slice.js';
 
 const NewsPage = () => {
   const dispatch = useDispatch();
+  const [search, setSearch] = useState('');
   const pageNumber = useSelector(selectNewsPage);
 
   useEffect(() => {
-    dispatch(getNews({ page: pageNumber }));
-  }, [pageNumber]);
+    console.log(search);
+    dispatch(getNews({ page: pageNumber, keyword: search }));
+  }, [pageNumber, search]);
 
   const totalPages = useSelector(selectNewsTotalPages);
 
   return (
     <section className='container'>
-      <div>
-        <div>
-          <Title />
-          <SearchField />
+      <div className='pt-15 pb-20'>
+        <div className='flex flex-col mb-6 md:flex-row md:items-center md:justify-between'>
+          <Title titleText={'News'} />
+          <SearchField setSearch={setSearch} />
         </div>
         <NewsList />
         <Pagination

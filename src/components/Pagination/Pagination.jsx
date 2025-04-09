@@ -102,7 +102,7 @@ const Pagination = ({ page, totalPages, setPage }) => {
               onClick={() => handlePageClick(pageNum)}
               className={
                 pageNum === page
-                  ? 'p-2.5 w-10 flex justify-center items-center rounded-full bg-brand text-text-white font-bold text-sm leading-[18px] md:w-11 md:h-11 md:text-lg md:leading-[22px]'
+                  ? 'p-2.5 w-10 flex justify-center items-center rounded-full bg-brand text-text-white font-bold text-sm leading-[18px] md:w-11 md:h-11 md:text-lg '
                   : 'p-2.5 w-10 flex justify-center items-center border border-disabled rounded-full font-bold text-sm leading-[18px] md:w-11 md:h-11 md:text-lg md:leading-[22px]'
               }
             >

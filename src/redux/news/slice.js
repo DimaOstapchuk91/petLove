@@ -28,7 +28,8 @@ const newsSlice = createSlice({
         state.isError = false;
       })
       .addCase(getNews.fulfilled, (state, action) => {
-        state.dataNews = action.payload.result;
+        console.log(action);
+        state.dataNews = action.payload.results;
         state.totalPages = action.payload.totalPages;
         state.isLoading = false;
       })
