@@ -25,8 +25,8 @@ const Nav = ({ header }) => {
                       : `px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-inputs rounded-[30px]`
                 : ({ isActive }) =>
                     isActive
-                      ? ``
-                      : `py-3.5 px-5 block text-center border border-border rounded-[30px] w-full text-[14px] font-medium text-text-white`
+                      ? `py-3.5 px-5 block text-center border border-border rounded-[30px] w-full text-[14px] font-medium text-text-white`
+                      : `py-3.5 px-5 block text-center border border-border-light rounded-[30px] w-full text-[14px] font-medium text-text-white`
             }
             to='/news'
           >
@@ -45,8 +45,8 @@ const Nav = ({ header }) => {
                       : `px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-inputs rounded-[30px]`
                 : ({ isActive }) =>
                     isActive
-                      ? ``
-                      : `py-3.5 px-5 block text-center border border-border rounded-[30px] w-full text-[14px] font-medium text-text-white`
+                      ? `py-3.5 px-5 block text-center border border-border rounded-[30px] w-full text-[14px] font-medium text-text-white`
+                      : `py-3.5 px-5 block text-center border border-border-light rounded-[30px] w-full text-[14px] font-medium text-text-white`
             }
             to='/notices'
           >
@@ -66,8 +66,8 @@ const Nav = ({ header }) => {
                       : `px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-inputs rounded-[30px]`
                 : ({ isActive }) =>
                     isActive
-                      ? ``
-                      : `py-3.5 px-5 block text-center border border-border rounded-[30px] w-full text-[14px] font-medium text-text-white`
+                      ? `py-3.5 px-5 block text-center border border-border rounded-[30px] w-full text-[14px] font-medium text-text-white`
+                      : `py-3.5 px-5 block text-center border border-border-light rounded-[30px] w-full text-[14px] font-medium text-text-white`
             }
             to='/friends'
           >
