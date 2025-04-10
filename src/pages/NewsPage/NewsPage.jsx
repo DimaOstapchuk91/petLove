@@ -25,8 +25,8 @@ const NewsPage = () => {
 
   return (
     <section className='container'>
-      <div className='pt-15 pb-20'>
-        <div className='flex flex-col mb-6 md:flex-row md:items-center md:justify-between'>
+      <div className='pt-15 pb-20 md:pt-21.5 xl:pt-24'>
+        <div className='flex flex-col gap-5 mb-6 md:flex-row md:items-center md:justify-between md:gap-0 md:mb-11 xl:mb-15'>
           <Title titleText={'News'} />
           <SearchField setSearch={setSearch} />
         </div>

@@ -42,7 +42,7 @@ const LoginForm = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <Title titleText={'Log in'} />
-      <p className='text-[14px] font-medium mb-6 md:text-lg md:mb-8'>
+      <p className='text-[14px] font-medium mb-6 mt-3 md:mt-4 md:text-lg md:mb-8'>
         Welcome! Please enter your credentials to login to the platform:
       </p>
       <ul className='flex flex-col gap-2.5 mb-10 md:gap-4 md:mb-12.5'>

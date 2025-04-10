@@ -27,7 +27,7 @@ const Header = () => {
       className={
         isLocation
           ? 'max-w-[375px] mx-auto px-[20px]  md:max-w-[768px] xl:max-w-[1280px] relative '
-          : 'max-w-[375px] mx-auto px-[20px] mt-7 md:px-[32px] md:max-w-[768px] xl:max-w-[1280px]'
+          : 'max-w-[375px] mx-auto px-[20px] mt-7 md:px-[32px] md:max-w-[768px] xl:max-w-[1280px] xl:px-16'
       }
     >
       <div

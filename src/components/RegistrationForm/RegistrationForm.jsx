@@ -47,8 +47,8 @@ const RegistrationForm = () => {
       className='bg-text-white px-5 py-5 rounded-[30px] md:py-6.5 md:px-35 xl:w-1/2 xl:py-17 xl:px-21'
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Title titleText={'Registration'} />
-      <p className='text-[14px] font-medium mb-5 md:text-lg md:mb-8'>
+      <Title titleText={'Registration'} form={true} />
+      <p className='text-[14px] font-medium mb-5 mt-3 md:mt-4 md:text-lg md:mb-8'>
         Thank you for your interest in our platform.
       </p>
       <ul className='flex flex-col gap-2.5 mb-6 md:gap-4 xl:mb-8.5'>
