@@ -13,6 +13,7 @@ import {
 } from 'redux-persist';
 import { newsReducer } from './news/slice.js';
 import { friendsReducer } from './friends/slice.js';
+import { noticesReducer } from './notices/slice.js';
 
 const persistUserConfig = {
   key: 'accessToken',
@@ -27,6 +28,7 @@ export const store = configureStore({
     user: persistedUserReducer,
     news: newsReducer,
     friends: friendsReducer,
+    notices: noticesReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

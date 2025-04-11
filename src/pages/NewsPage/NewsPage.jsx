@@ -17,9 +17,8 @@ const NewsPage = () => {
   const pageNumber = useSelector(selectNewsPage);
 
   useEffect(() => {
-    console.log(search);
     dispatch(getNews({ page: pageNumber, keyword: search }));
-  }, [pageNumber, search]);
+  }, [dispatch, pageNumber, search]);
 
   const totalPages = useSelector(selectNewsTotalPages);
 

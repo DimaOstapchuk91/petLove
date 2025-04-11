@@ -12,7 +12,7 @@ const FriendsList = () => {
 
   useEffect(() => {
     dispatch(getFriendsData());
-  }, []);
+  }, [dispatch]);
 
   return (
     <ul className='flex flex-col gap-5 mt-10 md:flex-row md:flex-wrap xl:gap-y-7'>
