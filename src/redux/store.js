@@ -14,6 +14,7 @@ import {
 import { newsReducer } from './news/slice.js';
 import { friendsReducer } from './friends/slice.js';
 import { noticesReducer } from './notices/slice.js';
+import { filtersReducer } from './filters/slice.js';
 
 const persistUserConfig = {
   key: 'accessToken',
@@ -29,6 +30,7 @@ export const store = configureStore({
     news: newsReducer,
     friends: friendsReducer,
     notices: noticesReducer,
+    filters: filtersReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

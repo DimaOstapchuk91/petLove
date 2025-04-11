@@ -15,7 +15,7 @@ const NoticesItem = ({ dataItem }) => {
     price,
   } = dataItem;
   return (
-    <li className='p-6 bg-text-white w-full rounded-2xl max-w-[335px] md:max-w-[342px] xl:max-w-[361px]'>
+    <li className='p-6 bg-text-white w-full rounded-2xl max-w-[335px] md:max-w-[342px] xl:max-w-[362px]'>
       <img
         className='w-full  h-[178px] object-cover rounded-2xl mb-6 md:h-[226px]'
         src={imgURL}

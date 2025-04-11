@@ -3,13 +3,11 @@ import NoticesFilters from '../../components/NoticesFilters/NoticesFilters.jsx';
 import NoticesList from '../../components/NoticesList/NoticesList.jsx';
 import Pagination from '../../components/Pagination/Pagination.jsx';
 import Title from '../../components/Title/Title.jsx';
-import {
-  selectFilters,
-  selectTotalPages,
-} from '../../redux/notices/selectors.js';
+import { selectTotalPages } from '../../redux/notices/selectors.js';
 import { getAllNoticesData } from '../../redux/notices/operations.js';
 import { useEffect } from 'react';
-import { setNotiesPage } from '../../redux/notices/slice.js';
+import { selectFilters } from '../../redux/filters/selectors.js';
+import { setFiltersPage } from '../../redux/filters/slice.js';
 
 const NoticesPage = () => {
   const dispatch = useDispatch();
@@ -26,12 +24,12 @@ const NoticesPage = () => {
     <section className='container'>
       <div>
         <Title titleText={'Find your favorite pet'} />
-        <NoticesFilters />
+        <NoticesFilters filters={filters} />
         <NoticesList />
         <Pagination
           page={filters.page}
           totalPages={totalPages}
-          setPage={setNotiesPage}
+          setPage={setFiltersPage}
         />
       </div>
     </section>
