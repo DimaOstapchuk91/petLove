@@ -5,3 +5,11 @@ export const formatDate = rawDate => {
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 };
+
+export const formatNoticesDate = oldDate => {
+  const [year, month, day] = oldDate.split('-');
+
+  const formattedDate = `${day}.${month}.${year}`;
+
+  return formattedDate;
+};
