@@ -11,11 +11,12 @@ const initialState = {
   filters: {
     keyword: '',
     category: '',
+    species: '',
+    sex: '',
     locationId: '',
     byDate: '',
     byPrice: '',
     byPopularity: '',
-    sex: '',
     page: 1,
     limit: 6,
   },
@@ -32,8 +33,19 @@ const filtersSlice = createSlice({
   initialState,
   reducers: {
     setFilter(state, action) {
-      const { key, value } = action.payload;
-      state.filters[key] = value;
+      const newFilters = action.payload;
+
+      if (newFilters.byPopularity) {
+        newFilters.byPrice = ''; // очищаємо byPrice, якщо вибрано byPopularity
+      }
+      if (newFilters.byPrice) {
+        newFilters.byPopularity = ''; // очищаємо byPopularity, якщо вибрано byPrice
+      }
+
+      state.filters = {
+        ...state.filters,
+        ...newFilters,
+      };
     },
     resetFilters(state) {
       state.filters = initialState;

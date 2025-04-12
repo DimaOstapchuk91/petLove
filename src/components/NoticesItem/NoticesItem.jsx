@@ -38,7 +38,7 @@ const NoticesItem = ({ dataItem }) => {
         <p className='flex flex-col text-[10px] text-text-gray leading-3.5 -tracking-[0.2px] w-1/5'>
           Birthday
           <span className='text-xs text-text-dark'>
-            {formatNoticesDate(birthday)}
+            {birthday ? formatNoticesDate(birthday) : 'unknown'}
           </span>
         </p>
         <p className='flex flex-col text-[10px] text-text-gray leading-3.5 -tracking-[0.2px] w-1/5'>
@@ -58,7 +58,7 @@ const NoticesItem = ({ dataItem }) => {
         {comment}
       </p>
       <p className='font-bold leading-4 mb-3 md:text-lg md:leading-6'>
-        $ {price ? price : '40.99'}
+        $ {price ? price : 'Free'}
       </p>
       <div className='flex gap-2.5'>
         <button

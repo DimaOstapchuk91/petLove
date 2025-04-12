@@ -9,6 +9,7 @@ export const getAllNoticesData = createAsyncThunk(
       keyword = '',
       category,
       locationId,
+      species,
       byDate,
       byPrice,
       byPopularity,
@@ -23,6 +24,7 @@ export const getAllNoticesData = createAsyncThunk(
       const searchParams = new URLSearchParams();
       if (keyword) searchParams.append('keyword', keyword);
       if (category) searchParams.append('category', category);
+      if (species) searchParams.append('species', species);
       if (locationId) searchParams.append('locationId', locationId);
       if (byDate) searchParams.append('byDate', byDate);
       if (byPrice) searchParams.append('byPrice', byPrice);
