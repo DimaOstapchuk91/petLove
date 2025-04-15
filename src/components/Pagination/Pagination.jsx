@@ -95,7 +95,7 @@ const Pagination = ({ page, totalPages, setPage }) => {
       </div>
 
       <ul className='flex gap-2.5'>
-        {getVisiblePages().map((pageNum, index) => (
+        {getVisiblePages()?.map((pageNum, index) => (
           <li key={index}>
             <button
               key={pageNum}

@@ -36,10 +36,10 @@ const filtersSlice = createSlice({
       const newFilters = action.payload;
 
       if (newFilters.byPopularity) {
-        newFilters.byPrice = ''; // очищаємо byPrice, якщо вибрано byPopularity
+        newFilters.byPrice = '';
       }
       if (newFilters.byPrice) {
-        newFilters.byPopularity = ''; // очищаємо byPopularity, якщо вибрано byPrice
+        newFilters.byPopularity = '';
       }
 
       state.filters = {
@@ -48,7 +48,7 @@ const filtersSlice = createSlice({
       };
     },
     resetFilters(state) {
-      state.filters = initialState;
+      state.filters = initialState.filters;
     },
     setFiltersPage(state, action) {
       const newPage = action.payload;

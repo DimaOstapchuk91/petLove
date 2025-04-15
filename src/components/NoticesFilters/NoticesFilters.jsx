@@ -31,7 +31,7 @@ const NoticesFilters = () => {
     dispatch(getSearchCities());
   }, [dispatch]);
 
-  const { register, handleSubmit, watch, setValue, control, reset } = useForm({
+  const { register, handleSubmit, control, reset } = useForm({
     defaultValues: {
       keyword: '',
       category: '',
@@ -47,21 +47,17 @@ const NoticesFilters = () => {
   const watchedSex = useWatch({ control, name: 'sex' });
   const watchedSpecies = useWatch({ control, name: 'species' });
   const watchedCity = useWatch({ control, name: 'city' });
-  const watchedByPopularity = useWatch({ control, name: 'byPopularity' });
-  const watchedByPrice = useWatch({ control, name: 'byPrice' });
-
-  console.log(watchedByPopularity);
+  const watchedSort = useWatch({ control, name: 'sort' });
 
   useEffect(() => {
-    console.log('watchedByPopularity', watchedByPopularity);
-    if (watchedByPopularity) {
-      setValue('byPrice', '');
-      setValue('byPopularity', watchedByPopularity);
+    let byPrice = '';
+    let byPopularity = '';
+
+    if (watchedSort?.startsWith('popularity')) {
+      byPopularity = watchedSort.split('-')[1];
     }
-    console.log('watchedByPrice', watchedByPrice);
-    if (watchedByPrice) {
-      setValue('byPopularity', '');
-      setValue('byPrice', watchedByPrice);
+    if (watchedSort?.startsWith('price')) {
+      byPrice = watchedSort.split('-')[1];
     }
 
     const newFilters = {
@@ -69,11 +65,9 @@ const NoticesFilters = () => {
       ...(watchedSex && { sex: watchedSex }),
       ...(watchedSpecies && { species: watchedSpecies }),
       ...(watchedCity && { locationId: watchedCity.value }),
-      ...(watchedByPopularity && { byPopularity: watchedByPopularity }),
-      ...(watchedByPrice && { byPrice: watchedByPrice }),
+      ...(byPopularity && { byPopularity }),
+      ...(byPrice && { byPrice }),
     };
-
-    console.log('New filters:', newFilters);
 
     if (Object.keys(newFilters).length > 0) {
       dispatch(setFilter(newFilters));
@@ -83,9 +77,7 @@ const NoticesFilters = () => {
     watchedSex,
     watchedSpecies,
     watchedCity,
-    watchedByPopularity,
-    watchedByPrice,
-    setValue,
+    watchedSort,
     dispatch,
   ]);
 
@@ -145,23 +137,26 @@ const NoticesFilters = () => {
         />
         <div className='sort-options'>
           <label>
-            <input type='radio' {...register('byPopularity')} value='false' />
+            <input
+              type='radio'
+              {...register('sort')}
+              value='popularity-false'
+            />
             Popular
           </label>
           <label>
-            <input type='radio' {...register('byPopularity')} value='true' />
+            <input type='radio' {...register('sort')} value='popularity-true' />
             Unpopular
           </label>
           <label>
-            <input type='radio' {...register('byPrice')} value='false' />
+            <input type='radio' {...register('sort')} value='price-false' />
             Cheap
           </label>
           <label>
-            <input type='radio' {...register('byPrice')} value='true' />
+            <input type='radio' {...register('sort')} value='price-true' />
             Expensive
           </label>
         </div>
-        <button type='submit'>Apply Filters</button>
       </form>
       <button onClick={handleReset}>Reset Filters</button>
     </div>
