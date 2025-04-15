@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { Controller, useForm, useWatch } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { setFilter, resetFilters } from '../../redux/filters/slice.js';
 import {
   getNoticesSearchCategories,
@@ -8,7 +8,6 @@ import {
   getNoticesSearchSpecies,
   getSearchCities,
 } from '../../redux/filters/operations.js';
-import Select from 'react-select';
 import SearchField from '../SearchField/SearchField.jsx';
 import {
   selectCategories,
@@ -16,6 +15,8 @@ import {
   selectSex,
   selectSpecies,
 } from '../../redux/filters/selectors.js';
+import sprite from '../../assets/sprite.svg';
+import { CitySelect } from '../CitySelect/CitySelect.jsx';
 
 const NoticesFilters = () => {
   const dispatch = useDispatch();
@@ -97,77 +98,101 @@ const NoticesFilters = () => {
   };
 
   return (
-    <div className='filters'>
-      <form onSubmit={handleSubmit(handleFormSubmit)}>
-        <SearchField
-          register={register}
-          handleSubmit={handleSubmit}
-          watch={watch}
-          reset={handleSearchClear}
-        />
-        <select {...register('category')}>
-          <option value=''>Category</option>
-          {categories.map(category => (
-            <option key={category} value={category}>
-              {category.charAt(0).toUpperCase() + category.slice(1)}
-            </option>
-          ))}
-        </select>
-        <select {...register('sex')}>
-          <option value=''>Gender</option>
-          {sex.map(s => (
-            <option key={s} value={s}>
-              {s.charAt(0).toUpperCase() + s.slice(1)}
-            </option>
-          ))}
-        </select>
-        <select {...register('species')}>
-          <option value=''>Type</option>
+    <form
+      className='mt-10 py-5 px-8 bg-brand-light rounded-[30px] flex flex-col gap-3'
+      onSubmit={handleSubmit(handleFormSubmit)}
+    >
+      <SearchField
+        register={register}
+        handleSubmit={handleSubmit}
+        watch={watch}
+        reset={handleSearchClear}
+      />
+      <div className='flex gap-2 w-full'>
+        <label className='relative w-1/2'>
+          <select
+            className='p-3 pr-8 w-full  rounded-[30px] border-none outline-none bg-text-white appearance-none '
+            {...register('category')}
+          >
+            <option value=''>Category</option>
+            {categories.map(category => (
+              <option key={category} value={category}>
+                {category.charAt(0).toUpperCase() + category.slice(1)}
+              </option>
+            ))}
+          </select>
+          <svg
+            className='fill-text-dark top-3 right-3 absolute stroke-transparent -rotate-90 md:w-6 md:h-6'
+            width={18}
+            height={18}
+          >
+            <use href={`${sprite}#icon-arrow-small`}></use>
+          </svg>
+        </label>
+        <label className='relative w-1/2'>
+          <select
+            className='p-3 pr-8 w-full rounded-[30px] border-none outline-none bg-text-white appearance-none '
+            {...register('sex')}
+          >
+            <option value=''>By Gender</option>
+            {sex.map(s => (
+              <option key={s} value={s}>
+                {s.charAt(0).toUpperCase() + s.slice(1)}
+              </option>
+            ))}
+          </select>
+          <svg
+            className='fill-text-dark top-3 right-3 absolute stroke-transparent -rotate-90 md:w-6 md:h-6'
+            width={18}
+            height={18}
+          >
+            <use href={`${sprite}#icon-arrow-small`}></use>
+          </svg>
+        </label>
+      </div>
+      <label className='relative'>
+        <select
+          className='p-3 pr-8 w-full text-sm rounded-[30px] border border-transparent focus:border-brand hover:border-brand outline-none bg-text-white appearance-none'
+          {...register('species')}
+        >
+          <option value='' className=' text-sm'>
+            Type
+          </option>
           {species.map(sp => (
             <option key={sp} value={sp}>
               {sp.charAt(0).toUpperCase() + sp.slice(1)}
             </option>
           ))}
         </select>
-        <Controller
-          name='city'
-          control={control}
-          render={({ field }) => (
-            <Select
-              {...field}
-              options={cities.map(city => ({
-                value: city._id,
-                label: `${city.cityEn}, ${city.stateEn}`,
-              }))}
-              placeholder='Location'
-            />
-          )}
-        />
-        <div className='sort-options'>
-          <label>
-            <input
-              type='radio'
-              {...register('sort')}
-              value='popularity-false'
-            />
-            Popular
-          </label>
-          <label>
-            <input type='radio' {...register('sort')} value='popularity-true' />
-            Unpopular
-          </label>
-          <label>
-            <input type='radio' {...register('sort')} value='price-false' />
-            Cheap
-          </label>
-          <label>
-            <input type='radio' {...register('sort')} value='price-true' />
-            Expensive
-          </label>
-        </div>
-      </form>
+        <svg
+          className='fill-text-dark top-3 right-3 absolute stroke-transparent -rotate-90 md:w-6 md:h-6'
+          width={18}
+          height={18}
+        >
+          <use href={`${sprite}#icon-arrow-small`}></use>
+        </svg>
+      </label>
+      <CitySelect name={'city'} control={control} cities={cities} />
+      <div className='flex flex-wrap'>
+        <label>
+          <input type='radio' {...register('sort')} value='popularity-false' />
+          Popular
+        </label>
+        <label>
+          <input type='radio' {...register('sort')} value='popularity-true' />
+          Unpopular
+        </label>
+        <label>
+          <input type='radio' {...register('sort')} value='price-false' />
+          Cheap
+        </label>
+        <label>
+          <input type='radio' {...register('sort')} value='price-true' />
+          Expensive
+        </label>
+      </div>
       <button onClick={handleReset}>Reset Filters</button>
-    </div>
+    </form>
   );
 };
 

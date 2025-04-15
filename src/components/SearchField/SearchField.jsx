@@ -19,7 +19,7 @@ const SearchField = ({
 
   const renderInput = () => {
     return (
-      <label className='relative'>
+      <label className='relative block'>
         <input
           {...register('keyword')}
           className='p-3 w-full border border-inputs outline-none rounded-[30px] md:max-w-[230px] md:p-3.5'
@@ -41,7 +41,7 @@ const SearchField = ({
             </svg>
           </button>
         )}
-        <button className='absolute top-0 right-3 md:right-3.5' type='submit'>
+        <button className='absolute top-3 right-3 md:right-3.5' type='submit'>
           <svg
             className='fill-transparent stroke-text-dark'
             width={20}
