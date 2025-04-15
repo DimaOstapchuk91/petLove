@@ -1,33 +1,27 @@
-import { useForm } from 'react-hook-form';
 import sprite from '../../assets/sprite.svg';
 import { useEffect, useState } from 'react';
 
-const SearchField = ({ setSearch }) => {
+const SearchField = ({
+  register,
+  handleSubmit,
+  watch,
+  reset,
+  onSubmit,
+  asForm = false,
+}) => {
   const [showClear, setShowClear] = useState(false);
 
-  const { register, handleSubmit, watch, reset } = useForm();
-
-  const searchValue = watch('search');
+  const searchValue = watch('keyword');
 
   useEffect(() => {
-    console.log(searchValue);
     setShowClear(searchValue?.trim().length > 0);
   }, [searchValue]);
 
-  const onSubmit = ({ search }) => {
-    setSearch(search.trim());
-  };
-
-  const handleClear = () => {
-    reset();
-    setSearch('');
-  };
-
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+  const renderInput = () => {
+    return (
       <label className='relative'>
         <input
-          {...register('search')}
+          {...register('keyword')}
           className='p-3 w-full border border-inputs outline-none rounded-[30px] md:max-w-[230px] md:p-3.5'
           type='text'
           placeholder='Search'
@@ -35,7 +29,7 @@ const SearchField = ({ setSearch }) => {
         {showClear && (
           <button
             type='button'
-            onClick={handleClear}
+            onClick={reset}
             className='absolute top-1/2 -translate-y-1/2 right-10'
           >
             <svg
@@ -57,7 +51,13 @@ const SearchField = ({ setSearch }) => {
           </svg>
         </button>
       </label>
-    </form>
+    );
+  };
+
+  return asForm ? (
+    <form onSubmit={handleSubmit(onSubmit)}>{renderInput()}</form>
+  ) : (
+    renderInput()
   );
 };
 

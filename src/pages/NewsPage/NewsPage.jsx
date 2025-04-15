@@ -10,11 +10,23 @@ import {
   selectNewsTotalPages,
 } from '../../redux/news/selectors.js';
 import { setNewsPage } from '../../redux/news/slice.js';
+import { useForm } from 'react-hook-form';
 
 const NewsPage = () => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
   const pageNumber = useSelector(selectNewsPage);
+
+  const { register, handleSubmit, watch, reset } = useForm();
+
+  const handleSearchClear = () => {
+    reset({ keyword: '' });
+    setSearch('');
+  };
+
+  const onSubmit = ({ keyword }) => {
+    setSearch(keyword.trim());
+  };
 
   useEffect(() => {
     dispatch(getNews({ page: pageNumber, keyword: search }));
@@ -27,7 +39,14 @@ const NewsPage = () => {
       <div className='pt-15 pb-20 md:pt-21.5 xl:pt-24'>
         <div className='flex flex-col gap-5 mb-6 md:flex-row md:items-center md:justify-between md:gap-0 md:mb-11 xl:mb-15'>
           <Title titleText={'News'} />
-          <SearchField setSearch={setSearch} />
+          <SearchField
+            register={register}
+            handleSubmit={handleSubmit}
+            watch={watch}
+            reset={handleSearchClear}
+            onSubmit={onSubmit}
+            asForm={true}
+          />
         </div>
         <NewsList />
         <Pagination

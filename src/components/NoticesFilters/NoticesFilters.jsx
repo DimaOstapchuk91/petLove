@@ -31,7 +31,7 @@ const NoticesFilters = () => {
     dispatch(getSearchCities());
   }, [dispatch]);
 
-  const { register, handleSubmit, control, reset } = useForm({
+  const { register, handleSubmit, control, reset, watch } = useForm({
     defaultValues: {
       keyword: '',
       category: '',
@@ -82,7 +82,8 @@ const NoticesFilters = () => {
   ]);
 
   const handleFormSubmit = data => {
-    console.log(data);
+    console.log('data kayword', data);
+    dispatch(setFilter({ keyword: data.keyword }));
   };
 
   const handleReset = () => {
@@ -90,13 +91,20 @@ const NoticesFilters = () => {
     dispatch(resetFilters());
   };
 
+  const handleSearchClear = () => {
+    reset({ keyword: '' });
+    dispatch(setFilter({ keyword: '' }));
+  };
+
   return (
     <div className='filters'>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
-        {/* <SearchField
-          value={watch('keyword')}
-          onChange={e => setValue('keyword', e.target.value)}
-        /> */}
+        <SearchField
+          register={register}
+          handleSubmit={handleSubmit}
+          watch={watch}
+          reset={handleSearchClear}
+        />
         <select {...register('category')}>
           <option value=''>Category</option>
           {categories.map(category => (
