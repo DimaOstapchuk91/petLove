@@ -109,32 +109,33 @@ const NoticesFilters = () => {
 
   return (
     <form
-      className='mt-10 py-5 px-8 bg-brand-light rounded-[30px] flex flex-col gap-5'
+      className='mt-10 py-5 mb-10 px-8 bg-brand-light rounded-[30px] flex flex-col gap-5 md:py-10 md:mb-8 xl:-mx-[32px] xl:px-10 xl:mb-10'
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <div className='flex flex-col gap-3 border-b border-inputs pb-5'>
+      <div className='flex flex-col gap-3 border-b border-inputs pb-5 md:flex-row flex-wrap md:gap-4'>
         <SearchField
           register={register}
           handleSubmit={handleSubmit}
           watch={watch}
           reset={handleSearchClear}
         />
-        <div className='flex gap-2 w-full'>
-          <UniversalSelect
-            name={'category'}
-            control={control}
-            baseSelect={categoriesOption}
-            iconName={'icon-arrow-small'}
-            placeholder={'Category'}
-          />
-          <UniversalSelect
-            name={'sex'}
-            control={control}
-            baseSelect={sexOption}
-            iconName={'icon-arrow-small'}
-            placeholder={'By Gender'}
-          />
-        </div>
+
+        <UniversalSelect
+          name={'category'}
+          control={control}
+          baseSelect={categoriesOption}
+          iconName={'icon-arrow-small'}
+          placeholder={'Category'}
+          wrapperClassName={'w-full md:max-w-[170px] xl:max-w-[190px]'}
+        />
+        <UniversalSelect
+          name={'sex'}
+          control={control}
+          baseSelect={sexOption}
+          iconName={'icon-arrow-small'}
+          placeholder={'By Gender'}
+          wrapperClassName={'w-full md:max-w-[170px] xl:max-w-[190px]'}
+        />
 
         <UniversalSelect
           name={'species'}
@@ -142,19 +143,21 @@ const NoticesFilters = () => {
           baseSelect={speciesOption}
           iconName={'icon-arrow-small'}
           placeholder={'By type'}
+          wrapperClassName={'w-full md:max-w-[190px]'}
         />
         <UniversalSelect
           name={'city'}
           control={control}
           cities={citiesOption}
           iconName={'icon-search'}
+          wrapperClassName={'w-full md:max-w-[227px] xl:max-w-[236px]'}
         />
       </div>
       <div className='flex flex-wrap gap-2.5'>
         <label
           className={
             sort !== 'popularity-false'
-              ? 'p-3 rounded-[30px] transition-all duration-200 text-sm fonnt-medium flex items-center bg-text-white  cursor-pointer hover:bg-brand hover:text-text-white'
+              ? 'p-3 rounded-[30px] transition-all duration-200 text-sm fonnt-medium flex items-center bg-text-white  cursor-pointer md:p-3.5 md:text-base hover:bg-brand hover:text-text-white'
               : 'p-3 rounded-[30px] transition-all duration-200 text-sm fonnt-medium flex items-center gap-1.5 bg-brand text-text-white cursor-default'
           }
         >
@@ -171,7 +174,7 @@ const NoticesFilters = () => {
               onClick={handleRessetRadio}
               className='cursor-pointer'
             >
-              <svg className='w-4 h-4 stroke-white'>
+              <svg className='w-4 h-4 stroke-text-white'>
                 <use href={`${sprite}#icon-cross-small`} />
               </svg>
             </button>
@@ -180,7 +183,7 @@ const NoticesFilters = () => {
         <label
           className={
             sort !== 'popularity-true'
-              ? 'p-3 rounded-[30px] transition-all duration-200 text-sm fonnt-medium flex items-center bg-text-white  cursor-pointer hover:bg-brand hover:text-text-white'
+              ? 'p-3 rounded-[30px] transition-all duration-200 text-sm fonnt-medium flex items-center bg-text-white  cursor-pointer md:p-3.5 md:text-base hover:bg-brand hover:text-text-white'
               : 'p-3 rounded-[30px] transition-all duration-200 text-sm fonnt-medium flex items-center gap-1.5 bg-brand text-text-white cursor-default'
           }
         >
@@ -197,7 +200,7 @@ const NoticesFilters = () => {
               onClick={handleRessetRadio}
               className=' cursor-pointer'
             >
-              <svg className='w-4 h-4 stroke-white'>
+              <svg className='w-4 h-4 stroke-text-white'>
                 <use href={`${sprite}#icon-cross-small`} />
               </svg>
             </button>
@@ -206,7 +209,7 @@ const NoticesFilters = () => {
         <label
           className={
             sort !== 'price-false'
-              ? 'p-3 rounded-[30px] transition-all duration-200 text-sm fonnt-medium flex items-center bg-text-white  cursor-pointer hover:bg-brand hover:text-text-white'
+              ? 'p-3 rounded-[30px] transition-all duration-200 text-sm fonnt-medium flex items-center bg-text-white cursor-pointer md:p-3.5 md:text-base hover:bg-brand hover:text-text-white'
               : 'p-3 rounded-[30px] transition-all duration-200 text-sm fonnt-medium flex items-center gap-1.5 bg-brand text-text-white cursor-default'
           }
         >
@@ -223,7 +226,7 @@ const NoticesFilters = () => {
               onClick={handleRessetRadio}
               className='cursor-pointer'
             >
-              <svg className='w-4 h-4 stroke-white'>
+              <svg className='w-4 h-4 stroke-text-white'>
                 <use href={`${sprite}#icon-cross-small`} />
               </svg>
             </button>
@@ -232,7 +235,7 @@ const NoticesFilters = () => {
         <label
           className={
             sort !== 'price-true'
-              ? 'p-3 rounded-[30px] transition-all duration-200 text-sm fonnt-medium flex items-center bg-text-white  cursor-pointer hover:bg-brand hover:text-text-white'
+              ? 'p-3 rounded-[30px] transition-all duration-200 text-sm fonnt-medium flex items-center bg-text-white  cursor-pointer md:p-3.5 md:text-base hover:bg-brand hover:text-text-white'
               : 'p-3 rounded-[30px] transition-all duration-200 text-sm fonnt-medium flex items-center gap-1.5 bg-brand text-text-white cursor-default'
           }
         >
@@ -249,16 +252,16 @@ const NoticesFilters = () => {
               onClick={handleRessetRadio}
               className='cursor-pointer'
             >
-              <svg className='w-4 h-4 stroke-white'>
+              <svg className='w-4 h-4 stroke-text-white'>
                 <use href={`${sprite}#icon-cross-small`} />
               </svg>
             </button>
           )}
         </label>
       </div>
-      <div className='h-10.5 w-full relative overflow-hidden'>
+      <div className='h-10.5 w-full relative overflow-hidden md:h-12 flex justify-center '>
         <button
-          className={`p-3 w-full bg-brand rounded-[30px] text-text-white text-sm font-medium cursor-pointer transition-transform duration-300 ease-in-out ${
+          className={`p-3 w-full bg-brand rounded-[30px] text-text-white text-sm font-medium cursor-pointer transition-transform duration-300 md:text-base md:p-3.5 md:max-w-[170px]  ease-in-out ${
             hasActiveFilters()
               ? 'translate-y-0 opacity-100'
               : 'translate-y-full opacity-0'

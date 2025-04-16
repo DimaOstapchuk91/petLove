@@ -16,16 +16,16 @@ const SearchField = ({
   useEffect(() => {
     setShowClear(searchValue?.trim().length > 0);
   }, [searchValue]);
-  console.log(asForm);
+  console.log('assForm', asForm);
 
   const renderInput = () => {
     return (
-      <label className='relative block'>
+      <label className='relative block md:w-full md:max-w-[265px]'>
         <input
           {...register('keyword')}
           className={
             !asForm
-              ? 'p-3 w-full bg-text-white border border-transparent transition-all duration-150 focus:border-brand hover:border-brand outline-none !text-sm font-medium placeholder:text-text-dark rounded-[30px] md:max-w-[230px] md:p-3.5'
+              ? 'p-3 w-full bg-text-white border border-transparent transition-all duration-150 focus:border-brand hover:border-brand outline-none !text-sm font-medium placeholder:text-text-dark rounded-[30px] md:max-w-[265px] md:p-3.5'
               : 'p-3 w-full border border-inputs outline-none rounded-[30px] md:max-w-[230px] md:p-3.5'
           }
           type='text'
@@ -51,7 +51,7 @@ const SearchField = ({
           </button>
         )}
         <button
-          className='absolute top-3 right-3 md:right-3.5 cursor-pointer'
+          className='absolute top-3.5 right-3.5 md:right-3.5 cursor-pointer'
           type='submit'
         >
           <svg
