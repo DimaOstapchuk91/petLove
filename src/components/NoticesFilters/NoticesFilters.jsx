@@ -109,45 +109,47 @@ const NoticesFilters = () => {
 
   return (
     <form
-      className='mt-10 py-5 px-8 bg-brand-light rounded-[30px] flex flex-col gap-3'
+      className='mt-10 py-5 px-8 bg-brand-light rounded-[30px] flex flex-col gap-5'
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <SearchField
-        register={register}
-        handleSubmit={handleSubmit}
-        watch={watch}
-        reset={handleSearchClear}
-      />
-      <div className='flex gap-2 w-full'>
+      <div className='flex flex-col gap-3 border-b border-inputs pb-5'>
+        <SearchField
+          register={register}
+          handleSubmit={handleSubmit}
+          watch={watch}
+          reset={handleSearchClear}
+        />
+        <div className='flex gap-2 w-full'>
+          <UniversalSelect
+            name={'category'}
+            control={control}
+            baseSelect={categoriesOption}
+            iconName={'icon-arrow-small'}
+            placeholder={'Category'}
+          />
+          <UniversalSelect
+            name={'sex'}
+            control={control}
+            baseSelect={sexOption}
+            iconName={'icon-arrow-small'}
+            placeholder={'By Gender'}
+          />
+        </div>
+
         <UniversalSelect
-          name={'category'}
+          name={'species'}
           control={control}
-          baseSelect={categoriesOption}
+          baseSelect={speciesOption}
           iconName={'icon-arrow-small'}
-          placeholder={'Category'}
+          placeholder={'By type'}
         />
         <UniversalSelect
-          name={'sex'}
+          name={'city'}
           control={control}
-          baseSelect={sexOption}
-          iconName={'icon-arrow-small'}
-          placeholder={'By Gender'}
+          cities={citiesOption}
+          iconName={'icon-search'}
         />
       </div>
-
-      <UniversalSelect
-        name={'species'}
-        control={control}
-        baseSelect={speciesOption}
-        iconName={'icon-arrow-small'}
-        placeholder={'By type'}
-      />
-      <UniversalSelect
-        name={'city'}
-        control={control}
-        cities={citiesOption}
-        iconName={'icon-search'}
-      />
       <div className='flex flex-wrap gap-2.5'>
         <label
           className={
