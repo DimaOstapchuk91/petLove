@@ -16,14 +16,14 @@ import {
   selectSpecies,
 } from '../../redux/filters/selectors.js';
 import sprite from '../../assets/sprite.svg';
-import { CitySelect } from '../CitySelect/CitySelect.jsx';
+import UniversalSelect from '../UniversalSelect/UniversalSelect.jsx';
 
 const NoticesFilters = () => {
   const dispatch = useDispatch();
-  const categories = useSelector(selectCategories);
-  const sex = useSelector(selectSex);
-  const species = useSelector(selectSpecies);
-  const cities = useSelector(selectCities);
+  const categoriesOption = useSelector(selectCategories);
+  const sexOption = useSelector(selectSex);
+  const speciesOption = useSelector(selectSpecies);
+  const citiesOption = useSelector(selectCities);
 
   useEffect(() => {
     dispatch(getNoticesSearchCategories());
@@ -39,48 +39,42 @@ const NoticesFilters = () => {
       sex: '',
       species: '',
       city: '',
-      byPrice: '',
-      byPopularity: '',
+      sort: '',
     },
   });
 
-  const watchedCategory = useWatch({ control, name: 'category' });
-  const watchedSex = useWatch({ control, name: 'sex' });
-  const watchedSpecies = useWatch({ control, name: 'species' });
-  const watchedCity = useWatch({ control, name: 'city' });
-  const watchedSort = useWatch({ control, name: 'sort' });
+  const watchedValues = useWatch({ control });
+  const { keyword, category, sex, species, city, sort } = watchedValues || {};
+
+  console.log('sort', sort);
 
   useEffect(() => {
     let byPrice = '';
     let byPopularity = '';
 
-    if (watchedSort?.startsWith('popularity')) {
-      byPopularity = watchedSort.split('-')[1];
+    if (sort?.startsWith('popularity')) {
+      byPopularity = sort.split('-')[1];
     }
-    if (watchedSort?.startsWith('price')) {
-      byPrice = watchedSort.split('-')[1];
+    if (sort?.startsWith('price')) {
+      byPrice = sort.split('-')[1];
     }
 
     const newFilters = {
-      ...(watchedCategory && { category: watchedCategory }),
-      ...(watchedSex && { sex: watchedSex }),
-      ...(watchedSpecies && { species: watchedSpecies }),
-      ...(watchedCity && { locationId: watchedCity.value }),
+      ...(category && { category: category.value }),
+      ...(sex && { sex: sex.value }),
+      ...(species && { species: species.value }),
+      ...(city && { locationId: city.value }),
       ...(byPopularity && { byPopularity }),
       ...(byPrice && { byPrice }),
     };
 
+    console.log('byPrice', byPrice);
+    console.log('byPopolarity', byPopularity);
+
     if (Object.keys(newFilters).length > 0) {
       dispatch(setFilter(newFilters));
     }
-  }, [
-    watchedCategory,
-    watchedSex,
-    watchedSpecies,
-    watchedCity,
-    watchedSort,
-    dispatch,
-  ]);
+  }, [category, sex, species, city, sort, dispatch]);
 
   const handleFormSubmit = data => {
     console.log('data kayword', data);
@@ -97,6 +91,22 @@ const NoticesFilters = () => {
     dispatch(setFilter({ keyword: '' }));
   };
 
+  const handleRessetRadio = e => {
+    e.preventDefault(); // Забороняємо стандартну поведінку
+    e.stopPropagation();
+    reset({ sort: '' });
+    dispatch(
+      setFilter({
+        byPrice: '',
+        byPopularity: '',
+      })
+    );
+  };
+
+  const hasActiveFilters = () => {
+    return keyword || category || sex || species || city || sort;
+  };
+
   return (
     <form
       className='mt-10 py-5 px-8 bg-brand-light rounded-[30px] flex flex-col gap-3'
@@ -109,89 +119,153 @@ const NoticesFilters = () => {
         reset={handleSearchClear}
       />
       <div className='flex gap-2 w-full'>
-        <label className='relative w-1/2'>
-          <select
-            className='p-3 pr-8 w-full  rounded-[30px] border-none outline-none bg-text-white appearance-none '
-            {...register('category')}
-          >
-            <option value=''>Category</option>
-            {categories.map(category => (
-              <option key={category} value={category}>
-                {category.charAt(0).toUpperCase() + category.slice(1)}
-              </option>
-            ))}
-          </select>
-          <svg
-            className='fill-text-dark top-3 right-3 absolute stroke-transparent -rotate-90 md:w-6 md:h-6'
-            width={18}
-            height={18}
-          >
-            <use href={`${sprite}#icon-arrow-small`}></use>
-          </svg>
-        </label>
-        <label className='relative w-1/2'>
-          <select
-            className='p-3 pr-8 w-full rounded-[30px] border-none outline-none bg-text-white appearance-none '
-            {...register('sex')}
-          >
-            <option value=''>By Gender</option>
-            {sex.map(s => (
-              <option key={s} value={s}>
-                {s.charAt(0).toUpperCase() + s.slice(1)}
-              </option>
-            ))}
-          </select>
-          <svg
-            className='fill-text-dark top-3 right-3 absolute stroke-transparent -rotate-90 md:w-6 md:h-6'
-            width={18}
-            height={18}
-          >
-            <use href={`${sprite}#icon-arrow-small`}></use>
-          </svg>
-        </label>
+        <UniversalSelect
+          name={'category'}
+          control={control}
+          baseSelect={categoriesOption}
+          iconName={'icon-arrow-small'}
+          placeholder={'Category'}
+        />
+        <UniversalSelect
+          name={'sex'}
+          control={control}
+          baseSelect={sexOption}
+          iconName={'icon-arrow-small'}
+          placeholder={'By Gender'}
+        />
       </div>
-      <label className='relative'>
-        <select
-          className='p-3 pr-8 w-full text-sm rounded-[30px] border border-transparent focus:border-brand hover:border-brand outline-none bg-text-white appearance-none'
-          {...register('species')}
+
+      <UniversalSelect
+        name={'species'}
+        control={control}
+        baseSelect={speciesOption}
+        iconName={'icon-arrow-small'}
+        placeholder={'By type'}
+      />
+      <UniversalSelect
+        name={'city'}
+        control={control}
+        cities={citiesOption}
+        iconName={'icon-search'}
+      />
+      <div className='flex flex-wrap gap-2.5'>
+        <label
+          className={
+            sort !== 'popularity-false'
+              ? 'p-3 rounded-[30px] transition-all duration-200 text-sm fonnt-medium flex items-center bg-text-white  cursor-pointer hover:bg-brand hover:text-text-white'
+              : 'p-3 rounded-[30px] transition-all duration-200 text-sm fonnt-medium flex items-center gap-1.5 bg-brand text-text-white cursor-default'
+          }
         >
-          <option value='' className=' text-sm'>
-            Type
-          </option>
-          {species.map(sp => (
-            <option key={sp} value={sp}>
-              {sp.charAt(0).toUpperCase() + sp.slice(1)}
-            </option>
-          ))}
-        </select>
-        <svg
-          className='fill-text-dark top-3 right-3 absolute stroke-transparent -rotate-90 md:w-6 md:h-6'
-          width={18}
-          height={18}
-        >
-          <use href={`${sprite}#icon-arrow-small`}></use>
-        </svg>
-      </label>
-      <CitySelect name={'city'} control={control} cities={cities} />
-      <div className='flex flex-wrap'>
-        <label>
-          <input type='radio' {...register('sort')} value='popularity-false' />
+          <input
+            type='radio'
+            {...register('sort')}
+            value='popularity-false'
+            className='hidden'
+          />
           Popular
+          {sort === 'popularity-false' && (
+            <button
+              type='button'
+              onClick={handleRessetRadio}
+              className='cursor-pointer'
+            >
+              <svg className='w-4 h-4 stroke-white'>
+                <use href={`${sprite}#icon-cross-small`} />
+              </svg>
+            </button>
+          )}
         </label>
-        <label>
-          <input type='radio' {...register('sort')} value='popularity-true' />
+        <label
+          className={
+            sort !== 'popularity-true'
+              ? 'p-3 rounded-[30px] transition-all duration-200 text-sm fonnt-medium flex items-center bg-text-white  cursor-pointer hover:bg-brand hover:text-text-white'
+              : 'p-3 rounded-[30px] transition-all duration-200 text-sm fonnt-medium flex items-center gap-1.5 bg-brand text-text-white cursor-default'
+          }
+        >
+          <input
+            type='radio'
+            {...register('sort')}
+            value='popularity-true'
+            className='hidden'
+          />
           Unpopular
+          {sort === 'popularity-true' && (
+            <button
+              type='button'
+              onClick={handleRessetRadio}
+              className=' cursor-pointer'
+            >
+              <svg className='w-4 h-4 stroke-white'>
+                <use href={`${sprite}#icon-cross-small`} />
+              </svg>
+            </button>
+          )}
         </label>
-        <label>
-          <input type='radio' {...register('sort')} value='price-false' />
+        <label
+          className={
+            sort !== 'price-false'
+              ? 'p-3 rounded-[30px] transition-all duration-200 text-sm fonnt-medium flex items-center bg-text-white  cursor-pointer hover:bg-brand hover:text-text-white'
+              : 'p-3 rounded-[30px] transition-all duration-200 text-sm fonnt-medium flex items-center gap-1.5 bg-brand text-text-white cursor-default'
+          }
+        >
+          <input
+            type='radio'
+            {...register('sort')}
+            value='price-false'
+            className='hidden'
+          />
           Cheap
+          {sort === 'price-false' && (
+            <button
+              type='button'
+              onClick={handleRessetRadio}
+              className='cursor-pointer'
+            >
+              <svg className='w-4 h-4 stroke-white'>
+                <use href={`${sprite}#icon-cross-small`} />
+              </svg>
+            </button>
+          )}
         </label>
-        <label>
-          <input type='radio' {...register('sort')} value='price-true' />
+        <label
+          className={
+            sort !== 'price-true'
+              ? 'p-3 rounded-[30px] transition-all duration-200 text-sm fonnt-medium flex items-center bg-text-white  cursor-pointer hover:bg-brand hover:text-text-white'
+              : 'p-3 rounded-[30px] transition-all duration-200 text-sm fonnt-medium flex items-center gap-1.5 bg-brand text-text-white cursor-default'
+          }
+        >
+          <input
+            type='radio'
+            {...register('sort')}
+            value='price-true'
+            className='hidden'
+          />
           Expensive
+          {sort === 'price-true' && (
+            <button
+              type='button'
+              onClick={handleRessetRadio}
+              className='cursor-pointer'
+            >
+              <svg className='w-4 h-4 stroke-white'>
+                <use href={`${sprite}#icon-cross-small`} />
+              </svg>
+            </button>
+          )}
         </label>
       </div>
-      <button onClick={handleReset}>Reset Filters</button>
+      <div className='h-10.5 w-full relative overflow-hidden'>
+        <button
+          className={`p-3 w-full bg-brand rounded-[30px] text-text-white text-sm font-medium cursor-pointer transition-transform duration-300 ease-in-out ${
+            hasActiveFilters()
+              ? 'translate-y-0 opacity-100'
+              : 'translate-y-full opacity-0'
+          }`}
+          onClick={handleReset}
+        >
+          Reset Filters
+        </button>
+      </div>
     </form>
   );
 };

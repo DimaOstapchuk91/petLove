@@ -2,16 +2,26 @@ import Select, { components } from 'react-select';
 import { Controller } from 'react-hook-form';
 import sprite from '../../assets/sprite.svg';
 
-// 🔹 Кастомна іконка пошуку
-const DropdownIndicator = props => (
-  <components.DropdownIndicator {...props}>
-    <svg className='fill-transparent stroke-text-dark' width={18} height={18}>
-      <use href={`${sprite}#icon-search`} />
-    </svg>
-  </components.DropdownIndicator>
-);
+const DropdownIndicator = props => {
+  const { selectProps } = props;
+  const icon = selectProps.iconName;
+  return (
+    <components.DropdownIndicator {...props}>
+      <svg
+        className={
+          icon === 'icon-search'
+            ? 'fill-transparent stroke-text-dark'
+            : 'fil-text-dark stroke-text-dark -rotate-90'
+        }
+        width={18}
+        height={18}
+      >
+        <use href={`${sprite}#${icon}`} />
+      </svg>
+    </components.DropdownIndicator>
+  );
+};
 
-// 🔹 Кастомний компонент опції з підсвіченням тексту
 const CustomOption = props => {
   const { data, selectProps } = props;
   const inputValue = selectProps.inputValue.toLowerCase();
@@ -23,7 +33,7 @@ const CustomOption = props => {
     content = (
       <>
         {label.slice(0, index)}
-        <span className='text-text-dark font-bold'>
+        <span className={'text-text-dark font-bold'}>
           {label.slice(index, index + inputValue.length)}
         </span>
         {label.slice(index + inputValue.length)}
@@ -40,7 +50,6 @@ const CustomOption = props => {
 const customStyles = {
   control: (base, { isFocused }) => ({
     ...base,
-
     borderRadius: '30px',
     backgroundColor: 'var(--color-text-white)',
     border: isFocused
@@ -51,9 +60,11 @@ const customStyles = {
     boxShadow: 'none',
     fontSize: '14px',
     boxSizing: 'border-box',
+    cursor: 'pointer',
     outline: 'none',
+    width: '100%',
     ':hover': {
-      border: '1px solid var(--color-brand)', // для hover
+      border: '1px solid var(--color-brand)',
     },
   }),
   input: base => ({
@@ -79,6 +90,7 @@ const customStyles = {
     fontSize: '14px',
     borderRadius: '10px',
     padding: '10px 12px',
+    cursor: 'pointer',
   }),
   menu: base => ({
     ...base,
@@ -108,32 +120,47 @@ const customStyles = {
   }),
 };
 
-// 🔹 Основний компонент
-export const CitySelect = ({
+const UniversalSelect = ({
   name,
   control,
   cities,
+  baseSelect,
+  iconName,
   placeholder = 'Location',
 }) => {
-  const options = cities.map(city => ({
-    value: city._id,
-    label: `${city.cityEn}, ${city.stateEn}`,
-  }));
+  let options;
+
+  if (cities) {
+    options = cities.map(city => ({
+      value: city._id,
+      label: `${city.cityEn}, ${city.stateEn}`,
+    }));
+  } else {
+    options = baseSelect.map(base => ({
+      value: base,
+      label: base.charAt(0).toUpperCase() + base.slice(1),
+    }));
+  }
 
   return (
     <Controller
       name={name}
       control={control}
       render={({ field }) => (
-        <Select
-          {...field}
-          options={options}
-          placeholder={placeholder}
-          isSearchable
-          components={{ DropdownIndicator, Option: CustomOption }}
-          styles={customStyles}
-        />
+        <div className='w-full'>
+          <Select
+            {...field}
+            options={options}
+            placeholder={placeholder}
+            isSearchable={cities ? true : false}
+            components={{ DropdownIndicator, Option: CustomOption }}
+            styles={customStyles}
+            iconName={iconName}
+          />
+        </div>
       )}
     />
   );
 };
+
+export default UniversalSelect;
