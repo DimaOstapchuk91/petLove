@@ -43,6 +43,11 @@ body {
   display: none;
 }
 
+.noScroll {
+  overflow: hidden;
+  height: 100%;
+}
+
 @media (min-width: 768px) {
   .container {
     max-width: 768px;

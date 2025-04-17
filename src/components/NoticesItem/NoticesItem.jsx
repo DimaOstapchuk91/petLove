@@ -1,8 +1,18 @@
+import { useState } from 'react';
 import sprite from '../../assets/sprite.svg';
 import { formatNoticesDate } from '../../utils/formatDate.js';
+import { useSelector } from 'react-redux';
+import { selectIsLoggedIn } from '../../redux/user/selectors.js';
+import Modal from '../Modal/Modal.jsx';
+import ModalAttention from '../Modal/ModalAttention/ModalAttention.jsx';
+import ModalNotice from '../Modal/ModalNotice/ModalNotice.jsx';
 
 const NoticesItem = ({ dataItem }) => {
+  const isLogin = useSelector(selectIsLoggedIn);
+  const [isModalInfo, setIsModalInfo] = useState(false);
+
   const {
+    _id,
     imgURL,
     name,
     title,
@@ -14,6 +24,22 @@ const NoticesItem = ({ dataItem }) => {
     comment,
     price,
   } = dataItem;
+
+  const handleModalInfoOpen = () => {
+    setIsModalInfo(true);
+  };
+
+  const handleModalInfoClose = () => {
+    setIsModalInfo(false);
+  };
+
+  const handleFavoriteClick = () => {
+    if (!isLogin) {
+      setIsModalInfo(true);
+      return;
+    }
+  };
+
   return (
     <li className='p-6 bg-text-white w-full rounded-2xl max-w-[335px] md:max-w-[342px] xl:max-w-[362px]'>
       <img
@@ -64,15 +90,27 @@ const NoticesItem = ({ dataItem }) => {
         <button
           className='p-3.5 w-full bg-brand rounded-[30px] text-text-white text-sm font-medium leading-4.5 -tracking-[0.42px]'
           type='button'
+          onClick={handleModalInfoOpen}
         >
           Learn more
         </button>
-        <button className='rounded-full p-3.5 bg-brand-light' type='button'>
+        <button
+          className='rounded-full p-3.5 bg-brand-light'
+          type='button'
+          onClick={handleFavoriteClick}
+        >
           <svg className='fill-transparent stroke-brand' width='18' height='18'>
             <use href={`${sprite}#icon-heart`}></use>
           </svg>
         </button>
       </div>
+      <Modal isOpen={isModalInfo} onClose={handleModalInfoClose}>
+        {isLogin ? (
+          <ModalNotice onClose={handleModalInfoClose} id={_id} />
+        ) : (
+          <ModalAttention onClose={handleModalInfoClose} />
+        )}
+      </Modal>
     </li>
   );
 };
