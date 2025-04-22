@@ -20,8 +20,6 @@ const Header = () => {
 
   const isLocation = location.pathname === '/home';
 
-  console.log('is login ?', isLogin);
-
   return (
     <header
       className={

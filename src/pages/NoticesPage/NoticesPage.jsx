@@ -13,10 +13,8 @@ const NoticesPage = () => {
   const dispatch = useDispatch();
   const totalPages = useSelector(selectTotalPages);
   const filters = useSelector(selectFilters);
-  console.log('filters', filters);
 
   useEffect(() => {
-    console.log('test1 use effect');
     dispatch(getAllNoticesData(filters));
   }, [dispatch, filters]);
 

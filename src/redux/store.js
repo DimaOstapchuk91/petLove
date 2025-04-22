@@ -22,14 +22,24 @@ const persistUserConfig = {
   whitelist: ['token', 'isLoggedIn'],
 };
 
+const persistNoticesConfig = {
+  key: 'favoritesPets',
+  storage,
+  whitelist: ['favorites'],
+};
+
 const persistedUserReducer = persistReducer(persistUserConfig, userReducer);
+const persistedNoticesReducer = persistReducer(
+  persistNoticesConfig,
+  noticesReducer
+);
 
 export const store = configureStore({
   reducer: {
     user: persistedUserReducer,
     news: newsReducer,
     friends: friendsReducer,
-    notices: noticesReducer,
+    notices: persistedNoticesReducer,
     filters: filtersReducer,
   },
   middleware: getDefaultMiddleware =>

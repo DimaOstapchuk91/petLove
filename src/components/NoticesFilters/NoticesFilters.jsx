@@ -46,8 +46,6 @@ const NoticesFilters = () => {
   const watchedValues = useWatch({ control });
   const { keyword, category, sex, species, city, sort } = watchedValues || {};
 
-  console.log('sort', sort);
-
   useEffect(() => {
     let byPrice = '';
     let byPopularity = '';
@@ -68,16 +66,12 @@ const NoticesFilters = () => {
       ...(byPrice && { byPrice }),
     };
 
-    console.log('byPrice', byPrice);
-    console.log('byPopolarity', byPopularity);
-
     if (Object.keys(newFilters).length > 0) {
       dispatch(setFilter(newFilters));
     }
   }, [category, sex, species, city, sort, dispatch]);
 
   const handleFormSubmit = data => {
-    console.log('data kayword', data);
     dispatch(setFilter({ keyword: data.keyword }));
   };
 
@@ -92,7 +86,7 @@ const NoticesFilters = () => {
   };
 
   const handleRessetRadio = e => {
-    e.preventDefault(); // Забороняємо стандартну поведінку
+    e.preventDefault();
     e.stopPropagation();
     reset({ sort: '' });
     dispatch(

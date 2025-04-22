@@ -39,3 +39,34 @@ export const getAllNoticesData = createAsyncThunk(
     return handleRequest(requestFunction, thunkAPI);
   }
 );
+
+export const getNoticeById = createAsyncThunk(
+  'noties/getById',
+  async (id, thunkAPI) => {
+    const requestFunction = async () => {
+      return petLoveApi.get(`/notices/${id}`);
+    };
+    return handleRequest(requestFunction, thunkAPI);
+  }
+);
+
+export const addNoticeFavorite = createAsyncThunk(
+  'noties/addFavorite',
+  async (id, thunkAPI) => {
+    const requestFunction = async () => {
+      return petLoveApi.post(`/notices/favorites/add/${id}`);
+    };
+    console.log('test addFavorite', id);
+    return handleRequest(requestFunction, thunkAPI);
+  }
+);
+
+export const removeNoticeFavorite = createAsyncThunk(
+  'noties/removeFavorite',
+  async (id, thunkAPI) => {
+    const requestFunction = async () => {
+      return petLoveApi.delete(`/notices/favorites/remove/${id}`);
+    };
+    return handleRequest(requestFunction, thunkAPI);
+  }
+);

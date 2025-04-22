@@ -16,7 +16,6 @@ const SearchField = ({
   useEffect(() => {
     setShowClear(searchValue?.trim().length > 0);
   }, [searchValue]);
-  console.log('assForm', asForm);
 
   const renderInput = () => {
     return (

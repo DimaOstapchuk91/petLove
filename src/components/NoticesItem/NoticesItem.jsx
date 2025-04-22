@@ -1,15 +1,24 @@
 import { useState } from 'react';
 import sprite from '../../assets/sprite.svg';
 import { formatNoticesDate } from '../../utils/formatDate.js';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../redux/user/selectors.js';
 import Modal from '../Modal/Modal.jsx';
 import ModalAttention from '../Modal/ModalAttention/ModalAttention.jsx';
 import ModalNotice from '../Modal/ModalNotice/ModalNotice.jsx';
+import {
+  addNoticeFavorite,
+  removeNoticeFavorite,
+} from '../../redux/notices/operations.js';
+import { selectFavorites } from '../../redux/notices/selectors.js';
 
 const NoticesItem = ({ dataItem }) => {
   const isLogin = useSelector(selectIsLoggedIn);
+  const favorites = useSelector(selectFavorites);
+  const dispatch = useDispatch();
   const [isModalInfo, setIsModalInfo] = useState(false);
+
+  console.log('isFavorites', favorites);
 
   const {
     _id,
@@ -25,6 +34,8 @@ const NoticesItem = ({ dataItem }) => {
     price,
   } = dataItem;
 
+  const isFavorite = favorites.includes(_id);
+
   const handleModalInfoOpen = () => {
     setIsModalInfo(true);
   };
@@ -37,6 +48,12 @@ const NoticesItem = ({ dataItem }) => {
     if (!isLogin) {
       setIsModalInfo(true);
       return;
+    }
+
+    if (isFavorite) {
+      dispatch(removeNoticeFavorite(_id));
+    } else {
+      dispatch(addNoticeFavorite(_id));
     }
   };
 
@@ -88,18 +105,26 @@ const NoticesItem = ({ dataItem }) => {
       </p>
       <div className='flex gap-2.5'>
         <button
-          className='p-3.5 w-full bg-brand rounded-[30px] text-text-white text-sm font-medium leading-4.5 -tracking-[0.42px]'
+          className='p-3.5 w-full bg-brand rounded-[30px] text-text-white text-sm font-medium leading-4.5 -tracking-[0.42px] cursor-pointer hover:bg-hover transition-all duration-200 '
           type='button'
           onClick={handleModalInfoOpen}
         >
           Learn more
         </button>
         <button
-          className='rounded-full p-3.5 bg-brand-light'
+          className='group rounded-full p-3.5 bg-brand-light cursor-pointer'
           type='button'
           onClick={handleFavoriteClick}
         >
-          <svg className='fill-transparent stroke-brand' width='18' height='18'>
+          <svg
+            className={
+              isFavorite
+                ? 'group-hover:fill-hover fill-brand stroke-brand'
+                : 'group-hover:fill-brand fill-transparent stroke-brand'
+            }
+            width='18'
+            height='18'
+          >
             <use href={`${sprite}#icon-heart`}></use>
           </svg>
         </button>

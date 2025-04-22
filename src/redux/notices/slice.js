@@ -1,8 +1,15 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { getAllNoticesData } from './operations.js';
+import {
+  addNoticeFavorite,
+  getAllNoticesData,
+  getNoticeById,
+  removeNoticeFavorite,
+} from './operations.js';
 
 const initialState = {
   notiesData: [],
+  favorites: [],
+  noticeById: null,
   totalPages: null,
   isLoading: false,
   isError: null,
@@ -17,6 +24,15 @@ const noticesSlice = createSlice({
         console.log(action.payload.results);
         state.notiesData = action.payload.results;
         state.totalPages = action.payload.totalPages;
+      })
+      .addCase(getNoticeById.fulfilled, (state, action) => {
+        state.noticeById = action.payload;
+      })
+      .addCase(addNoticeFavorite.fulfilled, (state, action) => {
+        state.favorites = action.payload;
+      })
+      .addCase(removeNoticeFavorite.fulfilled, (state, action) => {
+        state.favorites = action.payload;
       })
       .addMatcher(isAnyOf(getAllNoticesData.pending), state => {
         state.isError = null;
