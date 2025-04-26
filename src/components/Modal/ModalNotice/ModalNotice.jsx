@@ -30,6 +30,7 @@ const ModalNotice = ({ id }) => {
     price,
     sex,
     title,
+    user,
     popularity,
     species,
   } = useSelector(selectNoticeById) || {};
@@ -122,9 +123,12 @@ const ModalNotice = ({ id }) => {
             <use href={`${sprite}#icon-heart`}></use>
           </svg>
         </button>
-        <button className='group flex justify-center gap-2 w-full max-w-1/2 rounded-full p-3 bg-brand-light text-brand cursor-pointer'>
+        <a
+          href={`mailto:${user.email}`}
+          className='group flex justify-center gap-2 w-full max-w-1/2 rounded-full p-3 bg-brand-light text-brand cursor-pointer'
+        >
           Contact
-        </button>
+        </a>
       </div>
     </div>
   );
