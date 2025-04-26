@@ -18,6 +18,11 @@ const initialState = {
 const noticesSlice = createSlice({
   name: 'notices',
   initialState,
+  reducers: {
+    removeNoticesById: state => {
+      state.noticeById = null;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(getAllNoticesData.fulfilled, (state, action) => {
@@ -34,18 +39,44 @@ const noticesSlice = createSlice({
       .addCase(removeNoticeFavorite.fulfilled, (state, action) => {
         state.favorites = action.payload;
       })
-      .addMatcher(isAnyOf(getAllNoticesData.pending), state => {
-        state.isError = null;
-        state.isLoading = true;
-      })
-      .addMatcher(isAnyOf(getAllNoticesData.fulfilled), state => {
-        state.isLoading = false;
-      })
-      .addMatcher(isAnyOf(getAllNoticesData.rejected), (state, action) => {
-        state.isLoading = false;
-        state.isError = action.payload;
-      });
+      .addMatcher(
+        isAnyOf(
+          getAllNoticesData.pending,
+          addNoticeFavorite.pending,
+          removeNoticeFavorite.pending,
+          getNoticeById.pending
+        ),
+        state => {
+          state.isError = null;
+          state.isLoading = true;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          getAllNoticesData.fulfilled,
+          addNoticeFavorite.fulfilled,
+          removeNoticeFavorite.fulfilled,
+          getNoticeById.fulfilled
+        ),
+        state => {
+          state.isLoading = false;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          getAllNoticesData.rejected,
+          addNoticeFavorite.rejected,
+          removeNoticeFavorite.rejected,
+          getNoticeById.rejected
+        ),
+        (state, action) => {
+          state.isLoading = false;
+          state.isError = action.payload;
+        }
+      );
   },
 });
+
+export const { removeNoticesById } = noticesSlice.actions;
 
 export const noticesReducer = noticesSlice.reducer;

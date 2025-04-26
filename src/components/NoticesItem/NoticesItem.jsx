@@ -11,6 +11,7 @@ import {
   removeNoticeFavorite,
 } from '../../redux/notices/operations.js';
 import { selectFavorites } from '../../redux/notices/selectors.js';
+import { removeNoticesById } from '../../redux/notices/slice.js';
 
 const NoticesItem = ({ dataItem }) => {
   const isLogin = useSelector(selectIsLoggedIn);
@@ -42,6 +43,7 @@ const NoticesItem = ({ dataItem }) => {
 
   const handleModalInfoClose = () => {
     setIsModalInfo(false);
+    dispatch(removeNoticesById());
   };
 
   const handleFavoriteClick = () => {
