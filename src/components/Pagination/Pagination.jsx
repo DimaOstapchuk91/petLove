@@ -58,7 +58,7 @@ const Pagination = ({ page, totalPages, setPage }) => {
 
   return (
     <div className='flex items-center justify-between md:justify-center md:gap-6'>
-      <div className='flex gap-1.5 md:gap-2'>
+      <div className='flex gap-[clamp(0px,calc((100vw-320px)*0.109),6px)] md:gap-2'>
         <button
           className='group flex py-2.5 px-1.5 border border-inputs disabled:border-disabled rounded-full'
           onClick={handleStartPage}
@@ -94,7 +94,7 @@ const Pagination = ({ page, totalPages, setPage }) => {
         </button>
       </div>
 
-      <ul className='flex gap-2.5'>
+      <ul className='flex gap-[clamp(0px,calc((100vw-320px)*0.109),10px)] md:gap-2.5'>
         {getVisiblePages()?.map((pageNum, index) => (
           <li key={index}>
             <button
@@ -112,7 +112,7 @@ const Pagination = ({ page, totalPages, setPage }) => {
         ))}
       </ul>
 
-      <div className='flex gap-1.5 md:gap-2'>
+      <div className='flex gap-[clamp(0px,calc((100vw-320px)*0.109),6px)] md:gap-2'>
         <button
           className='group p-2.5 border border-inputs disabled:border-disabled rounded-full'
           onClick={handleNextPage}
