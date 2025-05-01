@@ -67,7 +67,9 @@ const NoticesItem = ({ dataItem }) => {
         alt={name}
       />
       <div className='flex justify-between mb-2'>
-        <h3 className='font-bold leading-5 md:text-lg md:leading-6'>{title}</h3>
+        <h3 className='truncate block font-bold leading-5 md:text-lg md:leading-6'>
+          {title}
+        </h3>
         <p className='flex gap-0.5  items-center font-medium text-sm leading-4.5'>
           <svg className='fill-brand stroke-brand' width='16' height='16'>
             <use href={`${sprite}#icon-star`}></use>
@@ -78,7 +80,7 @@ const NoticesItem = ({ dataItem }) => {
       <div className='flex items-center justify-center gap-3.5 mb-4'>
         <p className='flex flex-col text-[10px] text-text-gray leading-3.5 -tracking-[0.2px] w-1/5'>
           Name
-          <span className='text-xs text-text-dark'>{name}</span>
+          <span className='truncate block text-xs text-text-dark'>{name}</span>
         </p>
         <p className='flex flex-col text-[10px] text-text-gray leading-3.5 -tracking-[0.2px] w-1/5'>
           Birthday
