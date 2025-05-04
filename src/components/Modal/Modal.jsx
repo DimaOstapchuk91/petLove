@@ -33,7 +33,7 @@ const Modal = ({ isOpen, onClose, children }) => {
       onClick={onClose}
     >
       <div
-        className='relative overflow-hidden'
+        className='relative w-max overflow-hidden'
         onClick={e => e.stopPropagation()}
       >
         <button
