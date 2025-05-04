@@ -23,6 +23,16 @@ const authSlice = createSlice({
     unauthorized() {
       return initialState;
     },
+    removeFavoritesById(state, action) {
+      const { id } = action.payload;
+      console.log('id', id);
+      if (state.userCurrentFull) {
+        state.userCurrentFull.noticesFavorites =
+          state.userCurrentFull.noticesFavorites.filter(
+            item => item._id !== id
+          );
+      }
+    },
   },
   extraReducers: builder => {
     builder
@@ -83,6 +93,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { unauthorized } = authSlice.actions;
+export const { unauthorized, removeFavoritesById } = authSlice.actions;
 
 export const userReducer = authSlice.reducer;

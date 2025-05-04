@@ -10,9 +10,10 @@ const ProfilePage = () => {
   useEffect(() => {
     dispatch(getUserFullCurrentData());
   }, []);
+
   return (
     <section className='container'>
-      <div className="pt-15 pb-20 md:pt-21.5 xl:pt-24'">
+      <div className='flex flex-col gap-10 pt-15 pb-20 md:pt-21.5 xl:pt-24'>
         <UserCard />
         <MyNotices />
       </div>

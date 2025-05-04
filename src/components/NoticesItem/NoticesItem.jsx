@@ -13,7 +13,7 @@ import {
 import { selectFavorites } from '../../redux/notices/selectors.js';
 import { removeNoticesById } from '../../redux/notices/slice.js';
 
-const NoticesItem = ({ dataItem }) => {
+const NoticesItem = ({ dataItem, profilePage, viewed, onRemove }) => {
   const isLogin = useSelector(selectIsLoggedIn);
   const favorites = useSelector(selectFavorites);
   const dispatch = useDispatch();
@@ -56,6 +56,10 @@ const NoticesItem = ({ dataItem }) => {
       dispatch(removeNoticeFavorite(_id));
     } else {
       dispatch(addNoticeFavorite(_id));
+    }
+
+    if (profilePage) {
+      onRemove(_id);
     }
   };
 
@@ -115,23 +119,39 @@ const NoticesItem = ({ dataItem }) => {
         >
           Learn more
         </button>
-        <button
-          className='group rounded-full p-3.5 bg-brand-light cursor-pointer'
-          type='button'
-          onClick={handleFavoriteClick}
-        >
-          <svg
-            className={
-              isFavorite
-                ? 'group-hover:fill-hover fill-brand stroke-brand'
-                : 'group-hover:fill-brand fill-transparent stroke-brand'
-            }
-            width='18'
-            height='18'
+        {!viewed && (
+          <button
+            className='group rounded-full p-3.5 bg-brand-light cursor-pointer hover:bg-hover-light transition-all duration-200'
+            type='button'
+            onClick={handleFavoriteClick}
           >
-            <use href={`${sprite}#icon-heart`}></use>
-          </svg>
-        </button>
+            {profilePage ? (
+              <svg
+                className={
+                  isFavorite
+                    ? 'fill-transparent stroke-brand'
+                    : 'fill-transparent stroke-brand'
+                }
+                width='18'
+                height='18'
+              >
+                <use href={`${sprite}#icon-trash`}></use>
+              </svg>
+            ) : (
+              <svg
+                className={
+                  isFavorite
+                    ? 'group-hover:fill-hover fill-brand stroke-brand'
+                    : 'group-hover:fill-brand fill-transparent stroke-brand'
+                }
+                width='18'
+                height='18'
+              >
+                <use href={`${sprite}#icon-heart`}></use>
+              </svg>
+            )}
+          </button>
+        )}
       </div>
       <Modal isOpen={isModalInfo} onClose={handleModalInfoClose}>
         {isLogin ? (
