@@ -35,8 +35,6 @@ const ModalNotice = ({ id }) => {
     species,
   } = useSelector(selectNoticeById) || {};
 
-  console.log('dataNoticeById', species);
-
   const starsCount = getStarCount(popularity);
   const isFavorite = favorites.includes(id);
 

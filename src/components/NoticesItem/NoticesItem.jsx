@@ -19,8 +19,6 @@ const NoticesItem = ({ dataItem, profilePage, viewed, onRemove }) => {
   const dispatch = useDispatch();
   const [isModalInfo, setIsModalInfo] = useState(false);
 
-  console.log('isFavorites', favorites);
-
   const {
     _id,
     imgURL,

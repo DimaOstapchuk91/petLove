@@ -11,7 +11,11 @@ const UserBlock = () => {
   return (
     <div className='mb-10 -mt-0.5'>
       {avatar ? (
-        <img src={avatar} alt={name} />
+        <img
+          src={avatar}
+          alt={name}
+          className=' rounded-full max-w-[94px] mb-7 mt-4.5 mx-auto'
+        />
       ) : (
         <div className='flex flex-col justify-center items-center gap-2 mb-7'>
           <div className='p-[27px] rounded-full bg-brand-light max-w-[94px]'>

@@ -1,5 +1,6 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import {
+  editUserCurrent,
   getUserCurrentData,
   getUserFullCurrentData,
   loginUser,
@@ -25,7 +26,6 @@ const authSlice = createSlice({
     },
     removeFavoritesById(state, action) {
       const { id } = action.payload;
-      console.log('id', id);
       if (state.userCurrentFull) {
         state.userCurrentFull.noticesFavorites =
           state.userCurrentFull.noticesFavorites.filter(
@@ -48,6 +48,9 @@ const authSlice = createSlice({
         state.userCurrent = action.payload;
       })
       .addCase(getUserFullCurrentData.fulfilled, (state, action) => {
+        state.userCurrentFull = action.payload;
+      })
+      .addCase(editUserCurrent.fulfilled, (state, action) => {
         state.userCurrentFull = action.payload;
       })
       .addCase(logoutUser.fulfilled, () => initialState)

@@ -9,6 +9,7 @@ const ModalAttention = () => {
     const index = Math.floor(Math.random() * images.length);
     return images[index];
   }, []);
+
   return (
     <div className='w-full max-w-[335px] px-5 py-10  bg-text-white rounded-[30px] p-10 md:max-w-[466px] md:p-15'>
       <div className='flex justify-center items-center rounded-full w-20 h-20 bg-brand-light mx-auto mb-5'>

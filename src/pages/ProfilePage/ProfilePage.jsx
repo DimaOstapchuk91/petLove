@@ -9,7 +9,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     dispatch(getUserFullCurrentData());
-  }, []);
+  }, [dispatch]);
 
   return (
     <section className='container'>
