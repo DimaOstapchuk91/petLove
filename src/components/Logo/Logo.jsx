@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import sprite from '../../assets/sprite.svg';
 
 const Logo = () => {
@@ -6,12 +6,17 @@ const Logo = () => {
 
   const isLocation = location.pathname === '/home';
 
+  const isStartScreen = location.pathname === '/';
+
   return (
     <div>
-      <p
+      <NavLink
+        to='/home'
         className={
           isLocation
             ? 'flex text-xl gap-0.5 font-bold text-text-white items-center md:text-[28px]'
+            : isStartScreen
+            ? 'flex !text-[50px] gap-0.5 font-bold text-text-white items-center  -tracking-[2px] md:!text-[100px] md:-tracking-[4px]'
             : 'flex text-xl font-bold items-baseline md:text-[28px] md:gap-0.5'
         }
       >
@@ -23,6 +28,8 @@ const Logo = () => {
             className={
               isLocation
                 ? 'stroke-text-white fill-text-white'
+                : isStartScreen
+                ? 'stroke-brand fill-brand w-[44px] h-[44px] md:w-[82px] md:h-[82px]'
                 : 'stroke-brand fill-brand md:w-[19px] md:h-[19px] '
             }
           >
@@ -30,7 +37,7 @@ const Logo = () => {
           </svg>
         </span>
         ve
-      </p>
+      </NavLink>
     </div>
   );
 };

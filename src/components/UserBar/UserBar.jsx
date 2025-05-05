@@ -1,7 +1,10 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import sprite from '../../assets/sprite.svg';
+import { selectUserCurrentFull } from '../../redux/user/selectors.js';
+import { useSelector } from 'react-redux';
 
 const UserBar = () => {
+  const userCurrentFull = useSelector(selectUserCurrentFull);
   const location = useLocation();
 
   const isLocation = location.pathname === '/home';
@@ -22,9 +25,10 @@ const UserBar = () => {
             : 'hidden md:block md:text-xl font-bold'
         }
       >
-        Anonimus
+        {userCurrentFull?.name}
       </p>
     </div>
   );
 };
+
 export default UserBar;

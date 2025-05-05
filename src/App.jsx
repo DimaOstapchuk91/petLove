@@ -9,13 +9,15 @@ import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import ProfilePage from './pages/ProfilePage/ProfilePage.jsx';
 import AddPetPage from './pages/AddPetPage/AddPetPage.jsx';
 import useAuthToken from './redux/service/configApi.js';
+import StartScreen from './components/StartScreen/StartScreen.jsx';
 
 function App() {
   useAuthToken();
   return (
     <>
-      <Layout>
-        <Routes>
+      <Routes>
+        <Route path='/' element={<StartScreen />} />
+        <Route element={<Layout />}>
           <Route path='/home' element={<HomePage />} />
           <Route path='/news' element={<NewsPage />} />
           <Route path='/notices' element={<NoticesPage />} />
@@ -24,8 +26,8 @@ function App() {
           <Route path='/login' element={<LoginPage />} />
           <Route path='/profile' element={<ProfilePage />} />
           <Route path='/add-pet' element={<AddPetPage />} />
-        </Routes>
-      </Layout>
+        </Route>
+      </Routes>
     </>
   );
 }
