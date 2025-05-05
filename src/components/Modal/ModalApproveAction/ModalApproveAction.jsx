@@ -3,9 +3,12 @@ import catIcon from '../../../assets/img/cat-icon.png';
 import { useMemo } from 'react';
 import { logoutUser } from '../../../redux/user/operations.js';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { logoutCleanStateNotices } from '../../../redux/notices/slice.js';
 
 const ModalApproveAction = ({ onClose }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const randomImage = useMemo(() => {
     const images = [dogIcon, catIcon];
@@ -15,7 +18,9 @@ const ModalApproveAction = ({ onClose }) => {
 
   const hendleLogOut = () => {
     dispatch(logoutUser());
+    dispatch(logoutCleanStateNotices());
     onClose();
+    navigate('/login');
   };
 
   return (

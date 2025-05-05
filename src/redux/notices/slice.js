@@ -22,6 +22,7 @@ const noticesSlice = createSlice({
     removeNoticesById: state => {
       state.noticeById = null;
     },
+    logoutCleanStateNotices: () => initialState,
   },
   extraReducers: builder => {
     builder
@@ -77,6 +78,7 @@ const noticesSlice = createSlice({
   },
 });
 
-export const { removeNoticesById } = noticesSlice.actions;
+export const { removeNoticesById, logoutCleanStateNotices } =
+  noticesSlice.actions;
 
 export const noticesReducer = noticesSlice.reducer;

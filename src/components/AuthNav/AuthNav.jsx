@@ -1,13 +1,19 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import useMediaQuery from '../../hooks/useMediaQuery.js';
 
-const AuthNav = ({ header }) => {
+const AuthNav = ({ header, onCloseMenu }) => {
   const location = useLocation();
   const isDesk = useMediaQuery('(min-width: 1280px)');
 
   const isHeader = header === 'header';
 
   const isLocation = location.pathname === '/home';
+
+  const handleCloseClick = () => {
+    if (!header) {
+      onCloseMenu();
+    }
+  };
 
   return (
     <>
@@ -22,6 +28,7 @@ const AuthNav = ({ header }) => {
       >
         <li>
           <NavLink
+            onClick={handleCloseClick}
             className={
               isHeader || isLocation
                 ? isLocation && isDesk
@@ -36,6 +43,7 @@ const AuthNav = ({ header }) => {
         </li>
         <li>
           <NavLink
+            onClick={handleCloseClick}
             className={
               isHeader || isLocation
                 ? 'py-4 px-5 flex justify-center items-center text-center  rounded-[30px] bg-brand-light text-brand font-bold'

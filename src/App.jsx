@@ -10,6 +10,8 @@ import ProfilePage from './pages/ProfilePage/ProfilePage.jsx';
 import AddPetPage from './pages/AddPetPage/AddPetPage.jsx';
 import useAuthToken from './redux/service/configApi.js';
 import StartScreen from './components/StartScreen/StartScreen.jsx';
+import { RestrictedRoute } from './components/RestrictedRoute/RestrictedRoute.jsx';
+import { PrivateRoute } from './components/PrivateRoute/PrivateRoute.jsx';
 
 function App() {
   useAuthToken();
@@ -22,10 +24,39 @@ function App() {
           <Route path='/news' element={<NewsPage />} />
           <Route path='/notices' element={<NoticesPage />} />
           <Route path='/friends' element={<OurFriendsPage />} />
-          <Route path='/register' element={<RegistrationPage />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/profile' element={<ProfilePage />} />
-          <Route path='/add-pet' element={<AddPetPage />} />
+          <Route
+            path='/register'
+            element={
+              <RestrictedRoute
+                component={<RegistrationPage />}
+                redirectTo='/profile'
+              />
+            }
+          />
+          <Route
+            path='/login'
+            element={
+              <RestrictedRoute
+                component={<LoginPage />}
+                redirectTo='/profile'
+              />
+            }
+          />
+          <Route
+            path='/profile'
+            element={
+              <PrivateRoute
+                component={<ProfilePage />}
+                redirectTo='/register'
+              />
+            }
+          />
+          <Route
+            path='/add-pet'
+            element={
+              <PrivateRoute component={<AddPetPage />} redirectTo='/register' />
+            }
+          />
         </Route>
       </Routes>
     </>

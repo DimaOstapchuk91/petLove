@@ -12,7 +12,7 @@ const ProfilePage = () => {
   }, [dispatch]);
 
   return (
-    <section className='max-w-[375px] mx-auto px-5 md:max-w-[768px] md:px-8 lg:max-w-[1280px]'>
+    <section className='max-w-[375px] mx-auto px-5 md:max-w-[768px] md:px-8 xl:max-w-[1280px]'>
       <div className='flex flex-col gap-10 pt-4.5 pb-14 md:pt-8 md:pb-15 xl:pb-8 xl:flex-row xl:gap-8'>
         <UserCard />
         <MyNotices />

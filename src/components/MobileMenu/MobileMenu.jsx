@@ -4,18 +4,37 @@ import AuthNav from '../AuthNav/AuthNav.jsx';
 import sprite from '../../assets/sprite.svg';
 import LogOutBtn from '../LogOutBtn/LogOutBtn.jsx';
 import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const MobileMenu = ({ isOpen, onClose, isLogin }) => {
   const location = useLocation();
 
   const isLocation = location.pathname === '/home';
 
+  useEffect(() => {
+    const handleKeyDown = event => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      document.body.classList.add('noScroll');
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.classList.remove('noScroll');
+    };
+  }, [isOpen, onClose]);
+
   return (
     <>
       <motion.div
         initial={{ x: '100%' }}
         animate={{ x: isOpen ? '0%' : '100%' }}
-        transition={{ type: 'tween', duration: 0.3 }}
+        transition={{ type: 'tween', duration: 0.2, ease: 'easeInOut' }}
         className={
           isLocation
             ? 'fixed top-0 right-0 h-full w-[50%] bg-text-white shadow-lg flex flex-col justify-between items-center pt-[236px] px-5 pb-10 z-40 transform transition-transform xl:hidden'
@@ -40,7 +59,7 @@ const MobileMenu = ({ isOpen, onClose, isLogin }) => {
           </svg>
         </button>
 
-        <Nav />
+        <Nav onCloseMenu={onClose} />
         {isLogin ? (
           <LogOutBtn
             className={
@@ -50,7 +69,7 @@ const MobileMenu = ({ isOpen, onClose, isLogin }) => {
             }
           />
         ) : (
-          <AuthNav />
+          <AuthNav onCloseMenu={onClose} />
         )}
       </motion.div>
 

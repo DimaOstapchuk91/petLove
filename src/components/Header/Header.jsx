@@ -43,12 +43,12 @@ const Header = () => {
           </div>
         ) : (
           <div className='flex gap-3'>
-            {isMobile && !isLocation ? (
+            {!isDesktop && isLogin && isMobile ? (
               <UserBar />
             ) : isLogin && !isLocation ? (
               <UserNav />
             ) : (
-              !isLocation && <AuthNav header={'header'} />
+              !isLocation && !isMobile && <AuthNav header={'header'} />
             )}
             <button type='button' onClick={() => setIsOpen(!isOpen)}>
               <svg
