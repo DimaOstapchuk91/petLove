@@ -18,7 +18,7 @@ const EditUserBtn = ({ userBlock }) => {
       {!userBlock ? (
         <button
           type='button'
-          className='p-2.5 bh-brand-light rounded-full bg-brand-light hover:bg-hover-light'
+          className='p-2.5 bh-brand-light rounded-full bg-brand-light hover:bg-hover-light cursor-pointer transition-all duration-200'
           onClick={handleOpenEditModal}
         >
           <svg className='fill-transparent stroke-brand' width='18' height='18'>

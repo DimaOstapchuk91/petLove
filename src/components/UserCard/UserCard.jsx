@@ -6,7 +6,7 @@ import sprite from '../../assets/sprite.svg';
 
 const UserCard = () => {
   return (
-    <div className='flex flex-col bg-text-white rounded-[30px] pt-4.5 px-5 pb-10 '>
+    <div className='flex flex-col bg-text-white rounded-[30px] pt-4.5 px-5 pb-10  md:p-10 xl:max-w-[520px] xl:max-h-max'>
       <div className='flex justify-between'>
         <p className='flex items-center bg-brand gap-1 py-2.5 px-3.5 text-sm leading-4.5 -tracking-[0.28px] text-text-white rounded-[30px]'>
           User

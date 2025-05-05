@@ -19,11 +19,11 @@ const ModalApproveAction = ({ onClose }) => {
   };
 
   return (
-    <div className='w-full max-w-[335px] px-7 py-10  bg-text-white rounded-[30px] p-10 md:max-w-[466px] md:p-15'>
+    <div className='w-full max-w-[335px] px-7 py-10  bg-text-white rounded-[30px] p-10 md:w-[448px] md:max-w-[448px] md:p-20'>
       <div className='flex justify-center items-center rounded-full w-20 h-20 bg-brand-light mx-auto mb-5'>
         <img src={randomImage} alt='cat or dog' width={44} height={44} />
       </div>
-      <h3 className='text-xl font-bold  leading-5 -tracking-[-0.6px] text-center mb-5 md:text-2xl md:leading-6 md:-tracking-[0.72]'>
+      <h3 className='text-xl font-bold  leading-5 -tracking-[-0.6px] text-center mb-5 md:text-2xl md:leading-6 md:-tracking-[0.72] md:mb-7'>
         Already leaving?
       </h3>
 
