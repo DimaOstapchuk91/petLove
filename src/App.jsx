@@ -45,16 +45,13 @@ function App() {
           <Route
             path='/profile'
             element={
-              <PrivateRoute
-                component={<ProfilePage />}
-                redirectTo='/register'
-              />
+              <PrivateRoute component={<ProfilePage />} redirectTo='/login' />
             }
           />
           <Route
             path='/add-pet'
             element={
-              <PrivateRoute component={<AddPetPage />} redirectTo='/register' />
+              <PrivateRoute component={<AddPetPage />} redirectTo='/login' />
             }
           />
         </Route>

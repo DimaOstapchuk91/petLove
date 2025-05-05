@@ -3,6 +3,8 @@ import NoticesItem from '../NoticesItem/NoticesItem.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserCurrentFull } from '../../redux/user/selectors.js';
 import { removeFavoritesById } from '../../redux/user/slice.js';
+import { NavLink } from 'react-router-dom';
+import { removeNoticeFavorite } from '../../redux/notices/operations.js';
 
 const MyNotices = () => {
   const dispatch = useDispatch();
@@ -13,6 +15,7 @@ const MyNotices = () => {
   const [activeTab, setActiveTab] = useState('favorites');
 
   const handleRemove = async id => {
+    dispatch(removeNoticeFavorite(id));
     dispatch(removeFavoritesById({ id }));
   };
   return (
@@ -40,23 +43,45 @@ const MyNotices = () => {
         </button>
       </div>
 
-      <ul className='flex flex-col gap-5 md:flex-row md:flex-wrap xl:gap-6'>
-        {(activeTab === 'favorites' ? noticesFavorites : noticesViewed)?.map(
-          item => (
-            <NoticesItem
-              key={item._id}
-              dataItem={item}
-              profilePage={true}
-              viewed={activeTab === 'viewed'}
-              onRemove={
-                activeTab === 'favorites'
-                  ? () => handleRemove(item._id)
-                  : undefined
-              }
-            />
-          )
-        )}
-      </ul>
+      {(activeTab === 'favorites' &&
+        Array.isArray(noticesFavorites) &&
+        noticesFavorites.length === 0) ||
+      (activeTab === 'viewed' &&
+        Array.isArray(noticesViewed) &&
+        noticesViewed.length === 0) ? (
+        <div className='mt-15 mb-20 md:mt-[160px] md:mb-[120px] xl:w-[664px]'>
+          <p className='text-sm  text-center font-medium leading-4.5 -tracking-[0.28px] md:max-w-[458px] md:mx-auto  md:text-base md:leading-5 md:-tracking-[0.32px] '>
+            Oops,{' '}
+            <NavLink
+              to='/notices'
+              className='text-brand font-bold cursor-pointer'
+            >
+              looks like there aren&apos;t any furries
+            </NavLink>{' '}
+            on our adorable page yet. Do not worry! View your pets on the
+            &#39;&#39;find your favorite pet&#39;&#39; page and add them to your
+            favorites.
+          </p>
+        </div>
+      ) : (
+        <ul className='flex flex-col gap-5 md:flex-row md:flex-wrap xl:gap-6'>
+          {(activeTab === 'favorites' ? noticesFavorites : noticesViewed)?.map(
+            item => (
+              <NoticesItem
+                key={item._id}
+                dataItem={item}
+                profilePage={true}
+                viewed={activeTab === 'viewed'}
+                onRemove={
+                  activeTab === 'favorites'
+                    ? () => handleRemove(item._id)
+                    : undefined
+                }
+              />
+            )
+          )}
+        </ul>
+      )}
     </div>
   );
 };

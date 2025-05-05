@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Modal from '../Modal/Modal.jsx';
 import ModalApproveAction from '../Modal/ModalApproveAction/ModalApproveAction.jsx';
 
-const LogOutBtn = ({ className }) => {
+const LogOutBtn = ({ className, onCloseMenu, isMobileMenu }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const hendleOpenModal = () => {
@@ -19,7 +19,11 @@ const LogOutBtn = ({ className }) => {
         LOG OUT
       </button>
       <Modal isOpen={isOpenModal} onClose={hendleCloseModal}>
-        <ModalApproveAction onClose={hendleCloseModal} />
+        <ModalApproveAction
+          isMobileMenu={isMobileMenu}
+          onCloseMenu={onCloseMenu}
+          onClose={hendleCloseModal}
+        />
       </Modal>
     </>
   );

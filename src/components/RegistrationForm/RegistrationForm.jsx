@@ -4,7 +4,7 @@ import { registerUser } from '../../redux/user/operations.js';
 import { useState } from 'react';
 import sprite from '../../assets/sprite.svg';
 import { orderRegistrationSchema } from '../../utils/formValidation.js';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Title from '../Title/Title.jsx';
 
@@ -12,7 +12,6 @@ const RegistrationForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [repeatPasswordVisible, setRepeatPasswordVisible] = useState(false);
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const {
@@ -31,15 +30,10 @@ const RegistrationForm = () => {
     setRepeatPasswordVisible(!repeatPasswordVisible);
   };
 
-  const onSubmit = async data => {
+  const onSubmit = data => {
     const { name, email, password } = data;
-    try {
-      await dispatch(registerUser({ name, email, password })).unwrap();
 
-      navigate('/profile');
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(registerUser({ name, email, password }));
   };
 
   return (

@@ -45,7 +45,7 @@ const Header = () => {
           <div className='flex gap-3'>
             {!isDesktop && isLogin && isMobile ? (
               <UserBar />
-            ) : isLogin && !isLocation ? (
+            ) : isLogin ? (
               <UserNav />
             ) : (
               !isLocation && !isMobile && <AuthNav header={'header'} />

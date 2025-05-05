@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logoutCleanStateNotices } from '../../../redux/notices/slice.js';
 
-const ModalApproveAction = ({ onClose }) => {
+const ModalApproveAction = ({ onClose, onCloseMenu, isMobileMenu }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -16,11 +16,18 @@ const ModalApproveAction = ({ onClose }) => {
     return images[index];
   }, []);
 
-  const hendleLogOut = () => {
-    dispatch(logoutUser());
-    dispatch(logoutCleanStateNotices());
-    onClose();
-    navigate('/login');
+  const hendleLogOut = async () => {
+    try {
+      dispatch(logoutUser()).unwrap();
+      dispatch(logoutCleanStateNotices());
+      onClose();
+      if (isMobileMenu) {
+        onCloseMenu();
+      }
+      navigate('/login');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

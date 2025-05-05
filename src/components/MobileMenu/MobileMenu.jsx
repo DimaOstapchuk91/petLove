@@ -62,6 +62,8 @@ const MobileMenu = ({ isOpen, onClose, isLogin }) => {
         <Nav onCloseMenu={onClose} />
         {isLogin ? (
           <LogOutBtn
+            isMobileMenu={true}
+            onCloseMenu={onClose}
             className={
               isLocation
                 ? 'py-4 block px-9 bg-brand text-text-white rounded-[30px] font-bold'
