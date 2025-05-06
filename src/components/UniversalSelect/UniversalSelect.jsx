@@ -54,6 +54,7 @@ const UniversalSelect = ({
   baseSelect,
   iconName,
   wrapperClassName,
+  addPetForm,
   placeholder = 'Location',
 }) => {
   let options;
@@ -72,6 +73,7 @@ const UniversalSelect = ({
 
   const isMobile = useMediaQuery('(max-width: 768px)');
 
+  console.log('addpetform', addPetForm);
   const customStyles = {
     control: (base, { isFocused }) => ({
       ...base,
@@ -79,8 +81,14 @@ const UniversalSelect = ({
       backgroundColor: 'var(--color-text-white)',
       border: isFocused
         ? '1px solid var(--color-brand)'
+        : addPetForm
+        ? '1px solid var(--color-brand)'
         : '1px solid transparent',
-      borderColor: isFocused ? 'var(--color-brand)' : 'none',
+      borderColor: isFocused
+        ? 'var(--color-brand)'
+        : addPetForm
+        ? 'var(--color-brand)'
+        : 'none',
       padding: isMobile ? '12px' : '14px',
       boxShadow: 'none',
       fontSize: isMobile ? '14px' : '16px',
@@ -104,9 +112,14 @@ const UniversalSelect = ({
     indicatorSeparator: () => ({
       display: 'none',
     }),
-    dropdownIndicator: base => ({
+    dropdownIndicator: (base, state) => ({
       ...base,
       padding: 0,
+      transition: 'transform 0.2s ease-in-out',
+      transform: state.selectProps.menuIsOpen
+        ? 'rotate(180deg)'
+        : 'rotate(0deg)',
+      fill: addPetForm ? 'var(--color-text-gray)' : '',
     }),
     option: (base, { isFocused }) => ({
       ...base,
@@ -130,7 +143,7 @@ const UniversalSelect = ({
     }),
     placeholder: base => ({
       ...base,
-      color: 'var(--color-text-dark)',
+      color: addPetForm ? 'var(--color-text-gray)' : 'var(--color-text-dark)',
     }),
     menuList: base => ({
       ...base,

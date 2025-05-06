@@ -6,6 +6,9 @@ import dogIcon from '../../assets/img/dog-icon.png';
 import catIcon from '../../assets/img/cat-icon.png';
 import rectangle from '../../assets/img/rectangle.png';
 import rectangleDesk from '../../assets/img/rectangle-desk.png';
+import addDog from '../../assets/img/add-dog-img.png';
+import addDogTab from '../../assets/img/add-dog-img-tab.png';
+import addDogDesk from '../../assets/img/add-dog-img-desk.png';
 import useMediaQuery from '../../hooks/useMediaQuery.js';
 
 const PetBlock = ({ isPet }) => {
@@ -14,9 +17,16 @@ const PetBlock = ({ isPet }) => {
 
   const cats = isPet === 'cat';
   const dogs = isPet === 'dog';
+  const addDogs = isPet === 'addDog';
 
   return (
-    <div className='rounded-[30px] bg-brand max-w-[335px] h-[280px] relative md:max-w-[704px] md:h-[302px] xl:w-1/2 xl:min-h-[654px]  '>
+    <div
+      className={
+        addDogs
+          ? 'rounded-[30px] bg-brand max-w-[335px] h-[213px] relative md:max-w-[704px] md:h-[248px] xl:w-1/2 xl:min-h-[654px]'
+          : 'rounded-[30px] bg-brand max-w-[335px] h-[280px] relative md:max-w-[704px] md:h-[302px] xl:w-1/2 xl:min-h-[654px]'
+      }
+    >
       {isDesk ? (
         <img
           className='absolute bottom-0 left-8'
@@ -25,7 +35,11 @@ const PetBlock = ({ isPet }) => {
         />
       ) : (
         <img
-          className='absolute bottom-0 right-0 md:w-[562px] md:top-11 md:right-12'
+          className={
+            addDogs
+              ? 'absolute top-8 right-0 md:w-[562px] md:top-11 md:right-12'
+              : 'absolute bottom-0 right-0 md:w-[562px] md:top-11 md:right-12'
+          }
           src={rectangle}
           alt='rectangle'
         />
@@ -51,7 +65,27 @@ const PetBlock = ({ isPet }) => {
             alt='cat'
           />
         ))}
-      {!isMobile && (
+      {addDogs &&
+        (isDesk ? (
+          <img
+            className='absolute bottom-0 left-8'
+            src={addDogDesk}
+            alt='Add dog img'
+          />
+        ) : isMobile ? (
+          <img
+            className='absolute top-0 right-4.5 md:right-22.5'
+            src={addDog}
+            alt='Add dog img'
+          />
+        ) : (
+          <img
+            className='absolute bottom-0 right-4.5 md:right-50.5'
+            src={addDogTab}
+            alt='Add dog img'
+          />
+        ))}
+      {!isMobile && !addDogs && (
         <div className='absolute bottom-8 left-8 max-w-[300px] p-4 bg-text-white rounded-[30px] flex gap-2 xl:left-15 xl:bottom-24.5'>
           <div className='w-15 h-15 bg-brand-light rounded-full flex justify-center items-center'>
             <img
