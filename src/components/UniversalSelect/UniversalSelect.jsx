@@ -89,7 +89,7 @@ const UniversalSelect = ({
         : addPetForm
         ? 'var(--color-brand)'
         : 'none',
-      padding: isMobile ? '12px' : '14px',
+      padding: isMobile ? '12px' : addPetForm ? '16px' : '14px',
       boxShadow: 'none',
       fontSize: isMobile ? '14px' : '16px',
       boxSizing: 'border-box',
@@ -111,6 +111,7 @@ const UniversalSelect = ({
     }),
     indicatorSeparator: () => ({
       display: 'none',
+      padding: 0,
     }),
     dropdownIndicator: (base, state) => ({
       ...base,
@@ -140,10 +141,12 @@ const UniversalSelect = ({
     valueContainer: base => ({
       ...base,
       paddingLeft: '0',
+      padding: '1px',
     }),
     placeholder: base => ({
       ...base,
       color: addPetForm ? 'var(--color-text-gray)' : 'var(--color-text-dark)',
+      padding: 0,
     }),
     menuList: base => ({
       ...base,

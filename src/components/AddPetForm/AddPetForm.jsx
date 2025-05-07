@@ -9,6 +9,7 @@ import { getNoticesSearchSpecies } from '../../redux/filters/operations.js';
 import 'react-datepicker/dist/react-datepicker.css';
 import './calendar.css';
 import DatePicker from 'react-datepicker';
+import { NavLink } from 'react-router-dom';
 
 const AddPetForm = () => {
   const dispatch = useDispatch();
@@ -56,59 +57,56 @@ const AddPetForm = () => {
   };
 
   return (
-    <div className='w-full max-w-[335px] py-10 px-5 rounded-[30px] bg-text-white md:w-[480px] md:max-w-[480px] md:p-12.5'>
-      <h2 className='text-[28px] font-bold mb-6 leading-7 -tracking-[0.84px]'>
+    <div className='w-full max-w-[335px] py-10 px-5 rounded-[30px] bg-text-white  md:max-w-[704px] md:px-34 md:py-10 xl:max-w-[592px] xl:px-20 xl:py-15'>
+      <h2 className='text-[28px] font-bold mb-6 leading-7 -tracking-[0.84px] md:text-[32px] md:leading-8 md:-tracking-[0.96px] md:mb-10'>
         Add my pet /{' '}
-        <span className='text-sm leading-4.5 text-text-gray-light tracking-normal'>
+        <span className='text-sm leading-4.5 text-text-gray-light tracking-normal md:text-base md:leading-5'>
           Personal details
         </span>
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
-        <ul className='flex justify-center gap-4 mb-6'>
+        <ul className='flex gap-2 mb-2 md:mb-0'>
           <li>
-            <label className='relative cursor-pointer'>
+            <label className='relative cursor-pointer group'>
               <input
                 type='radio'
                 value='male'
                 {...register('sex')}
                 className='sr-only peer'
               />
-              <div className='group w-8 h-8 rounded-full flex items-center justify-center bg-[#F43F5E1A] peer-checked:bg-[#F43F5E] transition-all'>
-                <svg className='w-6 h-6 fill-transparent stroke-[#F43F5E] group peer-checked:stroke-white'>
-                  <use href={`${sprite}#icon-male`} />
-                </svg>
-              </div>
+              <div className='w-8 h-8 rounded-full flex items-center justify-center bg-[#F43F5E1A] group-hover:bg-[#F43F5E] peer-checked:bg-[#F43F5E] transition-all duration-200 md:h-10 md:w-10'></div>
+              <svg className='absolute top-1.5 left-1.5 w-5 h-5 fill-transparent stroke-[#F43F5E] transition-all duration-200 group-hover:stroke-text-white peer-checked:stroke-white md:top-2 md:left-2 md:w-6 md:h-6'>
+                <use href={`${sprite}#icon-female`} />
+              </svg>
             </label>
           </li>
           <li>
-            <label className='relative cursor-pointer'>
+            <label className='relative cursor-pointer group'>
               <input
                 type='radio'
                 value='female'
                 {...register('sex')}
                 className='sr-only peer'
               />
-              <div className='w-12 h-12 rounded-full border border-brand flex items-center justify-center peer-checked:bg-brand peer-checked:fill-white transition-all'>
-                <svg className='w-6 h-6 fill-brand peer-checked:fill-white'>
-                  <use href={`${sprite}#icon-male`} />
-                </svg>
-              </div>
+              <div className='group w-8 h-8 rounded-full flex items-center justify-center bg-[#54ADFF1A] group-hover:bg-[#54ADFF] peer-checked:bg-[#54ADFF] transition-all duration-200 md:h-10 md:w-10'></div>
+              <svg className='absolute top-1.5 left-1.5 w-5 h-5 fill-transparent stroke-[#54ADFF] transition-all duration-200  group-hover:stroke-text-white peer-checked:stroke-text-white md:top-2 md:left-2 md:w-6 md:h-6'>
+                <use href={`${sprite}#icon-male`} />
+              </svg>
             </label>
           </li>
           <li>
-            <label className='relative cursor-pointer'>
+            <label className='relative cursor-pointer group'>
               <input
                 type='radio'
                 value='unknown'
                 {...register('sex')}
                 className='sr-only peer'
               />
-              <div className='w-12 h-12 rounded-full border border-brand flex items-center justify-center peer-checked:bg-brand peer-checked:fill-white transition-all'>
-                <svg className='w-6 h-6 fill-brand peer-checked:fill-white'>
-                  <use href={`${sprite}#icon-unknown`} />
-                </svg>
-              </div>
+              <div className='w-8 h-8 rounded-full flex items-center justify-center bg-brand-light group-hover:bg-brand transition-all duration-200 peer-checked:bg-brand md:h-10 md:w-10'></div>
+              <svg className='absolute w-5 h-5 fill-brand top-1.5 left-1.5 stroke-transparent group-hover:fill-text-white transition-all duration-200 peer-checked:fill-text-white md:top-2 md:left-2 md:w-6 md:h-6'>
+                <use href={`${sprite}#icon-unknown`} />
+              </svg>
             </label>
           </li>
         </ul>
@@ -117,14 +115,18 @@ const AddPetForm = () => {
             {errors.sex.message}
           </p>
         )}
-        <div className='p-[27px] mx-auto rounded-full bg-brand-light max-w-[94px] mb-3'>
-          <svg className='fill-brand stroke-transparent' width='40' height='40'>
+        <div className='p-[17px] flex items-center justify-center mx-auto rounded-full bg-brand-light h-[68px] w-[68px] mb-3 md:-mt-5.5 md:h-[86px] md:w-[86px] md:p-[21px]'>
+          <svg
+            className='fill-brand stroke-transparent md:w-11 md:h-11'
+            width='40'
+            height='40'
+          >
             <use href={`${sprite}#icon-paw`}></use>
           </svg>
         </div>
 
-        <div className='flex justify-between gap-2 mb-2.5 md:mb-5'>
-          <label className='block max-w-[161px] text-xs font-medium leading-4 -tracking-[0.24px] md:w-[226px] md:max-w-[226px] md:text-sm md:leading-4.5 md:-tracking-[0.28px]'>
+        <div className='flex justify-between gap-2 mb-2.5 md:mb-4.5'>
+          <label className='block max-w-[161px] text-xs font-medium leading-4 -tracking-[0.24px] md:w-[278px] md:max-w-[278px] md:text-sm md:leading-4.5 md:-tracking-[0.28px]'>
             <input
               type='text'
               placeholder='Enter URL'
@@ -152,14 +154,14 @@ const AddPetForm = () => {
           </button>
         </div>
 
-        <ul className='flex flex-col gap-2.5 mb-5 md:gap-3.5 md:mb-10'>
+        <ul className='flex flex-col gap-2.5 mb-5 md:gap-4.5 md:mb-10'>
           <li>
-            <label className='block text-sm font-medium leading-4.5 -tracking-[0.42]'>
+            <label className='block text-sm font-medium leading-4.5 -tracking-[0.42] md:text-base md:leading-5 md:-tracking-[0.48px]'>
               <input
                 type='text'
                 placeholder='Title'
                 {...register('title')}
-                className='w-full p-3 border border-brand rounded-[30px] outline-none'
+                className='w-full p-3 border border-brand rounded-[30px] outline-none md:p-4'
               />
               {errors.title && (
                 <p className='text-red-500 text-sm'>{errors.title.message}</p>
@@ -168,12 +170,12 @@ const AddPetForm = () => {
           </li>
 
           <li>
-            <label className='block text-sm font-medium leading-4.5 -tracking-[0.42]'>
+            <label className='block text-sm font-medium leading-4.5 -tracking-[0.42] md:text-base md:leading-5 md:-tracking-[0.48px] '>
               <input
                 type='text'
                 placeholder="Pet's Name"
                 {...register('name')}
-                className='w-full p-3 border border-brand rounded-[30px] outline-none'
+                className='w-full p-3 border border-brand rounded-[30px] outline-none md:p-4'
               />
               {errors.name && (
                 <p className='text-red-500 text-sm'>{errors.name.message}</p>
@@ -182,8 +184,8 @@ const AddPetForm = () => {
           </li>
 
           <div className='flex justify-between'>
-            <li className='w-full max-w-[144px] '>
-              <label className='block !text-sm font-medium leading-4.5 -tracking-[0.42]'>
+            <li className='w-full max-w-[144px] md:max-w-[210px]'>
+              <label className='block w-full !text-sm font-medium leading-4.5 -tracking-[0.42]'>
                 <Controller
                   control={control}
                   name='birthday'
@@ -194,7 +196,7 @@ const AddPetForm = () => {
                       selected={field.value}
                       onChange={date => field.onChange(date)}
                       placeholderText='00.00.0000'
-                      className='w-full p-3 !text-sm border border-brand rounded-[30px] outline-none'
+                      className='w-full p-3 !text-sm border border-brand rounded-[30px] outline-none md:p-4 leading-5 -tracking-[0.48px] md:w-[210px] md:!text-base'
                       dateFormat='dd.MM.yyyy'
                       showPopperArrow={false}
                       calendarStartDay={1}
@@ -209,7 +211,7 @@ const AddPetForm = () => {
                 )}
               </label>
             </li>
-            <li className='w-full max-w-[143px]'>
+            <li className='w-full max-w-[143px] md:max-w-[210px]'>
               <UniversalSelect
                 name={'species'}
                 control={control}
@@ -218,19 +220,27 @@ const AddPetForm = () => {
                 placeholder={'Type of pet'}
                 addPetForm={true}
                 wrapperClassName={
-                  'w-full max-w-[143px] md:max-w-[170px] xl:max-w-[190px]'
+                  'w-full max-w-[143px] md:max-w-[210px] xl:max-w-[210px]'
                 }
               />
             </li>
           </div>
         </ul>
 
-        <button
-          type='submit'
-          className='w-full p-3 bg-brand hover:bg-hover rounded-[30px] !text-sm font-bold text-text-white transition-all duration-200 leading-4.5 -tracking-[0.42px] cursor-pointer md:p-4 md:!text-base md:leading-5 md:-tracking-[0.48px]'
-        >
-          Save
-        </button>
+        <div className='w-full flex justify-end gap-2'>
+          <NavLink
+            to='/profile'
+            className='py-3 px-8.5 bg-disabled hover:bg-inputs rounded-[30px] !text-sm font-bold  transition-all duration-200 leading-4.5 -tracking-[0.42px] cursor-pointer md:py-3.5 md:px-[67px] md:!text-base md:leading-5 md:-tracking-[0.48px]'
+          >
+            Back
+          </NavLink>
+          <button
+            type='submit'
+            className='py-3 px-6.5 bg-brand hover:bg-hover rounded-[30px] !text-sm font-bold text-text-white transition-all duration-200 leading-4.5 -tracking-[0.42px] cursor-pointer md:py-3.5 md:px-14.5 md:!text-base md:leading-5 md:-tracking-[0.48px]'
+          >
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );
