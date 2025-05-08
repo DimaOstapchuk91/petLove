@@ -58,10 +58,10 @@ const NoticesFilters = () => {
     }
 
     const newFilters = {
-      ...(category && { category: category.value }),
-      ...(sex && { sex: sex.value }),
-      ...(species && { species: species.value }),
-      ...(city && { locationId: city.value }),
+      ...(category && { category }),
+      ...(sex && { sex }),
+      ...(species && { species }),
+      ...(city && { locationId: city }),
       ...(byPopularity && { byPopularity }),
       ...(byPrice && { byPrice }),
     };

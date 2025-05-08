@@ -13,3 +13,9 @@ export const formatNoticesDate = oldDate => {
 
   return formattedDate;
 };
+
+export const transformDateUs = oldDate => {
+  console.log('olddate', oldDate);
+  const [day, month, year] = oldDate.split('.');
+  return `${year}-${month}-${day}`;
+};

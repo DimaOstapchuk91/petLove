@@ -179,6 +179,8 @@ const UniversalSelect = ({
             components={{ DropdownIndicator, Option: CustomOption }}
             styles={customStyles}
             iconName={iconName}
+            value={options.find(opt => opt.value === field.value)}
+            onChange={selectedOption => field.onChange(selectedOption.value)}
           />
         </div>
       )}

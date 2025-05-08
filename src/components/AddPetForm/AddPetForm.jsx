@@ -11,6 +11,8 @@ import './calendar.css';
 import DatePicker from 'react-datepicker';
 import { NavLink } from 'react-router-dom';
 import { orderAddPetSchema } from '../../utils/formValidation.js';
+import { transformDateUs } from '../../utils/formatDate.js';
+import { addPets } from '../../redux/user/operations.js';
 
 const AddPetForm = () => {
   const dispatch = useDispatch();
@@ -26,6 +28,7 @@ const AddPetForm = () => {
     handleSubmit,
     formState: { errors },
     control,
+    setValue,
     watch,
   } = useForm({
     resolver: yupResolver(orderAddPetSchema),
@@ -41,7 +44,7 @@ const AddPetForm = () => {
 
   const onSubmit = data => {
     console.log('dataPet', data);
-    dispatch();
+    dispatch(addPets(data));
   };
 
   const handlePreviewAvatar = () => {
@@ -52,8 +55,9 @@ const AddPetForm = () => {
       setPreview(avatarUrl);
     } else {
       setPreview(null);
+      // errors.imgURL = 'Please enter image URL';
 
-      alert('Please enter a valid image URL');
+      // alert('Please enter a valid image URL');
     }
   };
 
@@ -119,13 +123,21 @@ const AddPetForm = () => {
           )}
         </div>
         <div className='p-[17px] flex items-center justify-center mx-auto rounded-full bg-brand-light h-[68px] w-[68px] mb-3 md:-mt-5.5 md:h-[86px] md:w-[86px] md:p-[21px]'>
-          <svg
-            className='fill-brand stroke-transparent md:w-11 md:h-11'
-            width='40'
-            height='40'
-          >
-            <use href={`${sprite}#icon-paw`}></use>
-          </svg>
+          {preview ? (
+            <img
+              src={preview}
+              alt='Avatar'
+              className='mx-auto rounded-full max-w-17 md:max-w-21.5'
+            />
+          ) : (
+            <svg
+              className='fill-brand stroke-transparent md:w-11 md:h-11'
+              width='40'
+              height='40'
+            >
+              <use href={`${sprite}#icon-paw`}></use>
+            </svg>
+          )}
         </div>
 
         <div
@@ -211,8 +223,12 @@ const AddPetForm = () => {
                   render={({ field }) => (
                     <DatePicker
                       {...field}
-                      selected={field.value}
-                      onChange={date => field.onChange(date)}
+                      selected={field.value ? new Date(field.value) : null}
+                      onChange={date => {
+                        const formatted =
+                          date?.toISOString().split('T')[0] ?? '';
+                        field.onChange(formatted);
+                      }}
                       placeholderText='00.00.0000'
                       className={`w-full h-10.5 p-3 !text-sm border rounded-[30px] outline-none md:p-4 leading-5 -tracking-[0.48px] md:w-[210px] md:!text-base hover:border-brand focus:border-brand md:h-13  ${
                         errors.birthday ? 'border-error' : 'border-inputs'
