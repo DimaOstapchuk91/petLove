@@ -10,6 +10,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './calendar.css';
 import DatePicker from 'react-datepicker';
 import { NavLink } from 'react-router-dom';
+import { orderAddPetSchema } from '../../utils/formValidation.js';
 
 const AddPetForm = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const AddPetForm = () => {
     control,
     watch,
   } = useForm({
-    // resolver: yupResolver(orderEditUserSchema),
+    resolver: yupResolver(orderAddPetSchema),
     defaultValues: {
       name: '',
       title: '',
@@ -66,55 +67,57 @@ const AddPetForm = () => {
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
-        <ul className='flex gap-2 mb-2 md:mb-0'>
-          <li>
-            <label className='relative cursor-pointer group'>
-              <input
-                type='radio'
-                value='male'
-                {...register('sex')}
-                className='sr-only peer'
-              />
-              <div className='w-8 h-8 rounded-full flex items-center justify-center bg-[#F43F5E1A] group-hover:bg-[#F43F5E] peer-checked:bg-[#F43F5E] transition-all duration-200 md:h-10 md:w-10'></div>
-              <svg className='absolute top-1.5 left-1.5 w-5 h-5 fill-transparent stroke-[#F43F5E] transition-all duration-200 group-hover:stroke-text-white peer-checked:stroke-white md:top-2 md:left-2 md:w-6 md:h-6'>
-                <use href={`${sprite}#icon-female`} />
-              </svg>
-            </label>
-          </li>
-          <li>
-            <label className='relative cursor-pointer group'>
-              <input
-                type='radio'
-                value='female'
-                {...register('sex')}
-                className='sr-only peer'
-              />
-              <div className='group w-8 h-8 rounded-full flex items-center justify-center bg-[#54ADFF1A] group-hover:bg-[#54ADFF] peer-checked:bg-[#54ADFF] transition-all duration-200 md:h-10 md:w-10'></div>
-              <svg className='absolute top-1.5 left-1.5 w-5 h-5 fill-transparent stroke-[#54ADFF] transition-all duration-200  group-hover:stroke-text-white peer-checked:stroke-text-white md:top-2 md:left-2 md:w-6 md:h-6'>
-                <use href={`${sprite}#icon-male`} />
-              </svg>
-            </label>
-          </li>
-          <li>
-            <label className='relative cursor-pointer group'>
-              <input
-                type='radio'
-                value='unknown'
-                {...register('sex')}
-                className='sr-only peer'
-              />
-              <div className='w-8 h-8 rounded-full flex items-center justify-center bg-brand-light group-hover:bg-brand transition-all duration-200 peer-checked:bg-brand md:h-10 md:w-10'></div>
-              <svg className='absolute w-5 h-5 fill-brand top-1.5 left-1.5 stroke-transparent group-hover:fill-text-white transition-all duration-200 peer-checked:fill-text-white md:top-2 md:left-2 md:w-6 md:h-6'>
-                <use href={`${sprite}#icon-unknown`} />
-              </svg>
-            </label>
-          </li>
-        </ul>
-        {errors.sex && (
-          <p className='text-red-500 text-sm text-center -mt-4 mb-2'>
-            {errors.sex.message}
-          </p>
-        )}
+        <div className='flex items-center m-0 xl:items-start'>
+          <ul className='flex gap-2 mb-2 md:mb-0'>
+            <li>
+              <label className='relative cursor-pointer group'>
+                <input
+                  type='radio'
+                  value='male'
+                  {...register('sex')}
+                  className='sr-only peer'
+                />
+                <div className='w-8 h-8 rounded-full flex items-center justify-center bg-[#F43F5E1A] group-hover:bg-[#F43F5E] peer-checked:bg-[#F43F5E] transition-all duration-200 md:h-10 md:w-10'></div>
+                <svg className='absolute top-1.5 left-1.5 w-5 h-5 fill-transparent stroke-[#F43F5E] transition-all duration-200 group-hover:stroke-text-white peer-checked:stroke-white md:top-2 md:left-2 md:w-6 md:h-6'>
+                  <use href={`${sprite}#icon-female`} />
+                </svg>
+              </label>
+            </li>
+            <li>
+              <label className='relative cursor-pointer group'>
+                <input
+                  type='radio'
+                  value='female'
+                  {...register('sex')}
+                  className='sr-only peer'
+                />
+                <div className='group w-8 h-8 rounded-full flex items-center justify-center bg-[#54ADFF1A] group-hover:bg-[#54ADFF] peer-checked:bg-[#54ADFF] transition-all duration-200 md:h-10 md:w-10'></div>
+                <svg className='absolute top-1.5 left-1.5 w-5 h-5 fill-transparent stroke-[#54ADFF] transition-all duration-200  group-hover:stroke-text-white peer-checked:stroke-text-white md:top-2 md:left-2 md:w-6 md:h-6'>
+                  <use href={`${sprite}#icon-male`} />
+                </svg>
+              </label>
+            </li>
+            <li>
+              <label className='relative cursor-pointer group'>
+                <input
+                  type='radio'
+                  value='unknown'
+                  {...register('sex')}
+                  className='sr-only peer'
+                />
+                <div className='w-8 h-8 rounded-full flex items-center justify-center bg-brand-light group-hover:bg-brand transition-all duration-200 peer-checked:bg-brand md:h-10 md:w-10'></div>
+                <svg className='absolute w-5 h-5 fill-brand top-1.5 left-1.5 stroke-transparent group-hover:fill-text-white transition-all duration-200 peer-checked:fill-text-white md:top-2 md:left-2 md:w-6 md:h-6'>
+                  <use href={`${sprite}#icon-unknown`} />
+                </svg>
+              </label>
+            </li>
+          </ul>
+          {errors.sex && (
+            <p className='text-error text-[10px] ml-5 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+              {errors.sex.message}
+            </p>
+          )}
+        </div>
         <div className='p-[17px] flex items-center justify-center mx-auto rounded-full bg-brand-light h-[68px] w-[68px] mb-3 md:-mt-5.5 md:h-[86px] md:w-[86px] md:p-[21px]'>
           <svg
             className='fill-brand stroke-transparent md:w-11 md:h-11'
@@ -125,34 +128,42 @@ const AddPetForm = () => {
           </svg>
         </div>
 
-        <div className='flex justify-between gap-2 mb-2.5 md:mb-4.5'>
-          <label className='block max-w-[161px] text-xs font-medium leading-4 -tracking-[0.24px] md:w-[278px] md:max-w-[278px] md:text-sm md:leading-4.5 md:-tracking-[0.28px]'>
+        <div
+          className={`flex justify-between gap-2  ${
+            errors.imgURL ? 'mb-0' : 'mb-2.5 md:mb-4.5'
+          }`}
+        >
+          <label className='block max-w-[170px] text-xs font-medium leading-4 -tracking-[0.24px] md:w-[278px] md:max-w-[278px] md:text-sm md:leading-4.5 md:-tracking-[0.28px]'>
             <input
               type='text'
               placeholder='Enter URL'
               {...register('imgURL')}
-              className='w-full truncate block p-3 pr-9 border border-brand rounded-[30px] outline-none md:pr-5'
+              className={`w-full truncate block p-2.5 pr-5 border rounded-[30px] outline-none hover:border-brand focus:border-brand  ${
+                errors.imgURL ? 'border-error' : 'border-inputs'
+              }`}
             />
-            {errors.imgURL && (
-              <p className='text-red-500 text-sm'>{errors.imgURL.message}</p>
-            )}
           </label>
 
           <button
             type='button'
-            className='flex items-center gap-2 cursor-pointer p-3 rounded-[30px] bg-brand-light !text-xs leading-4 -tracking-[0.24px] font-medium transition-all duration-200 hover:bg-hover-light md:!text-sm md:leading-4.5 md:-tracking-[0.28px] md:px-4 '
+            className='flex items-center gap-2 cursor-pointer p-2.5 rounded-[30px] bg-brand-light !text-xs leading-4 -tracking-[0.24px] font-medium transition-all duration-200 hover:bg-hover-light md:!text-sm md:leading-4.5 md:-tracking-[0.28px] md:px-4'
             onClick={handlePreviewAvatar}
           >
             Upload photo
             <svg
               className='fill-transparent stroke-brand'
-              width='18'
-              height='18'
+              width='16'
+              height='16'
             >
               <use href={`${sprite}#icon-upload`}></use>
             </svg>
           </button>
         </div>
+        {errors.imgURL && (
+          <p className='text-error text-[10px] mb-1.5 ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+            {errors.imgURL.message}
+          </p>
+        )}
 
         <ul className='flex flex-col gap-2.5 mb-5 md:gap-4.5 md:mb-10'>
           <li>
@@ -161,10 +172,14 @@ const AddPetForm = () => {
                 type='text'
                 placeholder='Title'
                 {...register('title')}
-                className='w-full p-3 border border-brand rounded-[30px] outline-none md:p-4'
+                className={`w-full p-3 border rounded-[30px] outline-none md:p-4 hover:border-brand focus:border-brand  ${
+                  errors.title ? 'border-error' : 'border-inputs'
+                }`}
               />
               {errors.title && (
-                <p className='text-red-500 text-sm'>{errors.title.message}</p>
+                <p className='text-error text-[10px]  ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+                  {errors.title.message}
+                </p>
               )}
             </label>
           </li>
@@ -175,10 +190,14 @@ const AddPetForm = () => {
                 type='text'
                 placeholder="Pet's Name"
                 {...register('name')}
-                className='w-full p-3 border border-brand rounded-[30px] outline-none md:p-4'
+                className={`w-full p-3 border rounded-[30px] outline-none md:p-4 hover:border-brand focus:border-brand  ${
+                  errors.name ? 'border-error' : 'border-inputs'
+                }`}
               />
               {errors.name && (
-                <p className='text-red-500 text-sm'>{errors.name.message}</p>
+                <p className='text-error text-[10px]  ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+                  {errors.name.message}
+                </p>
               )}
             </label>
           </li>
@@ -189,14 +208,15 @@ const AddPetForm = () => {
                 <Controller
                   control={control}
                   name='birthday'
-                  rules={{ required: 'Date is required' }}
                   render={({ field }) => (
                     <DatePicker
                       {...field}
                       selected={field.value}
                       onChange={date => field.onChange(date)}
                       placeholderText='00.00.0000'
-                      className='w-full p-3 !text-sm border border-brand rounded-[30px] outline-none md:p-4 leading-5 -tracking-[0.48px] md:w-[210px] md:!text-base'
+                      className={`w-full h-10.5 p-3 !text-sm border rounded-[30px] outline-none md:p-4 leading-5 -tracking-[0.48px] md:w-[210px] md:!text-base hover:border-brand focus:border-brand md:h-13  ${
+                        errors.birthday ? 'border-error' : 'border-inputs'
+                      }`}
                       dateFormat='dd.MM.yyyy'
                       showPopperArrow={false}
                       calendarStartDay={1}
@@ -205,7 +225,7 @@ const AddPetForm = () => {
                   )}
                 />
                 {errors.birthday && (
-                  <p className='text-red-500 text-sm absolute -bottom-5 left-0'>
+                  <p className='text-error text-[10px]  ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
                     {errors.birthday.message}
                   </p>
                 )}
@@ -219,10 +239,16 @@ const AddPetForm = () => {
                 iconName={'icon-arrow-small'}
                 placeholder={'Type of pet'}
                 addPetForm={true}
+                errors={errors.species}
                 wrapperClassName={
                   'w-full max-w-[143px] md:max-w-[210px] xl:max-w-[210px]'
                 }
               />
+              {errors.species && (
+                <p className='text-error text-[10px]  ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+                  {errors.species.message}
+                </p>
+              )}
             </li>
           </div>
         </ul>

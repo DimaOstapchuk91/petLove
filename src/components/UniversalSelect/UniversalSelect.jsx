@@ -55,6 +55,7 @@ const UniversalSelect = ({
   iconName,
   wrapperClassName,
   addPetForm,
+  errors,
   placeholder = 'Location',
 }) => {
   let options;
@@ -73,7 +74,6 @@ const UniversalSelect = ({
 
   const isMobile = useMediaQuery('(max-width: 768px)');
 
-  console.log('addpetform', addPetForm);
   const customStyles = {
     control: (base, { isFocused }) => ({
       ...base,
@@ -82,7 +82,9 @@ const UniversalSelect = ({
       border: isFocused
         ? '1px solid var(--color-brand)'
         : addPetForm
-        ? '1px solid var(--color-brand)'
+        ? errors
+          ? '1px solid var(--error-color)'
+          : '1px solid var(--inputs-color)'
         : '1px solid transparent',
       borderColor: isFocused
         ? 'var(--color-brand)'
@@ -95,6 +97,7 @@ const UniversalSelect = ({
       boxSizing: 'border-box',
       cursor: 'pointer',
       outline: 'none',
+      height: addPetForm ? (isMobile ? '42px' : '52px') : '',
       width: '100%',
       ':hover': {
         border: '1px solid var(--color-brand)',
