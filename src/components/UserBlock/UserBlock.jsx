@@ -1,11 +1,7 @@
-import { useSelector } from 'react-redux';
 import sprite from '../../assets/sprite.svg';
 import EditUserBtn from '../EditUserBtn/EditUserBtn.jsx';
-import { selectUserCurrentFull } from '../../redux/user/selectors.js';
 
-const UserBlock = () => {
-  const userCurrentFull = useSelector(selectUserCurrentFull);
-
+const UserBlock = ({ userCurrentFull }) => {
   const { avatar, name, email, phone } = userCurrentFull || {};
 
   return (

@@ -1,5 +1,6 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import {
+  addPets,
   editUserCurrent,
   getUserCurrentData,
   getUserFullCurrentData,
@@ -33,6 +34,16 @@ const authSlice = createSlice({
           );
       }
     },
+
+    removeUserPetById(state, action) {
+      // const { id } = action.payload;
+      console.log(action.payload);
+      if (state.userCurrentFull) {
+        state.userCurrentFull.pets = state.userCurrentFull.pets.filter(
+          item => item._id !== action.payload
+        );
+      }
+    },
   },
   extraReducers: builder => {
     builder
@@ -54,6 +65,9 @@ const authSlice = createSlice({
         state.userCurrentFull = action.payload;
       })
       .addCase(logoutUser.fulfilled, () => initialState)
+      .addCase(addPets.fulfilled, (state, action) => {
+        state.userCurrentFull.pets = action.payload.pets;
+      })
       .addMatcher(
         isAnyOf(
           registerUser.pending,
@@ -96,6 +110,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { unauthorized, removeFavoritesById } = authSlice.actions;
+export const { unauthorized, removeFavoritesById, removeUserPetById } =
+  authSlice.actions;
 
 export const userReducer = authSlice.reducer;

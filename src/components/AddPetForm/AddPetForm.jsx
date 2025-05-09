@@ -9,12 +9,12 @@ import { getNoticesSearchSpecies } from '../../redux/filters/operations.js';
 import 'react-datepicker/dist/react-datepicker.css';
 import './calendar.css';
 import DatePicker from 'react-datepicker';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { orderAddPetSchema } from '../../utils/formValidation.js';
-import { transformDateUs } from '../../utils/formatDate.js';
 import { addPets } from '../../redux/user/operations.js';
 
 const AddPetForm = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const speciesOption = useSelector(selectSpecies);
   const [preview, setPreview] = useState(null);
@@ -28,7 +28,6 @@ const AddPetForm = () => {
     handleSubmit,
     formState: { errors },
     control,
-    setValue,
     watch,
   } = useForm({
     resolver: yupResolver(orderAddPetSchema),
@@ -43,8 +42,13 @@ const AddPetForm = () => {
   });
 
   const onSubmit = data => {
-    console.log('dataPet', data);
-    dispatch(addPets(data));
+    try {
+      dispatch(addPets(data)).unwrap();
+
+      navigate('/profile');
+    } catch (error) {
+      console.log('error', error);
+    }
   };
 
   const handlePreviewAvatar = () => {
@@ -71,7 +75,7 @@ const AddPetForm = () => {
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
-        <div className='flex items-center m-0 xl:items-start'>
+        <div className='flex items-center m-0 md:items-start'>
           <ul className='flex gap-2 mb-2 md:mb-0'>
             <li>
               <label className='relative cursor-pointer group'>
