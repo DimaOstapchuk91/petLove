@@ -34,6 +34,14 @@ body {
   background-color: var(--background-page);
 }
 
+button {
+  outline: none;
+}
+
+a {
+  outline: none;
+}
+
 .container {
   max-width: 375px;
   padding: 0 20px;

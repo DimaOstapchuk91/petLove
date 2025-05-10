@@ -34,10 +34,7 @@ const authSlice = createSlice({
           );
       }
     },
-
     removeUserPetById(state, action) {
-      // const { id } = action.payload;
-      console.log(action.payload);
       if (state.userCurrentFull) {
         state.userCurrentFull.pets = state.userCurrentFull.pets.filter(
           item => item._id !== action.payload

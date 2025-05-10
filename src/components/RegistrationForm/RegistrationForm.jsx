@@ -17,9 +17,12 @@ const RegistrationForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, touchedFields },
+    resetField,
+    getValues,
   } = useForm({
     resolver: yupResolver(orderRegistrationSchema),
+    mode: 'onChange',
   });
 
   const togglePasswordVisibility = () => {
@@ -36,6 +39,19 @@ const RegistrationForm = () => {
     dispatch(registerUser({ name, email, password }));
   };
 
+  const isValidName =
+    touchedFields.name && !errors.name && getValues('name')?.trim() !== '';
+  const isValidEmail =
+    touchedFields.email && !errors.email && getValues('email')?.trim() !== '';
+  const isValidPassword =
+    touchedFields.email &&
+    !errors.password &&
+    getValues('password')?.trim() !== '';
+  const isValidconfirmPassword =
+    touchedFields.confirmPassword &&
+    !errors.confirmPassword &&
+    getValues('confirmPassword')?.trim() !== '';
+
   return (
     <form
       className='bg-text-white px-5 py-5 rounded-[30px] md:py-6.5 md:px-35 xl:w-1/2 xl:py-17 xl:px-21'
@@ -47,48 +63,139 @@ const RegistrationForm = () => {
       </p>
       <ul className='flex flex-col gap-2.5 mb-6 md:gap-4 xl:mb-8.5'>
         <li>
-          <label>
+          <label className='relative'>
             <input
-              className='border border-inputs outline-none rounded-[30px] w-full p-3 md:p-4'
+              className={`border  outline-none rounded-[30px] w-full p-3 md:p-4 ${
+                errors.name
+                  ? 'border-error'
+                  : isValidName
+                  ? 'border-success focus:border-success'
+                  : 'border-inputs focus:border-brand'
+              } hover:border-brand`}
               type='text'
               name='name'
               placeholder='Name'
               {...register('name')}
             />
-            {errors.name && <p className=''>{errors.name.message}</p>}
-          </label>
-        </li>
-        <li>
-          <label>
-            <input
-              className='border border-inputs outline-none rounded-[30px] w-full p-3 md:p-4'
-              type='email'
-              name='email'
-              placeholder='Email'
-              {...register('email')}
-            />
-            {errors.email && <p className=''>{errors.email.message}</p>}
+            {errors.name && (
+              <button
+                type='button'
+                onClick={() => resetField('name')}
+                className='absolute top-0  right-3 cursor-pointer'
+              >
+                <svg
+                  className='fill-transparent stroke-error '
+                  width={20}
+                  height={20}
+                >
+                  <use href={`${sprite}#icon-cross-small`} />
+                </svg>
+              </button>
+            )}
+            {isValidName && (
+              <div className='absolute top-0  right-3 cursor-pointer'>
+                <svg
+                  className='fill-transparent stroke-success '
+                  width={20}
+                  height={20}
+                >
+                  <use href={`${sprite}#icon-check`} />
+                </svg>
+              </div>
+            )}
+            {errors.name && (
+              <p className='text-error mt-0.5 text-[10px] mb-1.5 ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+                {errors.name.message}
+              </p>
+            )}
           </label>
         </li>
         <li>
           <label className='relative'>
             <input
-              className='border border-inputs outline-none rounded-[30px] w-full p-3 md:p-4'
+              className={`border  outline-none rounded-[30px] w-full p-3 md:p-4 ${
+                errors.email
+                  ? 'border-error'
+                  : isValidEmail
+                  ? 'border-success focus:border-success'
+                  : 'border-inputs focus:border-brand'
+              } hover:border-brand`}
+              type='email'
+              name='email'
+              placeholder='Email'
+              {...register('email')}
+            />
+            {errors.email && (
+              <button
+                type='button'
+                onClick={() => resetField('email')}
+                className='absolute top-0  right-3 cursor-pointer'
+              >
+                <svg
+                  className='fill-transparent stroke-error '
+                  width={20}
+                  height={20}
+                >
+                  <use href={`${sprite}#icon-cross-small`} />
+                </svg>
+              </button>
+            )}
+            {isValidEmail && (
+              <div className='absolute top-0  right-3 cursor-pointer'>
+                <svg
+                  className='fill-transparent stroke-success '
+                  width={20}
+                  height={20}
+                >
+                  <use href={`${sprite}#icon-check`} />
+                </svg>
+              </div>
+            )}
+            {errors.email && (
+              <p className='text-error mt-0.5 text-[10px] mb-1.5 ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+                {errors.email.message}
+              </p>
+            )}
+          </label>
+        </li>
+        <li>
+          <label className='relative'>
+            <input
+              className={`border  outline-none transition-all duration-200 rounded-[30px] w-full p-3 md:p-4 ${
+                errors.password
+                  ? 'border-error'
+                  : isValidPassword
+                  ? 'border-success'
+                  : 'border-inputs'
+              } hover:border-brand`}
               type={passwordVisible ? 'text' : 'password'}
               name='password'
               placeholder='Password'
               {...register('password')}
             />
+            {isValidPassword && (
+              <div className='absolute top-0  right-9.5 cursor-pointer'>
+                <svg
+                  className='fill-transparent stroke-success '
+                  width={20}
+                  height={20}
+                >
+                  <use href={`${sprite}#icon-check`} />
+                </svg>
+              </div>
+            )}
             <button
               type='button'
-              className='absolute bottom-0.5 right-3 cursor-pointer'
+              className='group absolute top-0.5 transition-all duration-200 right-3 cursor-pointer outline-none'
               onClick={togglePasswordVisibility}
             >
               {passwordVisible ? (
                 <svg
                   width='18'
                   height='18'
-                  className='fill-transparent stroke-brand'
+                  className={`fill-transparent  ${
+                    errors.password ? 'stroke-error' : 'stroke-brand'
+                  } group-hover:stroke-hover`}
                 >
                   <use href={`${sprite}#icon-eye-on`}></use>
                 </svg>
@@ -96,34 +203,64 @@ const RegistrationForm = () => {
                 <svg
                   width='18'
                   height='18'
-                  className='fill-transparent stroke-brand'
+                  className={`fill-transparent  ${
+                    errors.password ? 'stroke-error' : 'stroke-brand'
+                  } group-hover:stroke-hover`}
                 >
                   <use href={`${sprite}#icon-eye-off`}></use>
                 </svg>
               )}
             </button>
-            {errors.password && <p className=''>{errors.password.message}</p>}
+            {errors.password && (
+              <p className='text-error mt-0.5  text-[10px] mb-1.5 ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+                {errors.password.message}
+              </p>
+            )}
+            {isValidPassword && (
+              <p className='text-success mt-0.5  text-[10px] mb-1.5 ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+                Password is secure
+              </p>
+            )}
           </label>
         </li>
         <li>
           <label className='relative'>
             <input
-              className='border border-inputs outline-none rounded-[30px] w-full p-3 md:p-4'
+              className={`border  outline-none transition-all duration-200 rounded-[30px] w-full p-3 md:p-4 ${
+                errors.confirmPassword
+                  ? 'border-error'
+                  : isValidconfirmPassword
+                  ? 'border-success'
+                  : 'border-inputs'
+              } hover:border-brand`}
               type={repeatPasswordVisible ? 'text' : 'password'}
               name='confirmPassword'
               placeholder='Confirm password'
               {...register('confirmPassword')}
             />
+            {isValidconfirmPassword && (
+              <div className='absolute top-0  right-9.5 cursor-pointer'>
+                <svg
+                  className='fill-transparent stroke-success '
+                  width={20}
+                  height={20}
+                >
+                  <use href={`${sprite}#icon-check`} />
+                </svg>
+              </div>
+            )}
             <button
               type='button'
-              className='absolute bottom-0.5 right-3 cursor-pointer'
+              className='group absolute top-0.5 transition-all duration-200 right-3 cursor-pointer'
               onClick={toggleRepeatPasswordVisibility}
             >
               {repeatPasswordVisible ? (
                 <svg
                   width='18'
                   height='18'
-                  className='fill-transparent stroke-brand'
+                  className={`fill-transparent  ${
+                    errors.confirmPassword ? 'stroke-error' : 'stroke-brand'
+                  } group-hover:stroke-hover`}
                 >
                   <use href={`${sprite}#icon-eye-on`}></use>
                 </svg>
@@ -131,14 +268,24 @@ const RegistrationForm = () => {
                 <svg
                   width='18'
                   height='18'
-                  className='fill-transparent stroke-brand'
+                  className={`fill-transparent  ${
+                    errors.confirmPassword ? 'stroke-error' : 'stroke-brand'
+                  } group-hover:stroke-hover`}
                 >
                   <use href={`${sprite}#icon-eye-off`}></use>
                 </svg>
               )}
             </button>
+
             {errors.confirmPassword && (
-              <p className=''>{errors.confirmPassword.message}</p>
+              <p className='text-error mt-0.5  text-[10px] mb-1.5 ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+                {errors.confirmPassword.message}
+              </p>
+            )}
+            {isValidconfirmPassword && (
+              <p className='text-success mt-0.5  text-[10px] mb-1.5 ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+                Passwords match
+              </p>
             )}
           </label>
         </li>
@@ -153,7 +300,7 @@ const RegistrationForm = () => {
         <p className='text-center text-xs text-text-gray font-medium md:text-sm'>
           Already have an account?{' '}
           <NavLink
-            className='text-brand transition-all duration-300 hover:text-hover cursor-pointer'
+            className='text-brand transition-all duration-300 hover:text-hover cursor-pointer hover:underline'
             to='/login'
           >
             Login

@@ -41,13 +41,13 @@ const ModalApproveAction = ({ onClose, onCloseMenu, isMobileMenu }) => {
 
       <div className='w-full  flex justify-center gap-2'>
         <button
-          className='py-3 px-[57px] w-full text-center max-w-[137px] rounded-[30px] text-text-white bg-brand text-sm font-bold leading-4.5 -tracking-[0.42px] hover:bg-hover transition-all duration-200 md:p-3.5 md:text-base md:leading-5 md:-tracking-[0.48px] md:max-w-[140px]'
+          className='py-3 px-[57px] w-full text-center max-w-[137px] rounded-[30px] text-text-white bg-brand text-sm font-bold leading-4.5 -tracking-[0.42px] hover:bg-hover transition-all duration-200 md:p-3.5 md:text-base md:leading-5 md:-tracking-[0.48px] md:max-w-[140px] cursor-pointer'
           onClick={hendleLogOut}
         >
           Yes
         </button>
         <button
-          className='py-3 px-11 text-center w-full max-w-[130px] rounded-[30px]  bg-disabled text-sm font-bold leading-4.5 -tracking-[0.42px] hover:bg-hover hover:text-text-white transition-all duration-200 md:p-3.5 md:text-base md:leading-5 md:-tracking-[0.48px] md:max-w-[140px]'
+          className='py-3 px-11 text-center w-full max-w-[130px] rounded-[30px]  bg-disabled text-sm font-bold leading-4.5 -tracking-[0.42px] hover:bg-hover hover:text-text-white transition-all duration-200 md:p-3.5 md:text-base md:leading-5 md:-tracking-[0.48px] md:max-w-[140px] cursor-pointer'
           onClick={() => {
             onClose();
           }}

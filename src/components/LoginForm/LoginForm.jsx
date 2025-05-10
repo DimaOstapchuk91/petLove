@@ -15,9 +15,12 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    resetField,
+    getValues,
+    formState: { errors, touchedFields },
   } = useForm({
     resolver: yupResolver(orderLoginSchema),
+    mode: 'onChange',
   });
 
   const togglePasswordVisibility = () => {
@@ -27,6 +30,13 @@ const LoginForm = () => {
   const onSubmit = data => {
     dispatch(loginUser(data)).unwrap();
   };
+
+  const isValidEmail =
+    touchedFields.email && !errors.email && getValues('email')?.trim() !== '';
+  const isValidPassword =
+    touchedFields.email &&
+    !errors.password &&
+    getValues('password')?.trim() !== '';
 
   return (
     <form
@@ -39,36 +49,91 @@ const LoginForm = () => {
       </p>
       <ul className='flex flex-col gap-2.5 mb-10 md:gap-4 md:mb-12.5'>
         <li>
-          <label>
+          <label className='relative'>
             <input
-              className='border border-inputs outline-none rounded-[30px] w-full p-3 md:p-4'
+              className={`border  outline-none rounded-[30px] w-full p-3 md:p-4 ${
+                errors.email
+                  ? 'border-error'
+                  : isValidEmail
+                  ? 'border-success focus:border-success'
+                  : 'border-inputs focus:border-brand'
+              } hover:border-brand`}
               type='email'
               name='email'
               placeholder='Email'
               {...register('email')}
             />
-            {errors.email && <p className=''>{errors.email.message}</p>}
+            {errors.email && (
+              <button
+                type='button'
+                onClick={() => resetField('email')}
+                className='absolute top-0  right-3 cursor-pointer'
+              >
+                <svg
+                  className='fill-transparent stroke-error '
+                  width={20}
+                  height={20}
+                >
+                  <use href={`${sprite}#icon-cross-small`} />
+                </svg>
+              </button>
+            )}
+            {isValidEmail && (
+              <div className='absolute top-0  right-3 cursor-pointer'>
+                <svg
+                  className='fill-transparent stroke-success '
+                  width={20}
+                  height={20}
+                >
+                  <use href={`${sprite}#icon-check`} />
+                </svg>
+              </div>
+            )}
+            {errors.email && (
+              <p className='text-error mt-0.5 text-[10px] mb-1.5 ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+                {errors.email.message}
+              </p>
+            )}
           </label>
         </li>
         <li>
           <label className='relative'>
             <input
-              className='border border-inputs outline-none rounded-[30px] w-full p-3 md:p-4'
+              className={`border  outline-none transition-all duration-200 rounded-[30px] w-full p-3 md:p-4 ${
+                errors.password
+                  ? 'border-error'
+                  : isValidPassword
+                  ? 'border-success'
+                  : 'border-inputs'
+              } hover:border-brand`}
               type={passwordVisible ? 'text' : 'password'}
               name='password'
               placeholder='Password'
               {...register('password')}
             />
+            {isValidPassword && (
+              <div className='absolute top-0  right-9.5 cursor-pointer'>
+                <svg
+                  className='fill-transparent stroke-success '
+                  width={20}
+                  height={20}
+                >
+                  <use href={`${sprite}#icon-check`} />
+                </svg>
+              </div>
+            )}
             <button
               type='button'
-              className='absolute bottom-0.5 right-3 cursor-pointer'
+              className='group absolute top-0.5 transition-all duration-200 right-3 cursor-pointer '
               onClick={togglePasswordVisibility}
             >
               {passwordVisible ? (
                 <svg
                   width='18'
                   height='18'
-                  className='fill-transparent stroke-brand'
+                  className={`fill-transparent  ${
+                    errors.password ? 'stroke-error' : 'stroke-brand'
+                  } group-hover:stroke-hover`}
                 >
                   <use href={`${sprite}#icon-eye-on`}></use>
                 </svg>
@@ -76,27 +141,38 @@ const LoginForm = () => {
                 <svg
                   width='18'
                   height='18'
-                  className='fill-transparent stroke-brand'
+                  className={`fill-transparent  ${
+                    errors.password ? 'stroke-error' : 'stroke-brand'
+                  } group-hover:stroke-hover`}
                 >
                   <use href={`${sprite}#icon-eye-off`}></use>
                 </svg>
               )}
             </button>
-            {errors.password && <p className=''>{errors.password.message}</p>}
+            {errors.password && (
+              <p className='text-error mt-0.5  text-[10px] mb-1.5 ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+                {errors.password.message}
+              </p>
+            )}
+            {isValidPassword && (
+              <p className='text-success mt-0.5  text-[10px] mb-1.5 ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+                Password is secure
+              </p>
+            )}
           </label>
         </li>
       </ul>
       <div className='flex flex-col  w-full gap-3'>
         <button
           type='submit'
-          className='p-3 w-ful bg-brand rounded-[30px] font-bold text-text-white transition-all duration-300 hover:bg-hover cursor-pointer md:p-4.5'
+          className='p-3 w-ful bg-brand rounded-[30px] font-bold text-text-white transition-all duration-200 hover:bg-hover cursor-pointer md:p-4.5'
         >
           LOG IN
         </button>
         <p className='text-center text-xs text-text-gray font-medium md:text-sm'>
           Don&apos;t have an account?{' '}
           <NavLink
-            className='text-brand transition-all duration-300 hover:text-hover cursor-pointer'
+            className='text-brand transition-all duration-300 hover:text-hover hover:underline cursor-pointer'
             to='/register'
           >
             Register
