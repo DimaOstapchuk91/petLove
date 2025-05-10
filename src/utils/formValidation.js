@@ -38,6 +38,7 @@ const passwordValid = Yup.string()
   .required('Password is required')
   .min(7, 'Minimum 7 symbols')
   .max(50, 'Maximum 50 symbols');
+
 export const orderRegistrationSchema = Yup.object({
   name: nameValid,
   email: emailValid,

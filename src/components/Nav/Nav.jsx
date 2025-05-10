@@ -28,8 +28,8 @@ const Nav = ({ header, onCloseMenu }) => {
                     isActive
                       ? `px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42]  border border-brand rounded-[30px]`
                       : isLocation && isDesk
-                      ? 'px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-border text-text-white hover:opacity-[0.8] rounded-[30px]'
-                      : `px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-inputs rounded-[30px]`
+                      ? 'px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-border text-text-white trnasition-all duration-200 hover:opacity-[0.8] rounded-[30px]'
+                      : `px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-inputs rounded-[30px] trnasition-all duration-200 hover:border-brand`
                 : ({ isActive }) =>
                     isActive
                       ? `py-3.5 px-5 block text-center border border-border rounded-[30px] w-full text-[14px] font-medium text-text-white`
@@ -49,8 +49,8 @@ const Nav = ({ header, onCloseMenu }) => {
                     isActive
                       ? `px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42]  border border-brand rounded-[30px]`
                       : isLocation && isDesk
-                      ? 'px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-border text-text-white hover:opacity-[0.8] rounded-[30px]'
-                      : `px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-inputs rounded-[30px]`
+                      ? 'px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-border text-text-white trnasition-all duration-200 hover:opacity-[0.8] rounded-[30px]'
+                      : `px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-inputs rounded-[30px] trnasition-all duration-200 hover:border-brand`
                 : ({ isActive }) =>
                     isActive
                       ? `py-3.5 px-5 block text-center border border-border rounded-[30px] w-full text-[14px] font-medium text-text-white`
@@ -71,8 +71,8 @@ const Nav = ({ header, onCloseMenu }) => {
                     isActive
                       ? `px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42]  border border-brand rounded-[30px]`
                       : isLocation && isDesk
-                      ? 'px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-border text-text-white hover:opacity-[0.8] rounded-[30px]'
-                      : `px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-inputs rounded-[30px]`
+                      ? 'px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-border text-text-white trnasition-all duration-200 hover:opacity-[0.8] rounded-[30px]'
+                      : `px-5 py-4 flex justify-center items-center font-medium leading-[18px] text-sm -tracking-[0.42] border border-inputs rounded-[30px] trnasition-all duration-200 hover:border-brand`
                 : ({ isActive }) =>
                     isActive
                       ? `py-3.5 px-5 block text-center border border-border rounded-[30px] w-full text-[14px] font-medium text-text-white`

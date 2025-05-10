@@ -12,6 +12,7 @@ import DatePicker from 'react-datepicker';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { orderAddPetSchema } from '../../utils/formValidation.js';
 import { addPets } from '../../redux/user/operations.js';
+import { errToast, successfullyToast } from '../../utils/toast.js';
 
 const AddPetForm = () => {
   const navigate = useNavigate();
@@ -46,8 +47,9 @@ const AddPetForm = () => {
       dispatch(addPets(data)).unwrap();
 
       navigate('/profile');
+      successfullyToast('Add pet is successfully');
     } catch (error) {
-      console.log('error', error);
+      errToast(error);
     }
   };
 
@@ -59,9 +61,6 @@ const AddPetForm = () => {
       setPreview(avatarUrl);
     } else {
       setPreview(null);
-      // errors.imgURL = 'Please enter image URL';
-
-      // alert('Please enter a valid image URL');
     }
   };
 

@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { orderLoginSchema } from '../../utils/formValidation.js';
 import Title from '../Title/Title.jsx';
+import { errToast, successfullyToast } from '../../utils/toast.js';
 
 const LoginForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -28,7 +29,13 @@ const LoginForm = () => {
   };
 
   const onSubmit = data => {
-    dispatch(loginUser(data)).unwrap();
+    try {
+      dispatch(loginUser(data)).unwrap();
+
+      successfullyToast('Login is successfully');
+    } catch (error) {
+      errToast(error);
+    }
   };
 
   const isValidEmail =
@@ -40,7 +47,7 @@ const LoginForm = () => {
 
   return (
     <form
-      className='bg-text-white px-5 py-15 rounded-[30px] md:py-17.5 md:px-35 xl:py-28.5 xl:px-21 xl:w-1/2 '
+      className='bg-text-white px-5 py-15 rounded-[30px] md:py-17.5 md:px-35 xl:py-28.5 xl:px-21 xl:w-1/2 xl:pb-5'
       onSubmit={handleSubmit(onSubmit)}
     >
       <Title titleText={'Log in'} />
@@ -51,7 +58,7 @@ const LoginForm = () => {
         <li>
           <label className='relative'>
             <input
-              className={`border  outline-none rounded-[30px] w-full p-3 md:p-4 ${
+              className={`!text-sm font-medium leading-4.5 -tracking-[0.42px] md:!text-base md:leading-5 md:-tracking-[0.48px] border outline-none rounded-[30px] w-full p-3 md:p-4 ${
                 errors.email
                   ? 'border-error'
                   : isValidEmail
@@ -90,7 +97,7 @@ const LoginForm = () => {
               </div>
             )}
             {errors.email && (
-              <p className='text-error mt-0.5 text-[10px] mb-1.5 ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+              <p className='text-error mt-0.5 text-[10px] ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
                 {errors.email.message}
               </p>
             )}
@@ -99,7 +106,7 @@ const LoginForm = () => {
         <li>
           <label className='relative'>
             <input
-              className={`border  outline-none transition-all duration-200 rounded-[30px] w-full p-3 md:p-4 ${
+              className={`!text-sm font-medium leading-4.5 -tracking-[0.42px] md:!text-base md:leading-5 md:-tracking-[0.48px] border outline-none transition-all duration-200 rounded-[30px] w-full p-3 md:p-4 ${
                 errors.password
                   ? 'border-error'
                   : isValidPassword
@@ -150,12 +157,12 @@ const LoginForm = () => {
               )}
             </button>
             {errors.password && (
-              <p className='text-error mt-0.5  text-[10px] mb-1.5 ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+              <p className='text-error mt-0.5  text-[10px] ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
                 {errors.password.message}
               </p>
             )}
             {isValidPassword && (
-              <p className='text-success mt-0.5  text-[10px] mb-1.5 ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+              <p className='text-success mt-0.5  text-[10px] ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
                 Password is secure
               </p>
             )}

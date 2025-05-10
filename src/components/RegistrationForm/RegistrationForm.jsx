@@ -7,6 +7,7 @@ import { orderRegistrationSchema } from '../../utils/formValidation.js';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Title from '../Title/Title.jsx';
+import { errToast, successfullyToast } from '../../utils/toast.js';
 
 const RegistrationForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -35,8 +36,12 @@ const RegistrationForm = () => {
 
   const onSubmit = data => {
     const { name, email, password } = data;
-
-    dispatch(registerUser({ name, email, password }));
+    try {
+      dispatch(registerUser({ name, email, password })).unwrap();
+      successfullyToast('Registration is successfully');
+    } catch (error) {
+      errToast(error);
+    }
   };
 
   const isValidName =
@@ -54,7 +59,7 @@ const RegistrationForm = () => {
 
   return (
     <form
-      className='bg-text-white px-5 py-5 rounded-[30px] md:py-6.5 md:px-35 xl:w-1/2 xl:py-17 xl:px-21'
+      className='bg-text-white px-5 py-5 rounded-[30px] md:py-6.5 md:px-35 xl:w-1/2 xl:py-17 xl:px-21 xl:pb-5'
       onSubmit={handleSubmit(onSubmit)}
     >
       <Title titleText={'Registration'} form={true} />
@@ -65,7 +70,7 @@ const RegistrationForm = () => {
         <li>
           <label className='relative'>
             <input
-              className={`border  outline-none rounded-[30px] w-full p-3 md:p-4 ${
+              className={`!text-sm font-medium leading-4.5 -tracking-[0.42px] md:!text-base md:leading-5 md:-tracking-[0.48px] border outline-none rounded-[30px] w-full p-3 md:p-4 ${
                 errors.name
                   ? 'border-error'
                   : isValidName
@@ -104,7 +109,7 @@ const RegistrationForm = () => {
               </div>
             )}
             {errors.name && (
-              <p className='text-error mt-0.5 text-[10px] mb-1.5 ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+              <p className='text-error mt-0.5 text-[10px] ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
                 {errors.name.message}
               </p>
             )}
@@ -113,7 +118,7 @@ const RegistrationForm = () => {
         <li>
           <label className='relative'>
             <input
-              className={`border  outline-none rounded-[30px] w-full p-3 md:p-4 ${
+              className={`!text-sm font-medium leading-4.5 -tracking-[0.42px] md:!text-base md:leading-5 md:-tracking-[0.48px] border outline-none rounded-[30px] w-full p-3 md:p-4 ${
                 errors.email
                   ? 'border-error'
                   : isValidEmail
@@ -152,7 +157,7 @@ const RegistrationForm = () => {
               </div>
             )}
             {errors.email && (
-              <p className='text-error mt-0.5 text-[10px] mb-1.5 ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+              <p className='text-error mt-0.5 text-[10px] ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
                 {errors.email.message}
               </p>
             )}
@@ -161,7 +166,7 @@ const RegistrationForm = () => {
         <li>
           <label className='relative'>
             <input
-              className={`border  outline-none transition-all duration-200 rounded-[30px] w-full p-3 md:p-4 ${
+              className={`!text-sm font-medium leading-4.5 -tracking-[0.42px] md:!text-base md:leading-5 md:-tracking-[0.48px] border outline-none transition-all duration-200 rounded-[30px] w-full p-3 md:p-4 ${
                 errors.password
                   ? 'border-error'
                   : isValidPassword
@@ -212,12 +217,12 @@ const RegistrationForm = () => {
               )}
             </button>
             {errors.password && (
-              <p className='text-error mt-0.5  text-[10px] mb-1.5 ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+              <p className='text-error mt-0.5  text-[10px] ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
                 {errors.password.message}
               </p>
             )}
             {isValidPassword && (
-              <p className='text-success mt-0.5  text-[10px] mb-1.5 ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+              <p className='text-success mt-0.5  text-[10px] ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
                 Password is secure
               </p>
             )}
@@ -226,7 +231,7 @@ const RegistrationForm = () => {
         <li>
           <label className='relative'>
             <input
-              className={`border  outline-none transition-all duration-200 rounded-[30px] w-full p-3 md:p-4 ${
+              className={`!text-sm font-medium leading-4.5 -tracking-[0.42px] md:!text-base md:leading-5 md:-tracking-[0.48px] border outline-none transition-all duration-200 rounded-[30px] w-full p-3 md:p-4 ${
                 errors.confirmPassword
                   ? 'border-error'
                   : isValidconfirmPassword
@@ -278,12 +283,12 @@ const RegistrationForm = () => {
             </button>
 
             {errors.confirmPassword && (
-              <p className='text-error mt-0.5  text-[10px] mb-1.5 ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+              <p className='text-error mt-0.5  text-[10px] ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
                 {errors.confirmPassword.message}
               </p>
             )}
             {isValidconfirmPassword && (
-              <p className='text-success mt-0.5  text-[10px] mb-1.5 ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+              <p className='text-success mt-0.5  text-[10px] ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
                 Passwords match
               </p>
             )}

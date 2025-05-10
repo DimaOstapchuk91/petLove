@@ -32,7 +32,7 @@ const ModalAttention = () => {
           Log In
         </NavLink>
         <NavLink
-          className='p-3 text-center w-full max-w-[130px] rounded-[30px] text-brand bg-brand-light text-sm font-bold leading-4.5 -tracking-[0.42px] hover:bg-hover hover:text-text-white transition-all duration-200 md:p-3.5 md:text-base md:leading-5 md:-tracking-[0.48px] md:max-w-[140px]'
+          className='p-3 text-center w-full max-w-[130px] rounded-[30px] text-brand bg-brand-light text-sm font-bold leading-4.5 -tracking-[0.42px] hover:bg-hover-light transition-all duration-200 md:p-3.5 md:text-base md:leading-5 md:-tracking-[0.48px] md:max-w-[140px]'
           to='/register'
         >
           Registration

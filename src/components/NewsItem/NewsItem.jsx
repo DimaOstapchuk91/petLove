@@ -22,7 +22,7 @@ const NewsItem = ({ item }) => {
           {formatDate(item.date)}
         </p>
         <a
-          className='text-brand underline font-medium text-sm leading-[18px] -tracking-[0.28px]'
+          className='text-brand underline font-medium text-sm leading-[18px] -tracking-[0.28px] transition-all duration-200 hover:text-hover hover:underline-offset-2'
           href={item.url}
         >
           Read more

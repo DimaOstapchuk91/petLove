@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectUserCurrentFull } from '../../../redux/user/selectors.js';
 import sprite from '../../../assets/sprite.svg';
 import { editUserCurrent } from '../../../redux/user/operations.js';
+import { errToast, successfullyToast } from '../../../utils/toast.js';
 
 const ModalEditUser = ({ onClose }) => {
   const dispatch = useDispatch();
@@ -30,8 +31,13 @@ const ModalEditUser = ({ onClose }) => {
   });
 
   const onSubmit = data => {
-    dispatch(editUserCurrent(data));
-    onClose();
+    try {
+      dispatch(editUserCurrent(data)).unwrap();
+      successfullyToast('Edit User is successfully');
+      onClose();
+    } catch (error) {
+      errToast(error);
+    }
   };
 
   const handlePreviewAvatar = () => {

@@ -5,6 +5,7 @@ import { logoutUser } from '../../../redux/user/operations.js';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logoutCleanStateNotices } from '../../../redux/notices/slice.js';
+import { errToast, successfullyToast } from '../../../utils/toast.js';
 
 const ModalApproveAction = ({ onClose, onCloseMenu, isMobileMenu }) => {
   const dispatch = useDispatch();
@@ -25,8 +26,9 @@ const ModalApproveAction = ({ onClose, onCloseMenu, isMobileMenu }) => {
         onCloseMenu();
       }
       navigate('/login');
+      successfullyToast('Goodbye :(');
     } catch (error) {
-      console.log(error);
+      errToast(error);
     }
   };
 
