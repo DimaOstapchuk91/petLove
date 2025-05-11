@@ -86,7 +86,7 @@ const RegistrationForm = () => {
               <button
                 type='button'
                 onClick={() => resetField('name')}
-                className='absolute top-0  right-3 cursor-pointer'
+                className='absolute top-0  right-[12px] cursor-pointer'
               >
                 <svg
                   className='fill-transparent stroke-error '
@@ -98,7 +98,7 @@ const RegistrationForm = () => {
               </button>
             )}
             {isValidName && (
-              <div className='absolute top-0  right-3 cursor-pointer'>
+              <div className='absolute top-0  right-[12px] cursor-pointer'>
                 <svg
                   className='fill-transparent stroke-success '
                   width={20}
@@ -134,7 +134,7 @@ const RegistrationForm = () => {
               <button
                 type='button'
                 onClick={() => resetField('email')}
-                className='absolute top-0  right-3 cursor-pointer'
+                className='absolute top-0  right-[12px] cursor-pointer'
               >
                 <svg
                   className='fill-transparent stroke-error '
@@ -146,7 +146,7 @@ const RegistrationForm = () => {
               </button>
             )}
             {isValidEmail && (
-              <div className='absolute top-0  right-3 cursor-pointer'>
+              <div className='absolute top-0  right-[12px] cursor-pointer'>
                 <svg
                   className='fill-transparent stroke-success '
                   width={20}
@@ -179,7 +179,7 @@ const RegistrationForm = () => {
               {...register('password')}
             />
             {isValidPassword && (
-              <div className='absolute top-0  right-9.5 cursor-pointer'>
+              <div className='absolute top-0  right-[38px] cursor-pointer'>
                 <svg
                   className='fill-transparent stroke-success '
                   width={20}
@@ -191,7 +191,7 @@ const RegistrationForm = () => {
             )}
             <button
               type='button'
-              className='group absolute top-0.5 transition-all duration-200 right-3 cursor-pointer outline-none'
+              className='group absolute top-[2px] transition-all duration-200 right-[12px] cursor-pointer outline-none'
               onClick={togglePasswordVisibility}
             >
               {passwordVisible ? (
@@ -217,12 +217,12 @@ const RegistrationForm = () => {
               )}
             </button>
             {errors.password && (
-              <p className='text-error mt-0.5  text-[10px] ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+              <p className='text-error mt-[2px]  text-[10px] ml-3 font-medium leading-[12px] -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
                 {errors.password.message}
               </p>
             )}
             {isValidPassword && (
-              <p className='text-success mt-0.5  text-[10px] ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
+              <p className='text-success mt-[2px]  text-[10px] ml-3 font-medium leading-[12px] -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
                 Password is secure
               </p>
             )}
@@ -244,7 +244,7 @@ const RegistrationForm = () => {
               {...register('confirmPassword')}
             />
             {isValidconfirmPassword && (
-              <div className='absolute top-0  right-9.5 cursor-pointer'>
+              <div className='absolute top-0  right-[38px] cursor-pointer'>
                 <svg
                   className='fill-transparent stroke-success '
                   width={20}
@@ -256,7 +256,7 @@ const RegistrationForm = () => {
             )}
             <button
               type='button'
-              className='group absolute top-0.5 transition-all duration-200 right-3 cursor-pointer'
+              className='group absolute top-[2px] transition-all duration-200 right-[12px] cursor-pointer'
               onClick={toggleRepeatPasswordVisibility}
             >
               {repeatPasswordVisible ? (

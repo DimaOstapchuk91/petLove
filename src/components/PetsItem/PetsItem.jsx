@@ -28,7 +28,7 @@ const PetsItem = ({ pet }) => {
       />
       <div className='flex flex-col xl:w-full'>
         <div className='relative mb-2 xl:w-full xl:mt-3.5'>
-          <h3 className='truncate block text-sm font-bold leading-4.5 md:max-w-[145px] xl:max-w-[243px]'>
+          <h3 className='truncate block text-sm font-bold leading-4.5 max-w-[145px] xl:max-w-[243px]'>
             {title}
           </h3>
           <button

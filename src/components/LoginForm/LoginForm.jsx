@@ -74,7 +74,7 @@ const LoginForm = () => {
               <button
                 type='button'
                 onClick={() => resetField('email')}
-                className='absolute top-0  right-3 cursor-pointer'
+                className='absolute top-0  right-[12px] cursor-pointer'
               >
                 <svg
                   className='fill-transparent stroke-error '
@@ -86,7 +86,7 @@ const LoginForm = () => {
               </button>
             )}
             {isValidEmail && (
-              <div className='absolute top-0  right-3 cursor-pointer'>
+              <div className='absolute top-0  right-[12px] cursor-pointer'>
                 <svg
                   className='fill-transparent stroke-success '
                   width={20}
@@ -119,7 +119,7 @@ const LoginForm = () => {
               {...register('password')}
             />
             {isValidPassword && (
-              <div className='absolute top-0  right-9.5 cursor-pointer'>
+              <div className='absolute top-0  right-[38px] cursor-pointer'>
                 <svg
                   className='fill-transparent stroke-success '
                   width={20}
@@ -131,7 +131,7 @@ const LoginForm = () => {
             )}
             <button
               type='button'
-              className='group absolute top-0.5 transition-all duration-200 right-3 cursor-pointer '
+              className='group absolute top-[2px] transition-all duration-200 right-[12px] cursor-pointer '
               onClick={togglePasswordVisibility}
             >
               {passwordVisible ? (
