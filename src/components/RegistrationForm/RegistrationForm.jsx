@@ -68,7 +68,7 @@ const RegistrationForm = () => {
       </p>
       <ul className='flex flex-col gap-2.5 mb-6 md:gap-4 xl:mb-8.5'>
         <li>
-          <label className='relative'>
+          <label className='relative block'>
             <input
               className={`!text-sm font-medium leading-4.5 -tracking-[0.42px] md:!text-base md:leading-5 md:-tracking-[0.48px] border outline-none rounded-[30px] w-full p-3 md:p-4 ${
                 errors.name
@@ -86,23 +86,23 @@ const RegistrationForm = () => {
               <button
                 type='button'
                 onClick={() => resetField('name')}
-                className='absolute top-0  right-[12px] cursor-pointer'
+                className='absolute top-3  right-3 md:top-4 md:right-4 cursor-pointer'
               >
                 <svg
-                  className='fill-transparent stroke-error '
-                  width={20}
-                  height={20}
+                  className='fill-transparent stroke-error md:w-5.5 md:h-5.5'
+                  width='18'
+                  height='18'
                 >
                   <use href={`${sprite}#icon-cross-small`} />
                 </svg>
               </button>
             )}
             {isValidName && (
-              <div className='absolute top-0  right-[12px] cursor-pointer'>
+              <div className='absolute top-3  right-3 md:top-4 md:right-4 cursor-pointer'>
                 <svg
-                  className='fill-transparent stroke-success '
-                  width={20}
-                  height={20}
+                  className='fill-transparent stroke-success md:w-5.5 md:h-5.5'
+                  width='18'
+                  height='18'
                 >
                   <use href={`${sprite}#icon-check`} />
                 </svg>
@@ -116,7 +116,7 @@ const RegistrationForm = () => {
           </label>
         </li>
         <li>
-          <label className='relative'>
+          <label className='relative block'>
             <input
               className={`!text-sm font-medium leading-4.5 -tracking-[0.42px] md:!text-base md:leading-5 md:-tracking-[0.48px] border outline-none rounded-[30px] w-full p-3 md:p-4 ${
                 errors.email
@@ -134,23 +134,23 @@ const RegistrationForm = () => {
               <button
                 type='button'
                 onClick={() => resetField('email')}
-                className='absolute top-0  right-[12px] cursor-pointer'
+                className='absolute top-3  right-3 md:top-4 md:right-4 cursor-pointer'
               >
                 <svg
-                  className='fill-transparent stroke-error '
-                  width={20}
-                  height={20}
+                  className='fill-transparent stroke-error md:w-5.5 md:h-5.5'
+                  width='18'
+                  height='18'
                 >
                   <use href={`${sprite}#icon-cross-small`} />
                 </svg>
               </button>
             )}
             {isValidEmail && (
-              <div className='absolute top-0  right-[12px] cursor-pointer'>
+              <div className='absolute top-3  right-3 md:top-4 md:right-4 cursor-pointer'>
                 <svg
-                  className='fill-transparent stroke-success '
-                  width={20}
-                  height={20}
+                  className='fill-transparent stroke-success md:w-5.5 md:h-5.5'
+                  width='18'
+                  height='18'
                 >
                   <use href={`${sprite}#icon-check`} />
                 </svg>
@@ -164,7 +164,7 @@ const RegistrationForm = () => {
           </label>
         </li>
         <li>
-          <label className='relative'>
+          <label className='relative block'>
             <input
               className={`!text-sm font-medium leading-4.5 -tracking-[0.42px] md:!text-base md:leading-5 md:-tracking-[0.48px] border outline-none transition-all duration-200 rounded-[30px] w-full p-3 md:p-4 ${
                 errors.password
@@ -179,11 +179,11 @@ const RegistrationForm = () => {
               {...register('password')}
             />
             {isValidPassword && (
-              <div className='absolute top-0  right-[38px] cursor-pointer'>
+              <div className='absolute top-3  right-9.5 md:top-4 md:right-12.5 cursor-pointer'>
                 <svg
-                  className='fill-transparent stroke-success '
-                  width={20}
-                  height={20}
+                  className='fill-transparent stroke-success md:w-5.5 md:h-5.5'
+                  width='18'
+                  height='18'
                 >
                   <use href={`${sprite}#icon-check`} />
                 </svg>
@@ -191,14 +191,14 @@ const RegistrationForm = () => {
             )}
             <button
               type='button'
-              className='group absolute top-[2px] transition-all duration-200 right-[12px] cursor-pointer outline-none'
+              className='group absolute top-3 transition-all duration-200 right-3 cursor-pointer md:top-4 md:right-4'
               onClick={togglePasswordVisibility}
             >
               {passwordVisible ? (
                 <svg
                   width='18'
                   height='18'
-                  className={`fill-transparent  ${
+                  className={`fill-transparent md:w-5.5 md:h-5.5 ${
                     errors.password ? 'stroke-error' : 'stroke-brand'
                   } group-hover:stroke-hover`}
                 >
@@ -208,7 +208,7 @@ const RegistrationForm = () => {
                 <svg
                   width='18'
                   height='18'
-                  className={`fill-transparent  ${
+                  className={`fill-transparent md:w-5.5 md:h-5.5 ${
                     errors.password ? 'stroke-error' : 'stroke-brand'
                   } group-hover:stroke-hover`}
                 >
@@ -229,7 +229,7 @@ const RegistrationForm = () => {
           </label>
         </li>
         <li>
-          <label className='relative'>
+          <label className='relative block'>
             <input
               className={`!text-sm font-medium leading-4.5 -tracking-[0.42px] md:!text-base md:leading-5 md:-tracking-[0.48px] border outline-none transition-all duration-200 rounded-[30px] w-full p-3 md:p-4 ${
                 errors.confirmPassword
@@ -244,11 +244,11 @@ const RegistrationForm = () => {
               {...register('confirmPassword')}
             />
             {isValidconfirmPassword && (
-              <div className='absolute top-0  right-[38px] cursor-pointer'>
+              <div className='absolute top-3  right-9.5 md:top-4 md:right-12.5 cursor-pointer'>
                 <svg
-                  className='fill-transparent stroke-success '
-                  width={20}
-                  height={20}
+                  className='fill-transparent stroke-success md:w-5.5 md:h-5.5'
+                  width='18'
+                  height='18'
                 >
                   <use href={`${sprite}#icon-check`} />
                 </svg>
@@ -256,14 +256,14 @@ const RegistrationForm = () => {
             )}
             <button
               type='button'
-              className='group absolute top-[2px] transition-all duration-200 right-[12px] cursor-pointer'
+              className='group absolute top-3 transition-all duration-200 right-3 md:top-4 md:right-4 cursor-pointer'
               onClick={toggleRepeatPasswordVisibility}
             >
               {repeatPasswordVisible ? (
                 <svg
                   width='18'
                   height='18'
-                  className={`fill-transparent  ${
+                  className={`fill-transparent md:w-5.5 md:h-5.5  ${
                     errors.confirmPassword ? 'stroke-error' : 'stroke-brand'
                   } group-hover:stroke-hover`}
                 >
@@ -273,7 +273,7 @@ const RegistrationForm = () => {
                 <svg
                   width='18'
                   height='18'
-                  className={`fill-transparent  ${
+                  className={`fill-transparent md:w-5.5 md:h-5.5  ${
                     errors.confirmPassword ? 'stroke-error' : 'stroke-brand'
                   } group-hover:stroke-hover`}
                 >

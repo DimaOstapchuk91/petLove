@@ -77,14 +77,14 @@ const AddPetForm = () => {
         <div className='flex items-center m-0 md:items-start'>
           <ul className='flex gap-2 mb-2 md:mb-0'>
             <li>
-              <label className='relative cursor-pointer group flex'>
+              <label className='relative cursor-pointer group block'>
                 <input
                   type='radio'
                   value='male'
                   {...register('sex')}
                   className='sr-only peer'
                 />
-                <div className='relative w-8 h-8 rounded-full flex items-center justify-center bg-[#F43F5E1A] group-hover:bg-[#F43F5E] peer-checked:bg-[#F43F5E] transition-all duration-200 md:h-10 md:w-10'></div>
+                <div className='relative w-8 h-8 rounded-full bg-[#F43F5E1A] group-hover:bg-[#F43F5E] peer-checked:bg-[#F43F5E] transition-all duration-200 md:h-10 md:w-10'></div>
                 <svg className='absolute block leading-none pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 fill-transparent stroke-[#F43F5E] transition-all duration-200 group-hover:stroke-text-white peer-checked:stroke-white md:top-2 md:left-2 md:w-6 md:h-6'>
                   <use href={`${sprite}#icon-female`} />
                 </svg>
@@ -105,7 +105,7 @@ const AddPetForm = () => {
               </label>
             </li>
             <li>
-              <label className='relative cursor-pointer group'>
+              <label className='relative cursor-pointer group block'>
                 <input
                   type='radio'
                   value='unknown'
