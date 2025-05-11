@@ -77,7 +77,7 @@ const AddPetForm = () => {
         <div className='flex items-center m-0 md:items-start'>
           <ul className='flex gap-2 mb-2 md:mb-0'>
             <li>
-              <label className='relative cursor-pointer group'>
+              <label className='relative cursor-pointer group flex'>
                 <input
                   type='radio'
                   value='male'
@@ -91,14 +91,14 @@ const AddPetForm = () => {
               </label>
             </li>
             <li>
-              <label className='relative cursor-pointer group'>
+              <label className='relative cursor-pointer group block'>
                 <input
                   type='radio'
                   value='female'
                   {...register('sex')}
                   className='sr-only peer'
                 />
-                <div className='relative w-8 h-8 rounded-full flex items-center justify-center bg-[#54ADFF1A] group-hover:bg-[#54ADFF] peer-checked:bg-[#54ADFF] transition-all duration-200 md:h-10 md:w-10'></div>
+                <div className='relative w-8 h-8 rounded-full  bg-[#54ADFF1A] group-hover:bg-[#54ADFF] peer-checked:bg-[#54ADFF] transition-all duration-200 md:h-10 md:w-10'></div>
                 <svg className='absolute block leading-none pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 fill-transparent stroke-[#54ADFF] transition-all duration-200  group-hover:stroke-text-white peer-checked:stroke-text-white md:top-2 md:left-2 md:w-6 md:h-6'>
                   <use href={`${sprite}#icon-male`} />
                 </svg>
@@ -112,7 +112,7 @@ const AddPetForm = () => {
                   {...register('sex')}
                   className='sr-only peer'
                 />
-                <div className='relative w-8 h-8 rounded-full flex items-center justify-center bg-brand-light group-hover:bg-brand transition-all duration-200 peer-checked:bg-brand md:h-10 md:w-10'></div>
+                <div className='relative w-8 h-8 rounded-full  bg-brand-light group-hover:bg-brand transition-all duration-200 peer-checked:bg-brand md:h-10 md:w-10'></div>
                 <svg className='absolute block leading-none pointer-events-none w-5 h-5 fill-brand top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 stroke-transparent group-hover:fill-text-white transition-all duration-200 peer-checked:fill-text-white md:top-2 md:left-2 md:w-6 md:h-6'>
                   <use href={`${sprite}#icon-unknown`} />
                 </svg>
