@@ -7,7 +7,7 @@ const NoticesList = () => {
 
   return (
     <>
-      {!dataNotices.length > 0 ? (
+      {!dataNotices?.length > 0 ? (
         <div className='px-8 py-5 md:py-15'>
           <p className='text-center font-bold text-brand md:text-2xl xl:text-3xl'>
             Sorry, nothing was found for this query.
@@ -15,7 +15,7 @@ const NoticesList = () => {
         </div>
       ) : (
         <ul className='flex flex-col gap-5 mb-11 md:flex-row md:flex-wrap md:mb-15 xl:gap-x-8 xl:gap-y-10'>
-          {dataNotices.map(item => (
+          {dataNotices?.map(item => (
             <NoticesItem key={item._id} dataItem={item} />
           ))}
         </ul>

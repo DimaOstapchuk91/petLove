@@ -48,8 +48,7 @@ const ModalEditUser = ({ onClose }) => {
       setPreview(avatarUrl);
     } else {
       setPreview(null);
-
-      alert('Please enter a valid image URL');
+      errToast('Avatar format png|jpg|jpeg|gif|bmp|webp');
     }
   };
 

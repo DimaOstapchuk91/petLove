@@ -14,8 +14,6 @@ const FriendsList = () => {
 
   const friendsData = useSelector(selectFriendsData);
 
-  console.log(friendsData);
-
   useEffect(() => {
     dispatch(getFriendsData());
   }, [dispatch]);

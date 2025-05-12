@@ -18,8 +18,6 @@ export const getAllNoticesData = createAsyncThunk(
       sex,
     } = params;
 
-    console.log(params);
-
     const requestFunction = async () => {
       const searchParams = new URLSearchParams();
       if (keyword) searchParams.append('keyword', keyword);

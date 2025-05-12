@@ -64,6 +64,7 @@ const AddPetForm = () => {
       setPreview(avatarUrl);
     } else {
       setPreview(null);
+      errToast('Avatar format png|jpg|jpeg|gif|bmp|webp');
     }
   };
 

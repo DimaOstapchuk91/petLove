@@ -4,7 +4,6 @@ export const handleRequest = async (requestFunction, thunkAPI, data = {}) => {
   try {
     const response = await requestFunction(data);
 
-    console.log(response);
     return response.data;
   } catch (error) {
     if (error.status === 401) {

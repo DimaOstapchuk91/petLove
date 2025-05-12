@@ -18,7 +18,6 @@ const NoticesPage = () => {
   const isLoading = useSelector(selectIsLoadingNotices);
   const totalPages = useSelector(selectTotalPages);
   const filters = useSelector(selectFilters);
-  console.log('noticesLoading', isLoading);
 
   useEffect(() => {
     dispatch(getAllNoticesData(filters));

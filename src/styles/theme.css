@@ -23,6 +23,4 @@
   --error-color: #ef2447;
   --success-color: #08aa83;
   --inputs-color: rgba(38, 38, 38, 0.15);
-
-  transition: background-color 500ms ease;
 }

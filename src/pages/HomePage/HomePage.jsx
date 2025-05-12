@@ -2,7 +2,6 @@ import mobileImg from '../../assets/img/home-img-mobile.jpg';
 import tabletImg from '../../assets/img/home-img-tablet.jpg';
 import deskImg from '../../assets/img/home-img-desk.jpg';
 import useMediaQuery from '../../hooks/useMediaQuery.js';
-// import mobileImg2x from '../../assets/img/home-img-mobile@2x.jpg';
 
 const HomePage = () => {
   const isMobile = useMediaQuery('(max-width: 767px)');

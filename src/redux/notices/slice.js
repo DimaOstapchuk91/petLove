@@ -31,7 +31,6 @@ const noticesSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getAllNoticesData.fulfilled, (state, action) => {
-        console.log(action.payload.results);
         state.notiesData = action.payload.results;
         state.totalPages = action.payload.totalPages;
       })
