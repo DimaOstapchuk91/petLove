@@ -44,6 +44,16 @@
 - **React DatePicker**
 - **React Hot Toast** — for toast notifications
 
+## 🎨 Figma Design
+
+## 📌 [View the UI/UX design in Figma](https://www.figma.com/file/puMNfZVg4YI8UZoJ1QiLLi/Petl%F0%9F%92%9Bve?type=design&node-id=55838-750&mode=design&t=Xg1IwIcKebTl5xGs-0)
+
+## 📄 Technical Specification
+
+🔗 [The project was developed according to the technical specifications](https://docs.google.com/spreadsheets/d/1DmQUeGZy_oaXN6yn69ORLzou1ZQRyTMlrAqPSit_clw/edit?gid=1134921873#gid=1134921873)
+
+---
+
 ## 🌐 Backend API
 
 This project uses a public backend API:
