@@ -16,8 +16,6 @@ const LoginForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const dispatch = useDispatch();
 
-  console.log('isLooading', isLoading);
-
   const {
     register,
     handleSubmit,

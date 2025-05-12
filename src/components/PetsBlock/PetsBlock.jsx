@@ -9,7 +9,7 @@ const PetsBlock = ({ userCurrentFull }) => {
         <h2 className='font-bold leading-5 md:text-lg md:leading-6'>My Pets</h2>
         <AddPet />
       </div>
-      <PetsList pets={pets} />
+      <PetsList pets={pets || []} />
     </div>
   );
 };

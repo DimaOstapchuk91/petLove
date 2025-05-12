@@ -15,7 +15,6 @@ const initialState = {
   userCurrentFull: null,
   token: null,
   isLoading: false,
-  isLogoutLoading: false,
   error: null,
 };
 
@@ -62,18 +61,7 @@ const authSlice = createSlice({
       .addCase(editUserCurrent.fulfilled, (state, action) => {
         state.userCurrentFull = action.payload;
       })
-      .addCase(logoutUser.pending, state => {
-        state.isLogoutLoading = true;
-        state.error = false;
-      })
-      .addCase(logoutUser.fulfilled, state => {
-        state.isLogoutLoading = false;
-        state = initialState;
-      })
-      .addCase(logoutUser.rejected, (state, action) => {
-        state.isLogoutLoading = false;
-        state.error = action.payload;
-      })
+      .addCase(logoutUser.fulfilled, () => initialState)
       .addCase(addPets.fulfilled, (state, action) => {
         state.userCurrentFull.pets = action.payload.pets;
       })
@@ -82,7 +70,8 @@ const authSlice = createSlice({
           registerUser.pending,
           loginUser.pending,
           getUserCurrentData.pending,
-          getUserFullCurrentData.pending
+          getUserFullCurrentData.pending,
+          logoutUser.pending
         ),
         state => {
           state.isLoading = true;
@@ -94,7 +83,8 @@ const authSlice = createSlice({
           registerUser.fulfilled,
           loginUser.fulfilled,
           getUserCurrentData.fulfilled,
-          getUserFullCurrentData.fulfilled
+          getUserFullCurrentData.fulfilled,
+          logoutUser.fulfilled
         ),
         state => {
           state.isLoading = false;
@@ -106,7 +96,8 @@ const authSlice = createSlice({
           registerUser.rejected,
           loginUser.rejected,
           getUserCurrentData.rejected,
-          getUserFullCurrentData.rejected
+          getUserFullCurrentData.rejected,
+          logoutUser.rejected
         ),
         (state, action) => {
           state.isLoading = false;

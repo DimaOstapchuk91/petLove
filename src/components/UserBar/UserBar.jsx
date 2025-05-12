@@ -4,7 +4,7 @@ import { selectUserCurrentFull } from '../../redux/user/selectors.js';
 import { useSelector } from 'react-redux';
 
 const UserBar = () => {
-  const userCurrentFull = useSelector(selectUserCurrentFull);
+  const userCurrentFull = useSelector(selectUserCurrentFull) || {};
   const location = useLocation();
 
   const isLocation = location.pathname === '/home';
@@ -14,7 +14,7 @@ const UserBar = () => {
         className='w-10 flex justify-center items-center h-10 bg-brand-light rounded-full cursor-pointer transition-all duration-300  hover:opacity-[0.8] md:w-12.5 md:h-12.5'
         to='/profile'
       >
-        {userCurrentFull ? (
+        {userCurrentFull?.avatar ? (
           <img
             src={userCurrentFull?.avatar}
             alt={userCurrentFull?.name}

@@ -35,13 +35,14 @@ const PetsList = ({ pets }) => {
       errToast(error);
     }
   };
+
   return (
     <>
       {isLoading ? (
         <div className='flex justify-center h-[130px] items-center md:h-[142px] xl:h-[132px] xl:w-[440px]'>
           <Loader height={'40'} width={'40'} color={'var(--color-brand)'} />
         </div>
-      ) : pets ? (
+      ) : pets.length > 0 ? (
         <ul className='flex flex-col gap-3.5 md:flex-row md:flex-wrap md:gap-3.5 xl:w-[440px]'>
           {pets?.map(pet => (
             <PetsItem

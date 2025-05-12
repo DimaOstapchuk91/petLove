@@ -24,8 +24,12 @@ const UserBlock = ({ userCurrentFull }) => {
         />
       ) : (
         <div className='flex flex-col justify-center items-center gap-2 mb-7'>
-          <div className='p-[27px] rounded-full bg-brand-light w-[94px] md:w-[110px] md:-mt-9'>
-            <svg className='fill-brand stroke-brand' width='40' height='40'>
+          <div className='p-[27px] flex justify-center items-center rounded-full bg-brand-light w-[94px] md:w-[110px] md:h-[110px] md:-mt-9'>
+            <svg
+              className='fill-brand stroke-brand md:w-12.5 md:h-12.5'
+              width='40'
+              height='40'
+            >
               <use href={`${sprite}#icon-user`}></use>
             </svg>
           </div>

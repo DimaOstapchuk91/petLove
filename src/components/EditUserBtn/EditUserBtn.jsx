@@ -28,7 +28,7 @@ const EditUserBtn = ({ userBlock }) => {
       ) : (
         <button
           type='button'
-          className='underline [text-decoration-skip-ink:none] cursor-pointer text-xs font-medium leading-4 -tracking-[0.24px]'
+          className='underline [text-decoration-skip-ink:none] cursor-pointer !text-xs font-medium leading-4 -tracking-[0.24px] md:!text-sm md:leading-4.5 md:-tracking-[0.28px] transition-all duration-200 hover:text-hover'
           onClick={handleOpenEditModal}
         >
           Upload photo

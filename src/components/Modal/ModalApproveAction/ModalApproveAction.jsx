@@ -1,12 +1,12 @@
 import dogIcon from '../../../assets/img/dog-icon.png';
 import catIcon from '../../../assets/img/cat-icon.png';
 import { useMemo } from 'react';
-import { selectIsLogoutLoading } from '../../../redux/user/selectors.js';
+import { selectIsLoading } from '../../../redux/user/selectors.js';
 import { useSelector } from 'react-redux';
 import Loader from '../../Loader/Loader.jsx';
 
 const ModalApproveAction = ({ onClose, approveText, id, approveFunction }) => {
-  const isLoading = useSelector(selectIsLogoutLoading);
+  const isLoading = useSelector(selectIsLoading);
   const randomImage = useMemo(() => {
     const images = [dogIcon, catIcon];
     const index = Math.floor(Math.random() * images.length);
