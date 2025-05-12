@@ -34,10 +34,10 @@ const RegistrationForm = () => {
     setRepeatPasswordVisible(!repeatPasswordVisible);
   };
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     const { name, email, password } = data;
     try {
-      dispatch(registerUser({ name, email, password })).unwrap();
+      await dispatch(registerUser({ name, email, password })).unwrap();
       successfullyToast('Registration is successfully');
     } catch (error) {
       errToast(error);

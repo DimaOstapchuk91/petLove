@@ -28,9 +28,9 @@ const LoginForm = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     try {
-      dispatch(loginUser(data)).unwrap();
+      await dispatch(loginUser(data)).unwrap();
 
       successfullyToast('Login is successfully');
     } catch (error) {

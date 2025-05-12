@@ -50,14 +50,15 @@ const NoticesItem = ({ dataItem, profilePage, viewed, onRemove }) => {
       return;
     }
 
+    if (profilePage && isFavorite) {
+      onRemove(_id);
+      return;
+    }
+
     if (isFavorite) {
       dispatch(removeNoticeFavorite(_id));
     } else {
       dispatch(addNoticeFavorite(_id));
-    }
-
-    if (profilePage) {
-      onRemove(_id);
     }
   };
 

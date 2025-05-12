@@ -1,23 +1,8 @@
 import { formatNoticesDate } from '../../utils/formatDate.js';
 import sprite from '../../assets/sprite.svg';
-import { useDispatch } from 'react-redux';
-import { removePets } from '../../redux/user/operations.js';
-import { removeUserPetById } from '../../redux/user/slice.js';
 
-const PetsItem = ({ pet }) => {
-  const dispatch = useDispatch();
+const PetsItem = ({ pet, onRemove }) => {
   const { _id, name, title, sex, species, birthday, imgURL } = pet || {};
-
-  const handleRemuvePet = () => {
-    try {
-      dispatch(removePets(_id)).unwrap();
-
-      dispatch(removeUserPetById(_id));
-      console.log('successfully removed pet');
-    } catch (error) {
-      console.log('error', error);
-    }
-  };
 
   return (
     <li className='flex gap-3.5 p-4 border rounded-[20px] border-inputs md:w-[305px] md:p-5.5 xl:w-full xl:p-5 xl:gap-[25px]'>
@@ -34,7 +19,7 @@ const PetsItem = ({ pet }) => {
           <button
             className='absolute -top-1 -right-1 group rounded-full p-[7px] bg-brand-light cursor-pointer hover:bg-hover-light transition-all duration-200 md:-top-2.5 md:-right-2.5 xl:p-2.5 xl:-top-3 xl:right-0'
             type='button'
-            onClick={handleRemuvePet}
+            onClick={() => onRemove(_id)}
           >
             <svg
               className='fill-transparent stroke-brand md:w-4.5 md:h-4.5 '

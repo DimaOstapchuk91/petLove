@@ -30,9 +30,9 @@ const ModalEditUser = ({ onClose }) => {
     },
   });
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     try {
-      dispatch(editUserCurrent(data)).unwrap();
+      await dispatch(editUserCurrent(data)).unwrap();
       successfullyToast('Edit User is successfully');
       onClose();
     } catch (error) {

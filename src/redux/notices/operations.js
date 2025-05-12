@@ -32,7 +32,6 @@ export const getAllNoticesData = createAsyncThunk(
       if (sex) searchParams.append('sex', sex);
       searchParams.append('page', page);
       searchParams.append('limit', limit);
-      console.log(searchParams.toString());
 
       return petLoveApi.get(`/notices?${searchParams.toString()}`);
     };
@@ -56,7 +55,6 @@ export const addNoticeFavorite = createAsyncThunk(
     const requestFunction = async () => {
       return petLoveApi.post(`/notices/favorites/add/${id}`);
     };
-    console.log('test addFavorite', id);
     return handleRequest(requestFunction, thunkAPI);
   }
 );

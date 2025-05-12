@@ -5,6 +5,7 @@ import {
   getNoticeById,
   removeNoticeFavorite,
 } from './operations.js';
+import { getUserFullCurrentData } from '../user/operations.js';
 
 const initialState = {
   notiesData: [],
@@ -39,6 +40,9 @@ const noticesSlice = createSlice({
       })
       .addCase(removeNoticeFavorite.fulfilled, (state, action) => {
         state.favorites = action.payload;
+      })
+      .addCase(getUserFullCurrentData.fulfilled, (state, action) => {
+        state.favorites = action.payload.noticesFavorites.map(fav => fav._id);
       })
       .addMatcher(
         isAnyOf(

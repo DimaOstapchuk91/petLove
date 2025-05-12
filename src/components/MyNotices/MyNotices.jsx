@@ -5,21 +5,41 @@ import { selectUserCurrentFull } from '../../redux/user/selectors.js';
 import { removeFavoritesById } from '../../redux/user/slice.js';
 import { NavLink } from 'react-router-dom';
 import { removeNoticeFavorite } from '../../redux/notices/operations.js';
+import Modal from '../Modal/Modal.jsx';
+import ModalApproveAction from '../Modal/ModalApproveAction/ModalApproveAction.jsx';
+import { errToast, successfullyToast } from '../../utils/toast.js';
 
 const MyNotices = () => {
   const dispatch = useDispatch();
   const userCurrentFull = useSelector(selectUserCurrentFull);
-  console.log('usercurrentdata', userCurrentFull);
+  const [idPetCard, setIdPetCard] = useState(null);
+  const [approveOpenModal, setApproveOpenModal] = useState(false);
 
   const { noticesFavorites, noticesViewed } = userCurrentFull || {};
   const [activeTab, setActiveTab] = useState('favorites');
 
+  const handleCloseApproveModal = () => {
+    setApproveOpenModal(false);
+  };
+
+  const handleOpenApproveModal = id => {
+    setApproveOpenModal(true);
+    setIdPetCard(id);
+  };
+
   const handleRemove = async id => {
-    dispatch(removeNoticeFavorite(id));
-    dispatch(removeFavoritesById({ id }));
+    try {
+      await dispatch(removeNoticeFavorite(id)).unwrap();
+      dispatch(removeFavoritesById({ id }));
+
+      successfullyToast('successfully deleted');
+      handleCloseApproveModal();
+    } catch (error) {
+      errToast(error);
+    }
   };
   return (
-    <div className='xl:mt-10'>
+    <div className='xl:mt-10 xl:w-full'>
       <div className='flex gap-2.5 mb-5 md:gap-2'>
         <button
           onClick={() => setActiveTab('favorites')}
@@ -74,7 +94,7 @@ const MyNotices = () => {
                 viewed={activeTab === 'viewed'}
                 onRemove={
                   activeTab === 'favorites'
-                    ? () => handleRemove(item._id)
+                    ? id => handleOpenApproveModal(id)
                     : undefined
                 }
               />
@@ -82,6 +102,14 @@ const MyNotices = () => {
           )}
         </ul>
       )}
+      <Modal isOpen={approveOpenModal} onClose={handleCloseApproveModal}>
+        <ModalApproveAction
+          onClose={handleCloseApproveModal}
+          approveFunction={handleRemove}
+          id={idPetCard}
+          approveText={'Are you sure you want to remove from favorites?'}
+        />
+      </Modal>
     </div>
   );
 };
