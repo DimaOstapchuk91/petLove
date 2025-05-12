@@ -3,15 +3,20 @@ import sprite from '../../assets/sprite.svg';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { loginUser } from '../../redux/user/operations.js';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { orderLoginSchema } from '../../utils/formValidation.js';
 import Title from '../Title/Title.jsx';
 import { errToast, successfullyToast } from '../../utils/toast.js';
+import { selectIsLoading } from '../../redux/user/selectors.js';
+import Loader from '../Loader/Loader.jsx';
 
 const LoginForm = () => {
+  const isLoading = useSelector(selectIsLoading);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const dispatch = useDispatch();
+
+  console.log('isLooading', isLoading);
 
   const {
     register,
@@ -172,9 +177,18 @@ const LoginForm = () => {
       <div className='flex flex-col  w-full gap-3'>
         <button
           type='submit'
-          className='p-3 w-ful bg-brand rounded-[30px] font-bold text-text-white transition-all duration-200 hover:bg-hover cursor-pointer md:p-4.5'
+          disabled={isLoading}
+          className='flex justify-center p-3 w-ful bg-brand rounded-[30px] font-bold text-text-white transition-all duration-200 hover:bg-hover cursor-pointer md:p-4.5'
         >
-          LOG IN
+          {isLoading ? (
+            <Loader
+              height={'18'}
+              width={'18'}
+              color={'var(--color-text-white)'}
+            />
+          ) : (
+            'LOG IN'
+          )}
         </button>
         <p className='text-center text-xs text-text-gray font-medium md:text-sm'>
           Don&apos;t have an account?{' '}

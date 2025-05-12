@@ -1,8 +1,12 @@
 import dogIcon from '../../../assets/img/dog-icon.png';
 import catIcon from '../../../assets/img/cat-icon.png';
 import { useMemo } from 'react';
+import { selectIsLogoutLoading } from '../../../redux/user/selectors.js';
+import { useSelector } from 'react-redux';
+import Loader from '../../Loader/Loader.jsx';
 
 const ModalApproveAction = ({ onClose, approveText, id, approveFunction }) => {
+  const isLoading = useSelector(selectIsLogoutLoading);
   const randomImage = useMemo(() => {
     const images = [dogIcon, catIcon];
     const index = Math.floor(Math.random() * images.length);
@@ -20,10 +24,20 @@ const ModalApproveAction = ({ onClose, approveText, id, approveFunction }) => {
 
       <div className='w-full  flex justify-center gap-2'>
         <button
-          className='py-3 px-[57px] w-full text-center max-w-[137px] rounded-[30px] text-text-white bg-brand text-sm font-bold leading-4.5 -tracking-[0.42px] hover:bg-hover transition-all duration-200 md:p-3.5 md:text-base md:leading-5 md:-tracking-[0.48px] md:max-w-[140px] cursor-pointer'
+          type='button'
+          disabled={isLoading}
+          className='flex justify-center py-3 px-[57px] w-full text-center max-w-[137px] rounded-[30px] text-text-white bg-brand text-sm font-bold leading-4.5 -tracking-[0.42px] hover:bg-hover transition-all duration-200 md:p-3.5 md:text-base md:leading-5 md:-tracking-[0.48px] md:max-w-[140px] cursor-pointer'
           onClick={() => approveFunction(id)}
         >
-          Yes
+          {isLoading ? (
+            <Loader
+              height={'18'}
+              width={'18'}
+              color={'var(--color-text-white)'}
+            />
+          ) : (
+            'Yes'
+          )}
         </button>
         <button
           className='py-3 px-11 text-center w-full max-w-[130px] rounded-[30px]  bg-disabled text-sm font-bold leading-4.5 -tracking-[0.42px] hover:bg-hover hover:text-text-white transition-all duration-200 md:p-3.5 md:text-base md:leading-5 md:-tracking-[0.48px] md:max-w-[140px] cursor-pointer'

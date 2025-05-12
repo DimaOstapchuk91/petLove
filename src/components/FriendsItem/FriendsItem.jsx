@@ -16,7 +16,13 @@ const FriendsItem = ({ dataItem }) => {
             : 'Day and night'}
         </p>
       </div>
-      <a href={url} title={url} target='_blank' rel='noopener noreferrer'>
+      <a
+        href={url}
+        title={url}
+        target='_blank'
+        rel='noopener noreferrer'
+        className='transition-all duration-200 hover:opacity-60'
+      >
         <img
           className='rounded-full md:w-22.5 md:h-22.5'
           src={imageUrl}
@@ -31,11 +37,11 @@ const FriendsItem = ({ dataItem }) => {
         </h3>
         <ul className='flex flex-col gap-2'>
           <li>
-            <p className='flex text-sm text-text-gray leading-[18px] font-medium -tracking-[0.28px]'>
-              Email:{' '}
+            <p className='flex gap-0.5 text-sm text-text-gray leading-[18px] font-medium -tracking-[0.28px]'>
+              Email:
               {email ? (
                 <a
-                  className='block truncate text-text-dark cursor-pointer ml-0.5'
+                  className='block truncate text-text-dark cursor-pointer ml-0.5 transition-all duration-200 hover:text-hover'
                   href={`mailto:${email}`}
                   title={email}
                 >
@@ -49,11 +55,11 @@ const FriendsItem = ({ dataItem }) => {
             </p>
           </li>
           <li>
-            <p className='flex text-sm text-text-gray leading-[18px] font-medium -tracking-[0.28px]'>
-              Address:{' '}
+            <p className='flex gap-0.5 text-sm text-text-gray leading-[18px] font-medium -tracking-[0.28px]'>
+              Address:
               {address ? (
                 <a
-                  className='block truncate max-w-[137px] ml-0.5  text-text-dark cursor-pointer xl:max-w-[153px]'
+                  className='block truncate max-w-[137px] ml-0.5  text-text-dark cursor-pointer xl:max-w-[153px] transition-all duration-200 hover:text-hover'
                   href={addressUrl}
                   target='_blank'
                   rel='noopener noreferrer'
@@ -69,11 +75,11 @@ const FriendsItem = ({ dataItem }) => {
             </p>
           </li>
           <li>
-            <p className='flex text-sm text-text-gray leading-[18px] font-medium -tracking-[0.28px]'>
-              Phone:{' '}
+            <p className='flex gap-0.5 text-sm text-text-gray leading-[18px] font-medium -tracking-[0.28px]'>
+              Phone:
               {phone ? (
                 <a
-                  className='text-text-dark cursor-pointer ml-0.5'
+                  className='text-text-dark cursor-pointer ml-0.5 transition-all duration-200 hover:text-hover'
                   href={`tel:${phone}`}
                 >
                   {phone}

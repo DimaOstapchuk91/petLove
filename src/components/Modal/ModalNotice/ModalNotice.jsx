@@ -13,7 +13,7 @@ import { getStarCount } from '../../../utils/getStarCount.js';
 import sprite from '../../../assets/sprite.svg';
 import { formatNoticesDate } from '../../../utils/formatDate.js';
 
-const ModalNotice = ({ id }) => {
+const ModalNotice = ({ id, profilePage, onRemove }) => {
   const favorites = useSelector(selectFavorites);
 
   const dispatch = useDispatch();
@@ -39,6 +39,11 @@ const ModalNotice = ({ id }) => {
   const isFavorite = favorites.includes(id);
 
   const handleFavoriteClick = () => {
+    if (profilePage && isFavorite) {
+      onRemove(id);
+      return;
+    }
+
     if (isFavorite) {
       dispatch(removeNoticeFavorite(id));
     } else {
@@ -112,18 +117,28 @@ const ModalNotice = ({ id }) => {
           type='button'
           onClick={handleFavoriteClick}
         >
-          Add to
-          <svg
-            className={
-              isFavorite
-                ? 'transition-all duration-200 group-hover:fill-hover fill-text-white stroke-text-white'
-                : 'transition-all duration-200 group-hover:fill-text-white fill-transparent stroke-text-white'
-            }
-            width='18'
-            height='18'
-          >
-            <use href={`${sprite}#icon-heart`}></use>
-          </svg>
+          {profilePage ? 'Delete' : 'Add to'}
+          {profilePage ? (
+            <svg
+              className={'fill-transparent stroke-text-white'}
+              width='18'
+              height='18'
+            >
+              <use href={`${sprite}#icon-trash`}></use>
+            </svg>
+          ) : (
+            <svg
+              className={
+                isFavorite
+                  ? 'transition-all duration-200 group-hover:fill-hover fill-text-white stroke-text-white'
+                  : 'transition-all duration-200 group-hover:fill-text-white fill-transparent stroke-text-white'
+              }
+              width='18'
+              height='18'
+            >
+              <use href={`${sprite}#icon-heart`}></use>
+            </svg>
+          )}
         </button>
         <a
           href={`mailto:${user?.email}`}

@@ -27,6 +27,9 @@ const noticesSlice = createSlice({
   },
   extraReducers: builder => {
     builder
+      .addCase(getAllNoticesData.pending, state => {
+        state.isLoading = true;
+      })
       .addCase(getAllNoticesData.fulfilled, (state, action) => {
         console.log(action.payload.results);
         state.notiesData = action.payload.results;
@@ -53,7 +56,6 @@ const noticesSlice = createSlice({
         ),
         state => {
           state.isError = null;
-          state.isLoading = true;
         }
       )
       .addMatcher(

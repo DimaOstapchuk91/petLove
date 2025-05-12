@@ -13,10 +13,13 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { orderAddPetSchema } from '../../utils/formValidation.js';
 import { addPets } from '../../redux/user/operations.js';
 import { errToast, successfullyToast } from '../../utils/toast.js';
+import { selectIsLoading } from '../../redux/user/selectors.js';
+import Loader from '../Loader/Loader.jsx';
 
 const AddPetForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
   const speciesOption = useSelector(selectSpecies);
   const [preview, setPreview] = useState(null);
 
@@ -42,9 +45,9 @@ const AddPetForm = () => {
     },
   });
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     try {
-      dispatch(addPets(data)).unwrap();
+      await dispatch(addPets(data)).unwrap();
 
       navigate('/profile');
       successfullyToast('Add pet is successfully');
@@ -219,7 +222,7 @@ const AddPetForm = () => {
 
           <div className='flex justify-between'>
             <li className='w-full max-w-[144px] md:max-w-[210px]'>
-              <label className='block w-full !text-sm font-medium leading-4.5 -tracking-[0.42]'>
+              <label className='relative block w-full !text-sm font-medium leading-4.5 -tracking-[0.42]'>
                 <Controller
                   control={control}
                   name='birthday'
@@ -232,17 +235,25 @@ const AddPetForm = () => {
                           date?.toISOString().split('T')[0] ?? '';
                         field.onChange(formatted);
                       }}
-                      placeholderText='00.00.0000'
+                      placeholderText='0000-00-00'
                       className={`w-full h-10.5 p-3 !text-sm border rounded-[30px] outline-none md:p-4 leading-5 -tracking-[0.48px] md:w-[210px] md:!text-base hover:border-brand focus:border-brand md:h-13  ${
                         errors.birthday ? 'border-error' : 'border-inputs'
                       }`}
                       dateFormat='dd.MM.yyyy'
                       showPopperArrow={false}
+                      shouldCloseOnSelect={true}
                       calendarStartDay={1}
                       maxDate={new Date()}
                     />
                   )}
                 />
+                <svg
+                  className='absolute top-3 right-3 fill-transparent stroke-text-gray-dark transition-all duration-200 hover:stroke-hover md:w-5 md:h-5 md:top-4 md:right-4 cursor-pointer'
+                  width='18'
+                  height='18'
+                >
+                  <use href={`${sprite}#icon-calendar`}></use>
+                </svg>
                 {errors.birthday && (
                   <p className='text-error text-[10px]  ml-3 font-medium leading-3 -tracking-[0.3px] md:text-sm md:leading-3.5 md:-tracking-[0.36px]'>
                     {errors.birthday.message}
@@ -281,9 +292,18 @@ const AddPetForm = () => {
           </NavLink>
           <button
             type='submit'
-            className='py-3 px-6.5 bg-brand hover:bg-hover rounded-[30px] !text-sm font-bold text-text-white transition-all duration-200 leading-4.5 -tracking-[0.42px] cursor-pointer md:py-3.5 md:px-14.5 md:!text-base md:leading-5 md:-tracking-[0.48px]'
+            disabled={isLoading}
+            className='flex justify-center py-3 px-6.5 w-[100px] bg-brand hover:bg-hover rounded-[30px] !text-sm font-bold text-text-white transition-all duration-200 leading-4.5 -tracking-[0.42px] cursor-pointer md:py-3.5 md:px-14.5 md:!text-base md:leading-5 md:-tracking-[0.48px] md:w-[170px]'
           >
-            Submit
+            {isLoading ? (
+              <Loader
+                height={'18'}
+                width={'18'}
+                color={'var(--color-text-white)'}
+              />
+            ) : (
+              'Submit'
+            )}
           </button>
         </div>
       </form>

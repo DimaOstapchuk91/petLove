@@ -1,16 +1,21 @@
 import { useState } from 'react';
 import NoticesItem from '../NoticesItem/NoticesItem.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUserCurrentFull } from '../../redux/user/selectors.js';
+import {
+  selectIsLoading,
+  selectUserCurrentFull,
+} from '../../redux/user/selectors.js';
 import { removeFavoritesById } from '../../redux/user/slice.js';
 import { NavLink } from 'react-router-dom';
 import { removeNoticeFavorite } from '../../redux/notices/operations.js';
 import Modal from '../Modal/Modal.jsx';
 import ModalApproveAction from '../Modal/ModalApproveAction/ModalApproveAction.jsx';
 import { errToast, successfullyToast } from '../../utils/toast.js';
+import Loader from '../Loader/Loader.jsx';
 
 const MyNotices = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
   const userCurrentFull = useSelector(selectUserCurrentFull);
   const [idPetCard, setIdPetCard] = useState(null);
   const [approveOpenModal, setApproveOpenModal] = useState(false);
@@ -82,6 +87,10 @@ const MyNotices = () => {
             &#39;&#39;find your favorite pet&#39;&#39; page and add them to your
             favorites.
           </p>
+        </div>
+      ) : isLoading ? (
+        <div className='flex justify-center h-[130px] items-center xl:w-[440px]'>
+          <Loader height={'40'} width={'40'} color={'var(--color-brand)'} />
         </div>
       ) : (
         <ul className='flex flex-col gap-5 md:flex-row md:flex-wrap xl:gap-6'>

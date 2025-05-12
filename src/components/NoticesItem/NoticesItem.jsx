@@ -160,7 +160,12 @@ const NoticesItem = ({ dataItem, profilePage, viewed, onRemove }) => {
       </div>
       <Modal isOpen={isModalInfo} onClose={handleModalInfoClose}>
         {isLogin ? (
-          <ModalNotice onClose={handleModalInfoClose} id={_id} />
+          <ModalNotice
+            onClose={handleModalInfoClose}
+            id={_id}
+            profilePage={profilePage}
+            onRemove={onRemove}
+          />
         ) : (
           <ModalAttention onClose={handleModalInfoClose} />
         )}

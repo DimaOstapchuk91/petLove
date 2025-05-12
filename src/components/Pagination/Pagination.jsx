@@ -6,7 +6,7 @@ const Pagination = ({ page, totalPages, setPage }) => {
   const dispatch = useDispatch();
   const isMobile = useMediaQuery('(max-width: 767px)');
 
-  console.log('page', page);
+  if (totalPages === 1) return null;
 
   const handleNextPage = () => {
     dispatch(setPage(page + 1));
@@ -62,7 +62,7 @@ const Pagination = ({ page, totalPages, setPage }) => {
     <div className='flex items-center justify-between md:justify-center md:gap-6'>
       <div className='flex gap-[clamp(0px,calc((100vw-320px)*0.109),6px)] md:gap-2'>
         <button
-          className='group flex py-2.5 px-1.5 border border-inputs disabled:border-disabled rounded-full cursor-pointer disabled:cursor-default'
+          className='group flex py-2.5 px-1.5 border border-inputs transition-all duration-200 hover:border-hover disabled:border-disabled rounded-full cursor-pointer disabled:cursor-default'
           onClick={handleStartPage}
           disabled={page === 1}
         >
@@ -82,7 +82,7 @@ const Pagination = ({ page, totalPages, setPage }) => {
           </svg>
         </button>
         <button
-          className='group p-2.5 border cursor-pointer disabled:cursor-default disabled:border-disabled border-inputs rounded-full '
+          className='group p-2.5 border cursor-pointer disabled:cursor-default disabled:border-disabled border-inputs  transition-all duration-200 hover:border-hover rounded-full '
           onClick={handlePrevPage}
           disabled={page === 1}
         >
@@ -97,26 +97,31 @@ const Pagination = ({ page, totalPages, setPage }) => {
       </div>
 
       <ul className='flex gap-[clamp(0px,calc((100vw-320px)*0.109),10px)] md:gap-2.5'>
-        {getVisiblePages()?.map((pageNum, index) => (
+        {getVisiblePages().map((pageNum, index) => (
           <li key={index}>
-            <button
-              key={pageNum}
-              onClick={() => handlePageClick(pageNum)}
-              className={
-                pageNum === page
-                  ? 'p-2.5 w-10 flex justify-center items-center rounded-full bg-brand cursor-pointer  text-text-white font-bold text-sm leading-[18px] md:w-11 md:h-11 md:text-lg '
-                  : 'p-2.5 w-10 flex justify-center items-center border border-disabled rounded-full cursor-pointer  font-bold text-sm leading-[18px] md:w-11 md:h-11 md:text-lg md:leading-[22px]'
-              }
-            >
-              {pageNum}
-            </button>
+            {typeof pageNum === 'number' ? (
+              <button
+                onClick={() => handlePageClick(pageNum)}
+                className={
+                  pageNum === page
+                    ? 'p-2.5 w-10 flex justify-center items-center rounded-full bg-brand cursor-pointer text-text-white font-bold text-sm leading-[18px] md:w-11 md:h-11 md:text-lg'
+                    : 'p-2.5 w-10 flex justify-center items-center border border-disabled rounded-full cursor-pointer transition-all duration-200 hover:border-hover font-bold text-sm leading-[18px] md:w-11 md:h-11 md:text-lg md:leading-[22px]'
+                }
+              >
+                {pageNum}
+              </button>
+            ) : (
+              <span className='p-2.5 w-10 border border-disabled rounded-full flex justify-center items-center text-sm md:w-11 md:h-11 md:text-lg'>
+                {pageNum}
+              </span>
+            )}
           </li>
         ))}
       </ul>
 
       <div className='flex gap-[clamp(0px,calc((100vw-320px)*0.109),6px)] md:gap-2'>
         <button
-          className='group p-2.5 border cursor-pointer disabled:cursor-default border-inputs disabled:border-disabled rounded-full'
+          className='group p-2.5 border cursor-pointer  transition-all duration-200 hover:border-hover disabled:cursor-default border-inputs disabled:border-disabled rounded-full'
           onClick={handleNextPage}
           disabled={page === totalPages}
         >
@@ -129,7 +134,7 @@ const Pagination = ({ page, totalPages, setPage }) => {
           </svg>
         </button>
         <button
-          className='group flex py-2.5 cursor-pointer disabled:cursor-default px-1.5 border disabled:border-disabled border-inputs rounded-full'
+          className='group flex py-2.5 cursor-pointer  transition-all duration-200 hover:border-hover disabled:cursor-default px-1.5 border disabled:border-disabled border-inputs rounded-full'
           onClick={handleEndPage}
           disabled={page === totalPages}
         >

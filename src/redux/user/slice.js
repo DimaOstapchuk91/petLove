@@ -15,6 +15,7 @@ const initialState = {
   userCurrentFull: null,
   token: null,
   isLoading: false,
+  isLogoutLoading: false,
   error: null,
 };
 
@@ -61,7 +62,18 @@ const authSlice = createSlice({
       .addCase(editUserCurrent.fulfilled, (state, action) => {
         state.userCurrentFull = action.payload;
       })
-      .addCase(logoutUser.fulfilled, () => initialState)
+      .addCase(logoutUser.pending, state => {
+        state.isLogoutLoading = true;
+        state.error = false;
+      })
+      .addCase(logoutUser.fulfilled, state => {
+        state.isLogoutLoading = false;
+        state = initialState;
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
+        state.isLogoutLoading = false;
+        state.error = action.payload;
+      })
       .addCase(addPets.fulfilled, (state, action) => {
         state.userCurrentFull.pets = action.payload.pets;
       })
@@ -70,12 +82,11 @@ const authSlice = createSlice({
           registerUser.pending,
           loginUser.pending,
           getUserCurrentData.pending,
-          getUserFullCurrentData.pending,
-          logoutUser.pending
+          getUserFullCurrentData.pending
         ),
         state => {
           state.isLoading = true;
-          state.error = false;
+          state.error = null;
         }
       )
       .addMatcher(
@@ -83,12 +94,11 @@ const authSlice = createSlice({
           registerUser.fulfilled,
           loginUser.fulfilled,
           getUserCurrentData.fulfilled,
-          getUserFullCurrentData.fulfilled,
-          logoutUser.fulfilled
+          getUserFullCurrentData.fulfilled
         ),
         state => {
           state.isLoading = false;
-          state.error = false;
+          state.error = null;
         }
       )
       .addMatcher(
@@ -96,8 +106,7 @@ const authSlice = createSlice({
           registerUser.rejected,
           loginUser.rejected,
           getUserCurrentData.rejected,
-          getUserFullCurrentData.rejected,
-          logoutUser.rejected
+          getUserFullCurrentData.rejected
         ),
         (state, action) => {
           state.isLoading = false;

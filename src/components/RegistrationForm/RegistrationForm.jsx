@@ -5,11 +5,14 @@ import { useState } from 'react';
 import sprite from '../../assets/sprite.svg';
 import { orderRegistrationSchema } from '../../utils/formValidation.js';
 import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Title from '../Title/Title.jsx';
 import { errToast, successfullyToast } from '../../utils/toast.js';
+import { selectIsLoading } from '../../redux/user/selectors.js';
+import Loader from '../Loader/Loader.jsx';
 
 const RegistrationForm = () => {
+  const isLoading = useSelector(selectIsLoading);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [repeatPasswordVisible, setRepeatPasswordVisible] = useState(false);
 
@@ -298,9 +301,18 @@ const RegistrationForm = () => {
       <div className='flex flex-col  w-full gap-3'>
         <button
           type='submit'
-          className='p-3 w-ful bg-brand rounded-[30px] text-text-white transition-all font-bold duration-300 hover:bg-hover cursor-pointer md:p-4.5 '
+          disabled={isLoading}
+          className='flex justify-center p-3 w-ful bg-brand rounded-[30px] text-text-white transition-all font-bold duration-300 hover:bg-hover cursor-pointer md:p-4.5 '
         >
-          REGISTRATION
+          {isLoading ? (
+            <Loader
+              height={'18'}
+              width={'18'}
+              color={'var(--color-text-white)'}
+            />
+          ) : (
+            'REGISTRATION'
+          )}
         </button>
         <p className='text-center text-xs text-text-gray font-medium md:text-sm'>
           Already have an account?{' '}
