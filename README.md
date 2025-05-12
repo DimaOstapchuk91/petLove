@@ -58,7 +58,7 @@ This project uses a public backend API:
 
 ```bash
    git clone https://github.com/your-username/petlove.git
-   cd TravelTrucks
+   cd petlove
 ```
 
 2. Run the following commands in your terminal:
