@@ -12,6 +12,7 @@ import useAuthToken from './redux/service/configApi.js';
 import StartScreen from './components/StartScreen/StartScreen.jsx';
 import { RestrictedRoute } from './components/RestrictedRoute/RestrictedRoute.jsx';
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute.jsx';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage.jsx';
 
 function App() {
   useAuthToken();
@@ -54,6 +55,7 @@ function App() {
               <PrivateRoute component={<AddPetPage />} redirectTo='/login' />
             }
           />
+          <Route path='*' element={<NotFoundPage />} />
         </Route>
       </Routes>
     </>
